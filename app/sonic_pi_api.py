@@ -20,6 +20,12 @@ class SynthStream(object):
     def note_off(self, note):
         self.sender.send_message('/python_out/%d/note_on' % self.stream, [note, 0])
 
+    def change_synth(self, index):
+        self.sender.send_message('/python_out/%d/synth_change' % self.stream, [index])
+
+    def shift_octave(self, offset):
+        self.sender.send_message('/python_out/%d/octave_shift' % self.stream, [offset])
+
     def close_stream(self):
         os.system('cat sonic_pi_stop.txt | sonic_pi')
 
