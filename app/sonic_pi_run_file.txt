@@ -30,7 +30,7 @@ define :sv do |sym| #extract numeric value associated with symbol eg :n64 => 64
 end
 
 live_loop :choose_synth do
-  synth_index = sync "/osc*/python_out/default/synth_change"
+  synth_index = sync "/osc*/python_out/0/synth_change"
 
   set :synth,[
   :beep,:blade,:bnoise,:chipbass,:chiplead,:chipnoise,:cnoise,:dark_ambience,:dpulse,\
@@ -44,16 +44,15 @@ live_loop :choose_synth do
 end
 
 live_loop :pb do #get current pitchbend value adjusted in range -12 to +12 (octave)
-  shift = sync "/osc*/python_out/default/octave_shift" #change to match your controller
+  shift = sync "/osc*/python_out/0/octave_shift" #change to match your controller
   set :pb,shift[0]*12
 end
 
-with_fx :reverb,room: 0.3,mix: 0.6 do #add some reverb
-
-  live_loop :midi_note_on do #this loop starts 100 second notes for specified pitches and stores reference
+live_loop :midi_note_on do #this loop starts 100 second notes for specified pitches and stores reference
+  with_fx :reverb,room: 0.3,mix: 0.6 do #add some reverb
     use_real_time
     on = 0
-    note, on = sync "/osc*/python_out/default/note_on" #change to match your controller
+    note, on = sync "/osc*/python_out/0/note_on" #change to match your controller
     if on >0
       if nv[note]==0 #check if new start for the note
         puts "setting note #{note} on"
@@ -71,8 +70,10 @@ with_fx :reverb,room: 0.3,mix: 0.6 do #add some reverb
       end
     end
   end
+end
   
-  live_loop :processnote,auto_cue: false,delay: 0.4 do # this applies pitchbend if any to note as it plays
+live_loop :processnote,auto_cue: false,delay: 0.4 do # this applies pitchbend if any to note as it plays
+  with_fx :reverb,room: 0.3,mix: 0.6 do #add some reverb
     #delayed start helps reduce timing errors
     use_real_time
     if on_notes.length > 0 #check if any notes on
@@ -93,8 +94,10 @@ with_fx :reverb,room: 0.3,mix: 0.6 do #add some reverb
     end
     sleep 0.08 #so that the loop sleeps if no notes on
   end
+end
   
-  live_loop :notekill,auto_cue: false,delay: 0.3 do # this loop kills released notes
+live_loop :notekill,auto_cue: false,delay: 0.3 do # this loop kills released notes
+  with_fx :reverb,room: 0.3,mix: 0.6 do #add some reverb
     #delayed start helps reduce timing errors
     use_real_time
     while kill_list.length > 0 #check if there are notes to be killed
@@ -107,4 +110,4 @@ with_fx :reverb,room: 0.3,mix: 0.6 do #add some reverb
     end
     sleep 0.01 #so that the loop sleeps if no notes to be killed
   end
-end #reverbend
+end
