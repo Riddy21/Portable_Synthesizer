@@ -1,6 +1,8 @@
 from pythonosc import udp_client
 import time
 import sys, os
+import mido
+import subprocess
 
 
 # Create a stream for controlling a synthesizer
@@ -27,23 +29,25 @@ class SynthStream(object):
         # Octave
         self.octave_shift = 0
 
+        self.open_stream()
+
+        time.sleep(0.1)
+        print(mido.get_output_names())
+
         # Setup osc output
-        self.sender = udp_client.SimpleUDPClient('127.0.0.1', 4560)
-        self.sender.send_message('/python_out/%d/note_on' % self.stream, [60, 1])
-        time.sleep(0.2)
-        self.sender.send_message('/python_out/%d/note_on' % self.stream, [60, 1])
+        self.port = mido.open_output()
 
     # Plays note
     def note_on(self, note):
-        self.sender.send_message('/python_out/%d/note_on' % self.stream, [note, 1])
+        self.port.send(mido.Message('note_on', note=note))
 
     # Kills note
     def note_off(self, note):
-        self.sender.send_message('/python_out/%d/note_on' % self.stream, [note, 0])
+        self.port.send(mido.Message('note_off', note=note))
 
     # Changes sound
     def change_synth(self, index):
-        self.sender.send_message('/python_out/%d/synth_change' % self.stream, [index])
+        self.port.send(mido.Message('program_change', program=index))
 
     # Shift the octave
     def octave_shift(self, shift):
@@ -54,7 +58,8 @@ class SynthStream(object):
         os.system('cat sonic_pi_stop.txt | sonic_pi')
 
     def open_stream(self):
-        os.system('cat sonic_pi_run_file.txt | sonic_pi')
+        print('openning stream')
+        subprocess.Popen(['fluidsynth', '-a', 'portaudio', '-g', '5', '/Users/ridvansong/Downloads/Part_1___2.sf2'])
 
     # ---------------- Keyboard Interface ---------------------
     # Presses down a key

@@ -12,7 +12,6 @@ class Main_Menu(object):
         self.font = pg.font.SysFont(None, 20)
         self.mainClock = pg.time.Clock()
         self.stream = SynthStream(stream_num=0)
-        self.stream.open_stream()
         self.keyboard = Keyboard(self.stream)
 
         self.loop()
@@ -79,6 +78,10 @@ class Main_Menu(object):
             self.keyboard.key_down(11)
         elif not keys[pg.K_m]:
             self.keyboard.key_up(11)
+        if keys[pg.K_UP]:
+            self.stream.change_synth(5)
+        if keys[pg.K_DOWN]:
+            self.stream.change_synth(10)
 
 
     def loop(self):
