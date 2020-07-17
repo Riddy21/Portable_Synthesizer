@@ -14,6 +14,8 @@ class Main_Menu(object):
         self.stream = SynthStream(stream_num=0)
         self.keyboard = Keyboard(self.stream)
         self.instrum_index = 0
+        self.key_set = self.make_key_mapping()
+        self.on_notes = set()
 
         self.loop()
 
@@ -27,70 +29,59 @@ class Main_Menu(object):
         pg.draw.rect(self.screen, (255, 0, 0), button_1)
 
     def get_events(self):
-        for e in pg.event.get():
-            if e.type == pg.QUIT:
-                sys.exit(0)
-        keys = pg.key.get_pressed()
-        if keys[pg.K_z]:
-            self.keyboard.key_down(0)
-        elif not keys[pg.K_z]:
-            self.keyboard.key_up(0)
-        if keys[pg.K_s]:
-            self.keyboard.key_down(1)
-        elif not keys[pg.K_s]:
-            self.keyboard.key_up(1)
-        if keys[pg.K_x]:
-            self.keyboard.key_down(2)
-        elif not keys[pg.K_x]:
-            self.keyboard.key_up(2)
-        if keys[pg.K_d]:
-            self.keyboard.key_down(3)
-        elif not keys[pg.K_d]:
-            self.keyboard.key_up(3)
-        if keys[pg.K_c]:
-            self.keyboard.key_down(4)
-        elif not keys[pg.K_c]:
-            self.keyboard.key_up(4)
-        if keys[pg.K_v]:
-            self.keyboard.key_down(5)
-        elif not keys[pg.K_v]:
-            self.keyboard.key_up(5)
-        if keys[pg.K_g]:
-            self.keyboard.key_down(6)
-        elif not keys[pg.K_g]:
-            self.keyboard.key_up(6)
-        if keys[pg.K_b]:
-            self.keyboard.key_down(7)
-        elif not keys[pg.K_b]:
-            self.keyboard.key_up(7)
-        if keys[pg.K_h]:
-            self.keyboard.key_down(8)
-        elif not keys[pg.K_h]:
-            self.keyboard.key_up(8)
-        if keys[pg.K_n]:
-            self.keyboard.key_down(9)
-        elif not keys[pg.K_n]:
-            self.keyboard.key_up(9)
-        if keys[pg.K_j]:
-            self.keyboard.key_down(10)
-        elif not keys[pg.K_j]:
-            self.keyboard.key_up(10)
-        if keys[pg.K_m]:
-            self.keyboard.key_down(11)
-        elif not keys[pg.K_m]:
-            self.keyboard.key_up(11)
-        if keys[pg.K_COMMA]:
-            self.keyboard.key_down(12)
-        elif not keys[pg.K_COMMA]:
-            self.keyboard.key_up(12)
-        if keys[pg.K_UP]:
-            self.keyboard.next_prog(0,pressed=True)
-        elif not keys[pg.K_UP]:
-            self.keyboard.next_prog(0,pressed=False)
-        if keys[pg.K_DOWN]:
-            self.keyboard.prev_prog(1, pressed=True)
-        elif not keys[pg.K_DOWN]:
-            self.keyboard.prev_prog(1, pressed=False)
+        e = pg.event.wait()
+        if e.type == pg.QUIT:
+            sys.exit()
+        elif e.type == pg.KEYDOWN:
+            try:
+                note = self.key_set[e.key]
+            except KeyError:
+                pass
+            else:
+                if note not in self.on_notes:
+                    self.keyboard.key_down(note)
+                    self.on_notes.add(note)
+        elif e.type == pg.KEYUP:
+            try:
+                note = self.key_set[e.key]
+            except KeyError:
+                pass
+            else:
+                if note in self.on_notes:
+                    self.keyboard.key_up(note)
+                    self.on_notes.remove(note)
+
+
+        # if keys[pg.K_UP]:
+        #     self.keyboard.next_prog(0,pressed=True)
+        # elif not keys[pg.K_UP]:
+        #     self.keyboard.next_prog(0,pressed=False)
+        # if keys[pg.K_DOWN]:
+        #     self.keyboard.prev_prog(1, pressed=True)
+        # elif not keys[pg.K_DOWN]:
+        #     self.keyboard.prev_prog(1, pressed=False)
+
+    def make_key_mapping(self):
+        key_list = [
+            pg.K_z,
+            pg.K_s,
+            pg.K_x,
+            pg.K_d,
+            pg.K_c,
+            pg.K_v,
+            pg.K_g,
+            pg.K_b,
+            pg.K_h,
+            pg.K_n,
+            pg.K_j,
+            pg.K_m,
+            pg.K_COMMA,
+        ]
+        mapping = {}
+        for i in range(len(key_list)):
+            mapping[key_list[i]] = (i)
+        return mapping
+
 
 
     def loop(self):
@@ -98,7 +89,7 @@ class Main_Menu(object):
             self.draw_interface()
             self.get_events()
             pg.display.update()
-            self.mainClock.tick(60)
+            self.mainClock.tick(120)
 
     def draw_text(self, text, font, color, surface, x, y):
         textobj = font.render(text, 1, color)

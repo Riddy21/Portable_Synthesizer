@@ -30,7 +30,14 @@ class SynthStream(object):
         self.open_stream()
 
         time.sleep(0.1)
-        print(mido.get_output_names())
+        mido_streams = mido.get_output_names()
+        print(mido_streams)
+
+        for i in mido_streams:
+            if 'Synth' in i:
+                port_num = i.split('(')[1].split(')')[0]
+                print(port_num)
+                break
 
         # Setup osc output
         self.port = mido.open_output()
