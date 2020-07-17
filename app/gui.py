@@ -13,6 +13,7 @@ class Main_Menu(object):
         self.mainClock = pg.time.Clock()
         self.stream = SynthStream(stream_num=0)
         self.keyboard = Keyboard(self.stream)
+        self.instrum_index = 0
 
         self.loop()
 
@@ -78,10 +79,18 @@ class Main_Menu(object):
             self.keyboard.key_down(11)
         elif not keys[pg.K_m]:
             self.keyboard.key_up(11)
+        if keys[pg.K_COMMA]:
+            self.keyboard.key_down(12)
+        elif not keys[pg.K_COMMA]:
+            self.keyboard.key_up(12)
         if keys[pg.K_UP]:
-            self.stream.change_synth(5)
+            self.keyboard.next_prog(0,pressed=True)
+        elif not keys[pg.K_UP]:
+            self.keyboard.next_prog(0,pressed=False)
         if keys[pg.K_DOWN]:
-            self.stream.change_synth(10)
+            self.keyboard.prev_prog(1, pressed=True)
+        elif not keys[pg.K_DOWN]:
+            self.keyboard.prev_prog(1, pressed=False)
 
 
     def loop(self):

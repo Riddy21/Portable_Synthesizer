@@ -3,6 +3,8 @@ import time
 import sys, os
 import mido
 import subprocess
+from sf2utils.sf2parse import Sf2File
+
 
 
 # Create a stream for controlling a synthesizer
@@ -13,15 +15,11 @@ class SynthStream(object):
         # Stream number
         self.stream = stream_num
 
-        # List of synths
-        self.synth_list = ['beep', 'blade', 'bnoise', 'chipbass', 'chiplead', 'chipnoise', 'cnoise', 'dark_ambience',
-                           'dpulse', 'dsaw', 'dtri', 'dull_bell', 'fm', 'gnoise', 'growl', 'hollow', 'hoover',
-                           'mod_beep', 'mod_dsaw', 'mod_fm,mod_pulse', 'mod_saw', 'mod_sine', 'mod_tri', 'noise',
-                           'piano', 'pluck', 'pnoise', 'pretty_bell', 'prophet', 'pulse', 'saw', 'sine', 'sound_in',
-                           'sound_in_stereo', 'square', 'subpulse', 'supersaw', 'tzb303', 'tech_saws']
+        with open('/Users/ridvansong/Downloads/Part_1___2.sf2', 'rb') as sf2_file:
+            sf2 = Sf2File(sf2_file)
 
-        # index of the synth based on the input
-        self.synth_index = self.synth_list.index(synth)
+        # List of synths
+        self.synth_list = sf2.instruments
 
         # Reverb value
         self.reverb = reverb
