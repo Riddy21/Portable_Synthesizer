@@ -4,6 +4,7 @@ import sys, os
 import mido
 import subprocess
 from sf2utils.sf2parse import Sf2File
+import threading
 
 
 
@@ -27,7 +28,9 @@ class SynthStream(object):
         # Octave
         self.octave_shift = 0
 
-        self.open_stream()
+        t = threading.Thread(target=self.open_stream())
+        t.daemon = True
+        t.start()
 
         time.sleep(0.1)
         mido_streams = mido.get_output_names()
