@@ -1,21 +1,37 @@
+import time
+
 import pygame as pg
 from pygame.locals import *
-from sonic_pi_api import SynthStream
-from keyboard import Keyboard
+from modes import Synth, open_stream
+from input import Keyboard
 import sys
 
-class Main_Menu(object):
+
+# Main class for the interface
+class Interface(object):
     def __init__(self):
+        # Initialize pygame
         pg.init()
+
+        # Display settings
         pg.display.set_caption('OP1 interface test')
-        self.screen = pg.display.set_mode((500, 500), 32)
+        # self.screen = pg.display.set_mode((480, 320), FULLSCREEN | DOUBLEBUF, 32)
+        self.screen = pg.display.set_mode((480, 320), 32)
+
+        # Fonts
         self.font = pg.font.SysFont(None, 20)
+
+        # Clock
         self.mainClock = pg.time.Clock()
-        self.stream = SynthStream(stream_num=0)
+
+        # Fluid synth connection
+        self.port = open_stream()
+        print('establisted fluid synth connection')
+        self.stream = Synth(channel=0, port=self.port)
+
         self.keyboard = Keyboard(self.stream)
-        self.instrum_index = 0
         self.key_set = self.make_key_mapping()
-        self.on_notes = set()
+        self.on_notes = []
 
         self.loop()
 
@@ -29,37 +45,30 @@ class Main_Menu(object):
         pg.draw.rect(self.screen, (255, 0, 0), button_1)
 
     def get_events(self):
-        e = pg.event.wait()
-        if e.type == pg.QUIT:
-            sys.exit()
-        elif e.type == pg.KEYDOWN:
-            try:
-                note = self.key_set[e.key]
-            except KeyError:
-                pass
-            else:
-                if note not in self.on_notes:
-                    self.keyboard.key_down(note)
-                    self.on_notes.add(note)
-        elif e.type == pg.KEYUP:
-            try:
-                note = self.key_set[e.key]
-            except KeyError:
-                pass
-            else:
-                if note in self.on_notes:
-                    self.keyboard.key_up(note)
-                    self.on_notes.remove(note)
+        events = pg.event.get()
+        for e in events:
+            if e.type == pg.KEYDOWN:
+                try:
+                    note = self.key_set[e.key]
+                except KeyError:
+                    pass
+                else:
+                    if note not in self.on_notes:
+                        self.keyboard.key_down(note)
+                        self.on_notes.append(note)
+            elif e.type == pg.KEYUP:
+                try:
+                    note = self.key_set[e.key]
+                except KeyError:
+                    pass
+                else:
+                    if note in self.on_notes:
+                        self.keyboard.key_up(note)
+                        self.on_notes.remove(note)
 
-
-        # if keys[pg.K_UP]:
-        #     self.keyboard.next_prog(0,pressed=True)
-        # elif not keys[pg.K_UP]:
-        #     self.keyboard.next_prog(0,pressed=False)
-        # if keys[pg.K_DOWN]:
-        #     self.keyboard.prev_prog(1, pressed=True)
-        # elif not keys[pg.K_DOWN]:
-        #     self.keyboard.prev_prog(1, pressed=False)
+        knobs = self.keyboard.get_knobs()
+        if knobs[0]:
+            self.keyboard.use_knob(0)
 
     def make_key_mapping(self):
         key_list = [
@@ -81,8 +90,6 @@ class Main_Menu(object):
         for i in range(len(key_list)):
             mapping[key_list[i]] = (i)
         return mapping
-
-
 
     def loop(self):
         while True:

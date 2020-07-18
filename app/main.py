@@ -1,9 +1,8 @@
-from sonic_pi_api import SynthStream
-from gui import Main_Menu
+from gui import Interface
 import time
 
 def main():
-    Main_Menu()
+    Interface()
 
 
 if __name__ == '__main__':
