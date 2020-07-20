@@ -39,7 +39,7 @@ class Interface(object):
         self.screen.fill((0, 0, 255))
         self.draw_text('main menu', self.font, (255, 255, 255), self.screen, 20, 20)
 
-        mx, my = pg.mouse.get_pos()
+        #mx, my = pg.mouse.get_pos()
 
         button_1 = pg.Rect(50, 100, 200, 50)
         pg.draw.rect(self.screen, (255, 0, 0), button_1)

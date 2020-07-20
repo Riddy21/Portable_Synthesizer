@@ -9,8 +9,9 @@ class Keyboard(object):
     def __init__(self):
 
         # init key values
-        self.key_set = self.make_key_mapping()
-        self.on_notes = []
+        self.key_dict = self.make_key_mapping()
+
+        self.on_keys = set()
 
         # init digital knobs
         # change to arrow keys on mac
@@ -19,33 +20,47 @@ class Keyboard(object):
         self.encoder_driver = Driver(self.encoder_buffer, scalar=True, factor=1)
         self.start_encoder_listener()
 
-        # Record button
+        # initialize with no play
+        self.playback_handler = None
 
-        # Play button
+        # For tracking if shift is on faster
+        self.shift = False
 
-        # Shift button
-
-        # left right arrow
-
-    # Change the channel we're connected
+    # Change the channel were connected
     def set_player(self, player):
         self.playback_handler = player
 
-    def make_key_mapping(self):
+    # make list for piano keys
+    @staticmethod
+    def make_key_mapping():
         key_list = [
-            pg.K_z,
-            pg.K_s,
-            pg.K_x,
-            pg.K_d,
-            pg.K_c,
-            pg.K_v,
-            pg.K_g,
-            pg.K_b,
-            pg.K_h,
-            pg.K_n,
-            pg.K_j,
-            pg.K_m,
-            pg.K_COMMA,
+            pg.K_z,  # C1
+            pg.K_s,  # C#1
+            pg.K_x,  # D1
+            pg.K_d,  # D#1
+            pg.K_c,  # E1
+            pg.K_v,  # F1
+            pg.K_g,  # F#1
+            pg.K_b,  # G1
+            pg.K_h,  # G#1
+            pg.K_n,  # A1
+            pg.K_j,  # A#1
+            pg.K_m,  # B1
+            pg.K_q,  # C2
+            pg.K_2,  # C#2
+            pg.K_w,  # D2
+            pg.K_3,  # D#2
+            pg.K_e,  # E2
+            pg.K_r,  # F2
+            pg.K_5,  # F#2
+            pg.K_t,  # G2
+            pg.K_6,  # G#2
+            pg.K_y,  # A2
+            pg.K_7,  # A#2
+            pg.K_u,  # B2
+            pg.K_LSHIFT,  # Shift
+            pg.K_LEFT,  # left arrow
+            pg.K_RIGHT  # right arrow
         ]
         mapping = {}
         for i in range(len(key_list)):
@@ -62,18 +77,28 @@ class Keyboard(object):
 
     # controls the keyboard to hit a key
     def key_down(self, key_index):
-        if key_index not in self.on_notes:
+        # If shift is off
+        if key_index == 24 and not self.shift:
+            self.shift = True
+            print(self.shift)
+
+        # Checks the if the key is on and adds key to on keys if not on
+        elif key_index not in self.on_keys:
             # add key to on_notes
-            self.on_notes.append(key_index)
+            self.on_keys.add(key_index)
 
             # play note
             self.playback_handler.key_down(key_index)
 
     # controls the keyboard to release a key
     def key_up(self, key_index):
-        if key_index in self.on_notes:
+        if key_index == 24 and self.shift:
+            self.shift = False
+            print(self.shift)
+
+        elif key_index in self.on_keys:
             # remove key from on_notes
-            self.on_notes.remove(key_index)
+            self.on_keys.remove(key_index)
 
             # play note
             self.playback_handler.key_up(key_index)

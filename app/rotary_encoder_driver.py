@@ -23,7 +23,8 @@ class Driver(object):
         while True:
             sleep(1)
             for i in range(4):
-                self.counter[i] = random.randint(0, 30)
+                # self.counter[i] = random.randint(0, 30)
+                self.counter[i] = 10
 
     def start_driver(self):
         import RPi.GPIO as GPIO

@@ -6,6 +6,7 @@ import os
 import pygame as pg
 from keyboard_driver import Keyboard
 from playback_handler import Player
+from gui import GUI
 
 # Engine class, handles all events, where main loop is
 # noinspection PyUnresolvedReferences
@@ -16,7 +17,7 @@ class Engine(object):
 
         # get assets directory
         home_path = os.getcwd()
-        assets_path = os.path.join(home_path, 'Assets', 'Part_1___2.sf2')
+        assets_path = os.path.join(home_path, 'Assets', 'Default.sf2')
 
         # Change audio channel
         if platform.system() == 'Darwin' or platform.system() == 'Windows':
@@ -52,6 +53,7 @@ class Engine(object):
         pg.init()
 
         # Start GUI
+        self.gui = GUI()
 
         # Start Clock
         self.mainClock = pg.time.Clock()
@@ -70,18 +72,21 @@ class Engine(object):
 
     # handle events
     def handle_events(self):
+        # start = time.time()
         events = pg.event.get()
         for e in events:
             if e.type == pg.KEYDOWN:
                 try:
-                    note = self.keyboard.key_set[e.key]
+                    note = self.keyboard.key_dict[e.key]
                 except KeyError:
                     pass
                 else:
                     self.keyboard.key_down(note)
+                    # end = time.time()
+                    # print(end-start)
             elif e.type == pg.KEYUP:
                 try:
-                    note = self.keyboard.key_set[e.key]
+                    note = self.keyboard.key_dict[e.key]
                 except KeyError:
                     pass
                 else:
@@ -95,8 +100,9 @@ class Engine(object):
     def loop(self):
         while True:
             # Update GUI
+            self.gui.draw_interface()
 
             # Handle events
             self.handle_events()
 
-            self.mainClock.tick(120)
+            self.mainClock.tick(240)
