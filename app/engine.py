@@ -52,9 +52,6 @@ class Engine(object):
         # start pygame stuff
         pg.init()
 
-        # Start GUI
-        self.gui = GUI()
-
         # Start Clock
         self.mainClock = pg.time.Clock()
 
@@ -68,11 +65,14 @@ class Engine(object):
         self.playback_handler = Player(keyboard=self.keyboard)
         self.playback_handler.add_channel(mode='freeplay', port=self.port)
 
+        # Start GUI
+        self.gui = GUI(self.playback_handler)
+
         self.loop()
 
     # handle events
     def handle_events(self):
-        # start = time.time()
+        start = time.time()
         events = pg.event.get()
         for e in events:
             if e.type == pg.KEYDOWN:
@@ -82,8 +82,8 @@ class Engine(object):
                     pass
                 else:
                     self.keyboard.key_down(note)
-                    # end = time.time()
-                    # print(end-start)
+                    end = time.time()
+                    print(end-start)
             elif e.type == pg.KEYUP:
                 try:
                     note = self.keyboard.key_dict[e.key]

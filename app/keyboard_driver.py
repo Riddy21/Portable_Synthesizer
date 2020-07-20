@@ -80,7 +80,6 @@ class Keyboard(object):
         # If shift is off
         if key_index == 24 and not self.shift:
             self.shift = True
-            print(self.shift)
 
         # Checks the if the key is on and adds key to on keys if not on
         elif key_index not in self.on_keys:
@@ -94,7 +93,6 @@ class Keyboard(object):
     def key_up(self, key_index):
         if key_index == 24 and self.shift:
             self.shift = False
-            print(self.shift)
 
         elif key_index in self.on_keys:
             # remove key from on_notes
