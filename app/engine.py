@@ -25,8 +25,12 @@ class Engine(object):
         else:
             audio = 'alsa'
 
+        # subprocess.Popen(
+        #     ['fluidsynth', '-a', audio, '-c', str(buffer_count), '-z', str(buffer_size), '-r', str(sr), '-g', '5',
+        #      assets_path])
+
         subprocess.Popen(
-            ['fluidsynth', '-a', audio, '-c', str(buffer_count), '-z', str(buffer_size), '-r', str(sr), '-g', '5',
+            ['fluidsynth', '-a', audio, '-g', '5',
              assets_path])
 
         time.sleep(5)

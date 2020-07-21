@@ -242,7 +242,11 @@ class Freeplay(Mode):
                 self.player.play_all()
 
     def key_up(self, index):
-        if index < 24:
+        # if shift is pressed
+        if self.keyboard.shift:
+            pass
+
+        elif index < 24:
             self.channel.key_up(index)
 
         # record function
@@ -331,7 +335,11 @@ class Test(Mode):
                 self.player.play_all()
 
     def key_up(self, index):
-        if index < 24:
+        # if shift is pressed
+        if self.keyboard.shift:
+            pass
+
+        elif index < 24:
             self.channel.key_up(index)
         # record function
         elif self.key_mappings[index] == 'record':
