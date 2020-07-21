@@ -79,7 +79,6 @@ class Player(object):
     def record_event(self, time, channel, event):
         # if is recording
         if self.recording:
-            print(time - self.recording, event[1])
             # add event to playlist
             self.recordlist.append([time - self.recording, channel, event])
 
@@ -88,10 +87,7 @@ class Player(object):
     def play_all(self):
         self.playing = True
         # sort the list by time
-        start = time.time()
         self.playlist = sorted(self.playlist, key=lambda l: l[0])
-        end = time.time()
-        # print(self.playlist)
 
         # Tracks starting time
         start_time = time.time()
@@ -121,7 +117,6 @@ class Player(object):
             if event[2][0] == 'program_change':
                 channel.midi_change_synth(event[2][1], background_mode=True)
 
-        print('end')
         self.playing = False
 
     # record all the channels at the same time
@@ -240,9 +235,26 @@ class Freeplay(Mode):
                         self.channel.key_up(i + 12)
                         self.channel.key_down(i)
 
+        # Play the recording list
+        elif self.key_mappings[index] == 'play':
+            # if any channels are not recording or player play
+            if not self.player.recording and not self.player.playing:
+                self.player.play_all()
+
     def key_up(self, index):
         if index < 24:
             self.channel.key_up(index)
+
+        # record function
+        elif self.key_mappings[index] == 'record':
+            if not self.player.recording and not self.player.playing:
+                self.player.record()
+
+                # plays all channels
+                self.player.play_all()
+
+        elif self.key_mappings[index] == 'stop':
+            self.player.stop_all()
 
     def use_knob(self, index, knob_num):
         if knob_num == 0:

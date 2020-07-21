@@ -61,6 +61,10 @@ class FreeplayInt(object):
     def draw_interface(self):
         self.gui.screen.fill((0, 0, 255))
         draw_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)
+        if self.events.player.recording:
+            draw_text('recording', self.gui.font, (255, 255, 255), self.gui.screen, 20, 40)
+        if self.events.player.playing:
+            draw_text('playing', self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)
 
 class TestInt(object):
     def __init__(self, events, gui):
