@@ -5,7 +5,7 @@ import platform
 import os
 import pygame as pg
 from keyboard_driver import Keyboard
-from playback_handler import Player
+from playback_handler import PlaybackHandler
 from gui import GUI
 
 # Engine class, handles all events, where main loop is
@@ -62,7 +62,7 @@ class Engine(object):
         self.keyboard = Keyboard()
 
         # Start playback controller and pass in the keyboard
-        self.playback_handler = Player(keyboard=self.keyboard)
+        self.playback_handler = PlaybackHandler(keyboard=self.keyboard)
         self.playback_handler.add_channel(mode='freeplay', port=self.port)
 
         # Start GUI
@@ -83,7 +83,7 @@ class Engine(object):
                 else:
                     self.keyboard.key_down(note)
                     end = time.time()
-                    print(end-start)
+                    # print(end-start)
             elif e.type == pg.KEYUP:
                 try:
                     note = self.keyboard.key_dict[e.key]

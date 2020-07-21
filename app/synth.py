@@ -1,4 +1,5 @@
 import mido
+import time
 from sf2utils.sf2parse import Sf2File
 
 class Synth(object):
@@ -8,7 +9,7 @@ class Synth(object):
             sf2 = Sf2File(sf2_file)
         return sf2.instruments
 
-    def __init__(self, channel, port, mode='freeplay', instr=0, reverb=0.3, gain=270):
+    def __init__(self, channel, port, recorder, mode='freeplay', instr=0, reverb=0.3, gain=270):
         # mode the synth is in
         self.mode = mode
 
@@ -26,31 +27,54 @@ class Synth(object):
 
         self.port = port
 
+        # Recorder to keep track of notes
+        self.recorder = recorder
+
     # Plays note
-    def _note_on(self, note):
+    def midi_note_on(self, note, background_mode=False):
         self.port.send(mido.Message('note_on', note=note, channel=self.channel))
 
+        if not background_mode:
+            # Send time stamp and note to recorder
+            self.recorder.record_event(time=time.time(), channel=self.channel, event=['note_on', note])
+
     # Kills note
-    def _note_off(self, note):
+    def midi_note_off(self, note, background_mode=False):
         self.port.send(mido.Message('note_off', note=note, channel=self.channel))
 
+        if not background_mode:
+            # Send time stamp and note to recorder
+            self.recorder.record_event(time=time.time(), channel=self.channel, event=['note_off', note])
+
     # Changes sound
-    def _change_synth(self, index):
+    def midi_change_synth(self, index, background_mode=False):
         self.port.send(mido.Message('program_change', program=index, channel=self.channel))
+
+        if not background_mode:
+            # Send time stamp and note to recorder
+            self.recorder.record_event(time=time.time(), channel=self.channel, event=['program_change', index])
+
+    def midi_stop(self):
+        start = time.time()
+        for note in range(128):
+            for channel in range(16):
+                self.port.send(mido.Message('note_off', note=note, channel=channel))
+        end = time.time()
+        print(end-start)
 
     # ---------------- Control Interface ---------------------
     # Presses down a key
     def key_down(self, key_index):
         note = key_index + self.octave + 60
-        self._note_on(note)
+        self.midi_note_on(note)
 
     def key_up(self, key_index):
         note = key_index + self.octave + 60
-        self._note_off(note)
+        self.midi_note_off(note)
 
     def change_synth(self, index):
         self.instr_ind = index
-        self._change_synth(self.instr_ind)
+        self.midi_change_synth(self.instr_ind)
 
     def octave_shift(self, shift):
         self.octave += shift * 12

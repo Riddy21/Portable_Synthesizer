@@ -27,8 +27,8 @@ class Keyboard(object):
         self.shift = False
 
     # Change the channel were connected
-    def set_player(self, player):
-        self.playback_handler = player
+    def set_handler(self, handler):
+        self.playback_handler = handler
 
     # make list for piano keys
     @staticmethod
@@ -58,9 +58,12 @@ class Keyboard(object):
             pg.K_y,  # A2
             pg.K_7,  # A#2
             pg.K_u,  # B2
-            pg.K_LSHIFT,  # Shift
+            pg.K_LSHIFT,
             pg.K_LEFT,  # left arrow
-            pg.K_RIGHT  # right arrow
+            pg.K_RIGHT,  # right arrow
+            pg.K_RSHIFT,
+            pg.K_BACKSPACE,
+            pg.K_RETURN
         ]
         mapping = {}
         for i in range(len(key_list)):

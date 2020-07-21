@@ -62,9 +62,6 @@ class FreeplayInt(object):
         self.gui.screen.fill((0, 0, 255))
         draw_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)
 
-        test_button = pg.Rect(50, 100, 200, 50)
-        pg.draw.rect(self.gui.screen, (255, 0, 0), test_button)
-
 class TestInt(object):
     def __init__(self, events, gui):
         self.name = 'test'
@@ -75,9 +72,10 @@ class TestInt(object):
     def draw_interface(self):
         self.gui.screen.fill((0, 0, 255))
         draw_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)
-
-        test_button = pg.Rect(50, 100, 200, 50)
-        pg.draw.rect(self.gui.screen, (255, 0, 0), test_button)
+        if self.events.player.recording:
+            draw_text('recording', self.gui.font, (255, 255, 255), self.gui.screen, 20, 40)
+        if self.events.player.playing:
+            draw_text('playing', self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)
 
 class StartupInt(object):
     def __init__(self, events, gui):
