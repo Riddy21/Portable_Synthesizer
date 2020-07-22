@@ -63,7 +63,9 @@ class Keyboard(object):
             pg.K_RIGHT,  # right arrow
             pg.K_RSHIFT,
             pg.K_BACKSPACE,
-            pg.K_RETURN
+            pg.K_RETURN,
+            pg.K_UP,
+            pg.K_DOWN
         ]
         mapping = {}
         for i in range(len(key_list)):

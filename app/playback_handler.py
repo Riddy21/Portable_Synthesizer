@@ -1,12 +1,10 @@
 from synth import Synth
-import time
-import pygame
-from threading_decorator import run_in_thread
+from player import Player
 
 
 # Class for connecting synths with the keyboard or handling it with other players
 class PlaybackHandler(object):
-    def __init__(self, keyboard):
+    def __init__(self, keyboard, port):
         # initialize channels and the keyboard
         self.channels = []
         self.keyboard = keyboard
@@ -14,20 +12,23 @@ class PlaybackHandler(object):
         # Set the playback hanlder on the keyboard to be this one
         self.keyboard.set_handler(self)
 
-        # set the player/recorder and pass channels
-        self.player = Player(self.channels)
-
         # Set the current mode to none
         self.current_mode = None
         self.current_channel_index = None
 
+        # port for connecting to fluidsynth
+        self.port = port
+
+        # set the player/recorder and pass channels
+        self.player = Player(self.channels, self)
+
     # Add a new channel and declare its playing mode
-    def add_channel(self, mode, port, instr=0, reverb=0.3, gain=270):
+    def add_channel(self, mode, instr=0, reverb=0.3, gain=270):
         # Find the channel number
         channel_length = len(self.channels)
 
         # Make the synth and add it to channels
-        synth = Synth(mode=mode, channel=channel_length, recorder=self.player, port=port, instr=instr, reverb=reverb,
+        synth = Synth(mode=mode, channel=channel_length, recorder=self.player, port=self.port, instr=instr, reverb=reverb,
                       gain=gain)
         self.channels.append(synth)
 
@@ -46,8 +47,15 @@ class PlaybackHandler(object):
 
     # Switch the current channel
     def switch_channel(self, channel_ind):
+        if channel_ind < 0:
+            return
+
         # change the channel
         self.current_channel_index = channel_ind
+
+        # if the channel doesn't exist, make new channel
+        if channel_ind >= len(self.channels):
+            self.add_channel('freeplay')
 
         # change the mode
         self.switch_mode(self.channels[channel_ind].mode)
@@ -64,76 +72,6 @@ class PlaybackHandler(object):
     def use_knob(self, index, knob_num):
         if knob_num == 0:
             self.current_mode.use_knob(index, knob_num)
-
-
-# player for recording and playing certain channels
-class Player(object):
-    def __init__(self, channels):
-        self.channels = channels
-        self.recording = False
-        self.playing = False
-
-        self.recordlist = []
-        self.playlist = []
-
-    def record_event(self, time, channel, event):
-        # if is recording
-        if self.recording:
-            # add event to playlist
-            self.recordlist.append([time - self.recording, channel, event])
-
-    # plays all the channels at the same time
-    @run_in_thread
-    def play_all(self):
-        self.playing = True
-        # sort the list by time
-        self.playlist = sorted(self.playlist, key=lambda l: l[0])
-
-        # Tracks starting time
-        start_time = time.time()
-
-        for event in self.playlist:
-            # Get the proper channel to play
-            channel = self.channels[event[1]]
-
-            # If was stopped
-            if self.playing == False:
-                # turn off all notes
-                channel.midi_stop()
-
-                break
-
-            note_time = event[0]
-
-            # wait until time to play note
-            while time.time() - start_time <= note_time:
-                pygame.time.delay(1)
-
-            # play the event
-            if event[2][0] == 'note_on':
-                channel.midi_note_on(event[2][1], background_mode=True)
-            elif event[2][0] == 'note_off':
-                channel.midi_note_off(event[2][1], background_mode=True)
-            if event[2][0] == 'program_change':
-                channel.midi_change_synth(event[2][1], background_mode=True)
-
-        self.playing = False
-
-    # record all the channels at the same time
-    def record(self):
-        self.recordlist = []
-        self.recording = time.time()
-
-    # Stops all playing and stops recording
-    def stop_all(self):
-        # move record list to play list
-        if self.recording:
-            self.playlist += self.recordlist
-        self.recording = False
-        self.playing = False
-
-    def pause(self, channel_ind):
-        pass
 
 
 # ------------------
@@ -164,8 +102,6 @@ class Freeplay(Mode):
 
         # map each key to a function dictionary
         self.key_mappings = self.map_index2function()
-
-        self.channel.change_synth(2)
 
     @staticmethod
     def map_index2function():
@@ -200,6 +136,8 @@ class Freeplay(Mode):
             "record",  # RShift
             "stop",  # Delete
             "play",  # Enter
+            "channel_up",  # Up arrow
+            "channel_down",  # Down arrow
         ]
 
         return key_list
@@ -207,13 +145,28 @@ class Freeplay(Mode):
     def key_down(self, index):
         # if shift is pressed
         if self.keyboard.shift:
+
             # if playing piano keys
             if index < 24:
                 pass
+
+            # Switch modes
             elif self.key_mappings[index] == 'octave_up':
                 self.playback_handler.switch_mode('test')
+
+            # Switch Synth
+            elif self.key_mappings[index] == 'channel_up':
+                self.channel.change_synth(self.channel.instr + 1)
+
+            # Switch Synth
+            elif self.key_mappings[index] == 'channel_down':
+                self.channel.change_synth(self.channel.instr - 1)
         # if playing piano keys
         elif index < 24:
+            # if the record button is held
+            if 27 in self.keyboard.on_keys:
+                self.key_up(27)
+
             self.channel.key_down(index)
         elif self.key_mappings[index] == 'octave_up':
             # shift octave if possible
@@ -240,6 +193,15 @@ class Freeplay(Mode):
             # if any channels are not recording or player play
             if not self.player.recording and not self.player.playing:
                 self.player.play_all()
+
+        # Switch up a channel
+        elif self.key_mappings[index] == 'channel_up':
+            self.playback_handler.switch_channel(self.playback_handler.current_channel_index + 1)
+
+        # Switch down a channel
+        elif self.key_mappings[index] == 'channel_down':
+            self.playback_handler.switch_channel(self.playback_handler.current_channel_index - 1)
+
 
     def key_up(self, index):
         # if shift is pressed
@@ -272,8 +234,6 @@ class Test(Mode):
         # map each key to a function dictionary
         self.key_mappings = self.map_index2function()
 
-        self.channel.change_synth(0)
-
     @staticmethod
     def map_index2function():
         key_list = [
@@ -307,6 +267,8 @@ class Test(Mode):
             "record",  # RShift
             "stop",  # Delete
             "play",  # Enter
+            "channel_up",  # Up arrow
+            "channel_down"  # Down arrow
         ]
 
         return key_list

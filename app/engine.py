@@ -25,13 +25,13 @@ class Engine(object):
         else:
             audio = 'alsa'
 
-        # subprocess.Popen(
-        #     ['fluidsynth', '-a', audio, '-c', str(buffer_count), '-z', str(buffer_size), '-r', str(sr), '-g', '5',
-        #      assets_path])
-
         subprocess.Popen(
-            ['fluidsynth', '-a', audio, '-g', '5',
+            ['fluidsynth', '-a', audio, '-c', str(buffer_count), '-z', str(buffer_size), '-r', str(sr), '-g', '5',
              assets_path])
+        #
+        # subprocess.Popen(
+        #     ['fluidsynth', '-a', audio, '-g', '5',
+        #      assets_path])
 
         time.sleep(5)
 
@@ -66,8 +66,8 @@ class Engine(object):
         self.keyboard = Keyboard()
 
         # Start playback controller and pass in the keyboard
-        self.playback_handler = PlaybackHandler(keyboard=self.keyboard)
-        self.playback_handler.add_channel(mode='freeplay', port=self.port)
+        self.playback_handler = PlaybackHandler(keyboard=self.keyboard, port=self.port)
+        self.playback_handler.add_channel(mode='freeplay')
 
         # Start GUI
         self.gui = GUI(self.playback_handler)
@@ -87,7 +87,7 @@ class Engine(object):
                 else:
                     self.keyboard.key_down(note)
                     end = time.time()
-                    # print(end-start)
+                    print(end-start)
             elif e.type == pg.KEYUP:
                 try:
                     note = self.keyboard.key_dict[e.key]

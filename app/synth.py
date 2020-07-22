@@ -19,6 +19,8 @@ class Synth(object):
         # instrument index
         self.instr = instr
 
+        self.instr_list = self.get_instruments()
+
         # Effects
         self.reverb = reverb
 
@@ -48,17 +50,24 @@ class Synth(object):
 
     # Changes sound
     def midi_change_synth(self, index, background_mode=False):
+        if index < 0 or index >127:
+            return
+        # send message
         self.port.send(mido.Message('program_change', program=index, channel=self.channel))
+
+        # Change the self parameter
+        self.instr = index
 
         if not background_mode:
             # Send time stamp and note to recorder
             self.recorder.record_event(time=time.time(), channel=self.channel, event=['program_change', index])
 
-    def midi_stop(self):
+    @staticmethod
+    def midi_stop(port):
         start = time.time()
         for note in range(128):
             for channel in range(16):
-                self.port.send(mido.Message('note_off', note=note, channel=channel))
+                port.send(mido.Message('note_off', note=note, channel=channel))
         end = time.time()
         print(end-start)
 
@@ -73,8 +82,7 @@ class Synth(object):
         self.midi_note_off(note)
 
     def change_synth(self, index):
-        self.instr_ind = index
-        self.midi_change_synth(self.instr_ind)
+        self.midi_change_synth(index)
 
     def octave_shift(self, shift):
         self.octave += shift * 12

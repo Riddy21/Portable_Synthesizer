@@ -66,6 +66,14 @@ class FreeplayInt(object):
         if self.events.player.playing:
             draw_text('playing', self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)
 
+        # TODO: Make api
+        channel_index = self.events.current_channel_index
+        channel = self.events.channels[channel_index]
+
+        draw_text('channel: %s' % channel_index, self.gui.font, (255, 255, 255), self.gui.screen, 20, 80)
+        draw_text('instrument: %s' % channel.instr_list[channel.instr], self.gui.font, (255, 255, 255), self.gui.screen,
+                  20, 100)
+
 class TestInt(object):
     def __init__(self, events, gui):
         self.name = 'test'
