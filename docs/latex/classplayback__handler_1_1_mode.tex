@@ -1,0 +1,138 @@
+\hypertarget{classplayback__handler_1_1_mode}{}\doxysection{playback\+\_\+handler.\+Mode Class Reference}
+\label{classplayback__handler_1_1_mode}\index{playback\_handler.Mode@{playback\_handler.Mode}}
+
+
+Inheritance diagram for playback\+\_\+handler.\+Mode\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classplayback__handler_1_1_mode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for playback\+\_\+handler.\+Mode\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{classplayback__handler_1_1_mode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classplayback__handler_1_1_mode_a620cadae77812d4971395b7ec9ef8089}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classplayback__handler_1_1_mode_a0583848aef966a491d36bb61455decb2}{name}}, synth, \mbox{\hyperlink{classplayback__handler_1_1_mode_a72a57ad77a393b721b096d5f5501e097}{keyboard}}, \mbox{\hyperlink{classplayback__handler_1_1_mode_ac2990e6bb04fca888bdc6872c74597c5}{playback\+\_\+handler}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classplayback__handler_1_1_mode_a0583848aef966a491d36bb61455decb2}{name}}
+\item 
+\mbox{\hyperlink{classplayback__handler_1_1_mode_a4f784cd3fe0e97b80512c4f4fa43fd40}{channel}}
+\item 
+\mbox{\hyperlink{classplayback__handler_1_1_mode_a72a57ad77a393b721b096d5f5501e097}{keyboard}}
+\item 
+\mbox{\hyperlink{classplayback__handler_1_1_mode_ac2990e6bb04fca888bdc6872c74597c5}{playback\+\_\+handler}}
+\item 
+\mbox{\hyperlink{classplayback__handler_1_1_mode_a2be6a6e4733259905b7b3b5e41d9b7cc}{player}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 82 of file playback\+\_\+handler.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classplayback__handler_1_1_mode_a620cadae77812d4971395b7ec9ef8089}\label{classplayback__handler_1_1_mode_a620cadae77812d4971395b7ec9ef8089}} 
+\index{playback\_handler.Mode@{playback\_handler.Mode}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!playback\_handler.Mode@{playback\_handler.Mode}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def playback\+\_\+handler.\+Mode.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{name,  }\item[{}]{synth,  }\item[{}]{keyboard,  }\item[{}]{playback\+\_\+handler }\end{DoxyParamCaption})}
+
+
+
+Definition at line 83 of file playback\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{83     \textcolor{keyword}{def }\_\_init\_\_(self, name, synth, keyboard, playback\_handler):}
+\DoxyCodeLine{84         self.name = name}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \textcolor{comment}{\# channel set to the proper synth}}
+\DoxyCodeLine{87         self.channel = synth}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89         \textcolor{comment}{\# Keybaord pointer}}
+\DoxyCodeLine{90         self.keyboard = keyboard}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92         \textcolor{comment}{\# Playback handler pointer for switching modes}}
+\DoxyCodeLine{93         self.playback\_handler = playback\_handler}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95         \textcolor{comment}{\# Get pointer to Player}}
+\DoxyCodeLine{96         self.player = playback\_handler.player}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classplayback__handler_1_1_mode_a4f784cd3fe0e97b80512c4f4fa43fd40}\label{classplayback__handler_1_1_mode_a4f784cd3fe0e97b80512c4f4fa43fd40}} 
+\index{playback\_handler.Mode@{playback\_handler.Mode}!channel@{channel}}
+\index{channel@{channel}!playback\_handler.Mode@{playback\_handler.Mode}}
+\doxysubsubsection{\texorpdfstring{channel}{channel}}
+{\footnotesize\ttfamily playback\+\_\+handler.\+Mode.\+channel}
+
+
+
+Definition at line 87 of file playback\+\_\+handler.\+py.
+
+\mbox{\Hypertarget{classplayback__handler_1_1_mode_a72a57ad77a393b721b096d5f5501e097}\label{classplayback__handler_1_1_mode_a72a57ad77a393b721b096d5f5501e097}} 
+\index{playback\_handler.Mode@{playback\_handler.Mode}!keyboard@{keyboard}}
+\index{keyboard@{keyboard}!playback\_handler.Mode@{playback\_handler.Mode}}
+\doxysubsubsection{\texorpdfstring{keyboard}{keyboard}}
+{\footnotesize\ttfamily playback\+\_\+handler.\+Mode.\+keyboard}
+
+
+
+Definition at line 90 of file playback\+\_\+handler.\+py.
+
+\mbox{\Hypertarget{classplayback__handler_1_1_mode_a0583848aef966a491d36bb61455decb2}\label{classplayback__handler_1_1_mode_a0583848aef966a491d36bb61455decb2}} 
+\index{playback\_handler.Mode@{playback\_handler.Mode}!name@{name}}
+\index{name@{name}!playback\_handler.Mode@{playback\_handler.Mode}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily playback\+\_\+handler.\+Mode.\+name}
+
+
+
+Definition at line 84 of file playback\+\_\+handler.\+py.
+
+\mbox{\Hypertarget{classplayback__handler_1_1_mode_ac2990e6bb04fca888bdc6872c74597c5}\label{classplayback__handler_1_1_mode_ac2990e6bb04fca888bdc6872c74597c5}} 
+\index{playback\_handler.Mode@{playback\_handler.Mode}!playback\_handler@{playback\_handler}}
+\index{playback\_handler@{playback\_handler}!playback\_handler.Mode@{playback\_handler.Mode}}
+\doxysubsubsection{\texorpdfstring{playback\_handler}{playback\_handler}}
+{\footnotesize\ttfamily playback\+\_\+handler.\+Mode.\+playback\+\_\+handler}
+
+
+
+Definition at line 93 of file playback\+\_\+handler.\+py.
+
+\mbox{\Hypertarget{classplayback__handler_1_1_mode_a2be6a6e4733259905b7b3b5e41d9b7cc}\label{classplayback__handler_1_1_mode_a2be6a6e4733259905b7b3b5e41d9b7cc}} 
+\index{playback\_handler.Mode@{playback\_handler.Mode}!player@{player}}
+\index{player@{player}!playback\_handler.Mode@{playback\_handler.Mode}}
+\doxysubsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily playback\+\_\+handler.\+Mode.\+player}
+
+
+
+Definition at line 96 of file playback\+\_\+handler.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{playback__handler_8py}{playback\+\_\+handler.\+py}}\end{DoxyCompactItemize}

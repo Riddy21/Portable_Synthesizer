@@ -1,0 +1,128 @@
+\hypertarget{classgui_1_1_startup_int}{}\doxysection{gui.\+Startup\+Int Class Reference}
+\label{classgui_1_1_startup_int}\index{gui.StartupInt@{gui.StartupInt}}
+
+
+Inheritance diagram for gui.\+Startup\+Int\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classgui_1_1_startup_int__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gui.\+Startup\+Int\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classgui_1_1_startup_int__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classgui_1_1_startup_int_aae6b007ab4bf05d9125db188873b76e0}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classgui_1_1_startup_int_ace32cba9a0ed84ad387d1bc6d3afb71b}{events}}, \mbox{\hyperlink{classgui_1_1_startup_int_a94a16febfa75dcb78c39eec337e97102}{gui}})
+\item 
+def \mbox{\hyperlink{classgui_1_1_startup_int_ade839951800d6ac058a6d046c37c43d3}{draw\+\_\+interface}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgui_1_1_startup_int_a56b1e60cc385e728db878633c820e822}{name}}
+\item 
+\mbox{\hyperlink{classgui_1_1_startup_int_ace32cba9a0ed84ad387d1bc6d3afb71b}{events}}
+\item 
+\mbox{\hyperlink{classgui_1_1_startup_int_a94a16febfa75dcb78c39eec337e97102}{gui}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 92 of file gui.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgui_1_1_startup_int_aae6b007ab4bf05d9125db188873b76e0}\label{classgui_1_1_startup_int_aae6b007ab4bf05d9125db188873b76e0}} 
+\index{gui.StartupInt@{gui.StartupInt}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!gui.StartupInt@{gui.StartupInt}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def gui.\+Startup\+Int.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{events,  }\item[{}]{gui }\end{DoxyParamCaption})}
+
+
+
+Definition at line 93 of file gui.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{93     \textcolor{keyword}{def }\_\_init\_\_(self, events, gui):}
+\DoxyCodeLine{94         self.name = \textcolor{stringliteral}{'startup'}}
+\DoxyCodeLine{95         self.events = events}
+\DoxyCodeLine{96         self.gui = gui}
+\DoxyCodeLine{97 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgui_1_1_startup_int_ade839951800d6ac058a6d046c37c43d3}\label{classgui_1_1_startup_int_ade839951800d6ac058a6d046c37c43d3}} 
+\index{gui.StartupInt@{gui.StartupInt}!draw\_interface@{draw\_interface}}
+\index{draw\_interface@{draw\_interface}!gui.StartupInt@{gui.StartupInt}}
+\doxysubsubsection{\texorpdfstring{draw\_interface()}{draw\_interface()}}
+{\footnotesize\ttfamily def gui.\+Startup\+Int.\+draw\+\_\+interface (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 99 of file gui.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{99     \textcolor{keyword}{def }draw\_interface(self):}
+\DoxyCodeLine{100         self.gui.screen.fill((0, 0, 255))}
+\DoxyCodeLine{101         \mbox{\hyperlink{namespacegui_aa892e8509b82e440932eadee9bf9612a}{draw\_text}}(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103         test\_button = pg.Rect(50, 100, 200, 50)}
+\DoxyCodeLine{104         pg.draw.rect(self.gui.screen, (255, 0, 0), test\_button)}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classgui_1_1_startup_int_ace32cba9a0ed84ad387d1bc6d3afb71b}\label{classgui_1_1_startup_int_ace32cba9a0ed84ad387d1bc6d3afb71b}} 
+\index{gui.StartupInt@{gui.StartupInt}!events@{events}}
+\index{events@{events}!gui.StartupInt@{gui.StartupInt}}
+\doxysubsubsection{\texorpdfstring{events}{events}}
+{\footnotesize\ttfamily gui.\+Startup\+Int.\+events}
+
+
+
+Definition at line 95 of file gui.\+py.
+
+\mbox{\Hypertarget{classgui_1_1_startup_int_a94a16febfa75dcb78c39eec337e97102}\label{classgui_1_1_startup_int_a94a16febfa75dcb78c39eec337e97102}} 
+\index{gui.StartupInt@{gui.StartupInt}!gui@{gui}}
+\index{gui@{gui}!gui.StartupInt@{gui.StartupInt}}
+\doxysubsubsection{\texorpdfstring{gui}{gui}}
+{\footnotesize\ttfamily gui.\+Startup\+Int.\+gui}
+
+
+
+Definition at line 96 of file gui.\+py.
+
+\mbox{\Hypertarget{classgui_1_1_startup_int_a56b1e60cc385e728db878633c820e822}\label{classgui_1_1_startup_int_a56b1e60cc385e728db878633c820e822}} 
+\index{gui.StartupInt@{gui.StartupInt}!name@{name}}
+\index{name@{name}!gui.StartupInt@{gui.StartupInt}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily gui.\+Startup\+Int.\+name}
+
+
+
+Definition at line 94 of file gui.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gui_8py}{gui.\+py}}\end{DoxyCompactItemize}

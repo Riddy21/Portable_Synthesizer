@@ -1,0 +1,198 @@
+\hypertarget{classgui_1_1_g_u_i}{}\doxysection{gui.\+G\+UI Class Reference}
+\label{classgui_1_1_g_u_i}\index{gui.GUI@{gui.GUI}}
+
+
+Inheritance diagram for gui.\+G\+UI\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classgui_1_1_g_u_i__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gui.\+G\+UI\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classgui_1_1_g_u_i__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classgui_1_1_g_u_i_ac5d7bf37c101aa33da99bf186ac07189}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, playback\+\_\+handler)
+\item 
+def \mbox{\hyperlink{classgui_1_1_g_u_i_a727caa10455ae971311154c914124036}{set\+\_\+interface}} (self, mode)
+\item 
+def \mbox{\hyperlink{classgui_1_1_g_u_i_afcf31f4c2abaa23ea83a04b5969ee368}{draw\+\_\+interface}} (self)
+\item 
+def \mbox{\hyperlink{classgui_1_1_g_u_i_a92cfa7e1933c024c1f8dcb78c4a50b3c}{update}} (self, func)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgui_1_1_g_u_i_ae2e9fa6a66cab2d767afff68b54e826f}{screen}}
+\item 
+\mbox{\hyperlink{classgui_1_1_g_u_i_a5126a68ff5b1d5fffdc70952356af280}{font}}
+\item 
+\mbox{\hyperlink{classgui_1_1_g_u_i_a79449ff72e64b4f29e466ed68eb6ada9}{events}}
+\item 
+\mbox{\hyperlink{classgui_1_1_g_u_i_aa6dc3a6cfbb5c2c08ccd92b29fc33530}{interface}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 13 of file gui.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgui_1_1_g_u_i_ac5d7bf37c101aa33da99bf186ac07189}\label{classgui_1_1_g_u_i_ac5d7bf37c101aa33da99bf186ac07189}} 
+\index{gui.GUI@{gui.GUI}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!gui.GUI@{gui.GUI}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def gui.\+G\+U\+I.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{playback\+\_\+handler }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file gui.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{14     \textcolor{keyword}{def }\_\_init\_\_(self, playback\_handler):}
+\DoxyCodeLine{15         \textcolor{comment}{\# Setup display}}
+\DoxyCodeLine{16         \textcolor{keywordflow}{if} platform.system() == \textcolor{stringliteral}{'Darwin'} \textcolor{keywordflow}{or} platform.system() == \textcolor{stringliteral}{'Windows'}:}
+\DoxyCodeLine{17             self.screen = pg.display.set\_mode((480, 320), 32)}
+\DoxyCodeLine{18         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{19             self.screen = pg.display.set\_mode((480, 320), FULLSCREEN | DOUBLEBUF, 32)}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21         \textcolor{comment}{\# Fonts}}
+\DoxyCodeLine{22         self.font = pg.font.SysFont(\textcolor{stringliteral}{'Helvetica'}, 20)}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         \textcolor{comment}{\# Get the playback handler to get all the events}}
+\DoxyCodeLine{25         self.events = playback\_handler}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27         self.interface = StartupInt(self.events, self)}
+\DoxyCodeLine{28 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgui_1_1_g_u_i_afcf31f4c2abaa23ea83a04b5969ee368}\label{classgui_1_1_g_u_i_afcf31f4c2abaa23ea83a04b5969ee368}} 
+\index{gui.GUI@{gui.GUI}!draw\_interface@{draw\_interface}}
+\index{draw\_interface@{draw\_interface}!gui.GUI@{gui.GUI}}
+\doxysubsubsection{\texorpdfstring{draw\_interface()}{draw\_interface()}}
+{\footnotesize\ttfamily def gui.\+G\+U\+I.\+draw\+\_\+interface (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 37 of file gui.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{37     \textcolor{keyword}{def }draw\_interface(self):}
+\DoxyCodeLine{38         \textcolor{comment}{\# switch interfaces if the interface changed}}
+\DoxyCodeLine{39         \textcolor{keywordflow}{if} self.events.current\_mode.name != self.interface.name:}
+\DoxyCodeLine{40             self.set\_interface(self.events.current\_mode.name)}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{comment}{\# draw the interface and update}}
+\DoxyCodeLine{43         self.interface.draw\_interface()}
+\DoxyCodeLine{44         pg.display.update()}
+\DoxyCodeLine{45 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classgui_1_1_g_u_i_a727caa10455ae971311154c914124036}\label{classgui_1_1_g_u_i_a727caa10455ae971311154c914124036}} 
+\index{gui.GUI@{gui.GUI}!set\_interface@{set\_interface}}
+\index{set\_interface@{set\_interface}!gui.GUI@{gui.GUI}}
+\doxysubsubsection{\texorpdfstring{set\_interface()}{set\_interface()}}
+{\footnotesize\ttfamily def gui.\+G\+U\+I.\+set\+\_\+interface (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{mode }\end{DoxyParamCaption})}
+
+
+
+Definition at line 30 of file gui.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{30     \textcolor{keyword}{def }set\_interface(self, mode):}
+\DoxyCodeLine{31         \textcolor{keywordflow}{if} mode == \textcolor{stringliteral}{'freeplay'}:}
+\DoxyCodeLine{32             self.interface = FreeplayInt(self.events, self)}
+\DoxyCodeLine{33         \textcolor{keywordflow}{elif} mode == \textcolor{stringliteral}{'test'}:}
+\DoxyCodeLine{34             self.interface = TestInt(self.events, self)}
+\DoxyCodeLine{35 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classgui_1_1_g_u_i_a92cfa7e1933c024c1f8dcb78c4a50b3c}\label{classgui_1_1_g_u_i_a92cfa7e1933c024c1f8dcb78c4a50b3c}} 
+\index{gui.GUI@{gui.GUI}!update@{update}}
+\index{update@{update}!gui.GUI@{gui.GUI}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily def gui.\+G\+U\+I.\+update (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{func }\end{DoxyParamCaption})}
+
+
+
+Definition at line 47 of file gui.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{47     \textcolor{keyword}{def }update(self, func):}
+\DoxyCodeLine{48         pg.display.update(func)}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{comment}{\# -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{51 \textcolor{comment}{\# Interface Modes}}
+\DoxyCodeLine{52 \textcolor{comment}{\# -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{53 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classgui_1_1_g_u_i_a79449ff72e64b4f29e466ed68eb6ada9}\label{classgui_1_1_g_u_i_a79449ff72e64b4f29e466ed68eb6ada9}} 
+\index{gui.GUI@{gui.GUI}!events@{events}}
+\index{events@{events}!gui.GUI@{gui.GUI}}
+\doxysubsubsection{\texorpdfstring{events}{events}}
+{\footnotesize\ttfamily gui.\+G\+U\+I.\+events}
+
+
+
+Definition at line 25 of file gui.\+py.
+
+\mbox{\Hypertarget{classgui_1_1_g_u_i_a5126a68ff5b1d5fffdc70952356af280}\label{classgui_1_1_g_u_i_a5126a68ff5b1d5fffdc70952356af280}} 
+\index{gui.GUI@{gui.GUI}!font@{font}}
+\index{font@{font}!gui.GUI@{gui.GUI}}
+\doxysubsubsection{\texorpdfstring{font}{font}}
+{\footnotesize\ttfamily gui.\+G\+U\+I.\+font}
+
+
+
+Definition at line 22 of file gui.\+py.
+
+\mbox{\Hypertarget{classgui_1_1_g_u_i_aa6dc3a6cfbb5c2c08ccd92b29fc33530}\label{classgui_1_1_g_u_i_aa6dc3a6cfbb5c2c08ccd92b29fc33530}} 
+\index{gui.GUI@{gui.GUI}!interface@{interface}}
+\index{interface@{interface}!gui.GUI@{gui.GUI}}
+\doxysubsubsection{\texorpdfstring{interface}{interface}}
+{\footnotesize\ttfamily gui.\+G\+U\+I.\+interface}
+
+
+
+Definition at line 27 of file gui.\+py.
+
+\mbox{\Hypertarget{classgui_1_1_g_u_i_ae2e9fa6a66cab2d767afff68b54e826f}\label{classgui_1_1_g_u_i_ae2e9fa6a66cab2d767afff68b54e826f}} 
+\index{gui.GUI@{gui.GUI}!screen@{screen}}
+\index{screen@{screen}!gui.GUI@{gui.GUI}}
+\doxysubsubsection{\texorpdfstring{screen}{screen}}
+{\footnotesize\ttfamily gui.\+G\+U\+I.\+screen}
+
+
+
+Definition at line 17 of file gui.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gui_8py}{gui.\+py}}\end{DoxyCompactItemize}

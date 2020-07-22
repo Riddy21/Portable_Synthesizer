@@ -1,0 +1,272 @@
+\hypertarget{classengine_1_1_engine}{}\doxysection{engine.\+Engine Class Reference}
+\label{classengine_1_1_engine}\index{engine.Engine@{engine.Engine}}
+
+
+Inheritance diagram for engine.\+Engine\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classengine_1_1_engine__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for engine.\+Engine\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classengine_1_1_engine__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classengine_1_1_engine_abd54f6fe444596a7cffdd099955bb9d5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classengine_1_1_engine_a8e1535937d25d484c241628b6c58f485}{port}})
+\item 
+def \mbox{\hyperlink{classengine_1_1_engine_ac02822e07f60130e3ecb8dd8d08d4fbb}{handle\+\_\+events}} (self)
+\item 
+def \mbox{\hyperlink{classengine_1_1_engine_a50c8030b5d256d4721004d01783e418c}{loop}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classengine_1_1_engine_a10595c155b04637eae6669de931f150a}{start\+\_\+server}} (buffer\+\_\+count, buffer\+\_\+size, sr)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classengine_1_1_engine_a19c736714f37e86a16b389f02091e607}{main\+Clock}}
+\item 
+\mbox{\hyperlink{classengine_1_1_engine_a8e1535937d25d484c241628b6c58f485}{port}}
+\item 
+\mbox{\hyperlink{classengine_1_1_engine_a373b442dea5c84cc962f9b6967307fb4}{keyboard}}
+\item 
+\mbox{\hyperlink{classengine_1_1_engine_afe32701b4d069b21c003188a9d9496bc}{playback\+\_\+handler}}
+\item 
+\mbox{\hyperlink{classengine_1_1_engine_a806cc1f2f71e612838bb9976881d7baa}{gui}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 13 of file engine.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classengine_1_1_engine_abd54f6fe444596a7cffdd099955bb9d5}\label{classengine_1_1_engine_abd54f6fe444596a7cffdd099955bb9d5}} 
+\index{engine.Engine@{engine.Engine}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!engine.Engine@{engine.Engine}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def engine.\+Engine.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{port }\end{DoxyParamCaption})}
+
+
+
+Definition at line 55 of file engine.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{55     \textcolor{keyword}{def }\_\_init\_\_(self, port):}
+\DoxyCodeLine{56         \textcolor{comment}{\# start pygame stuff}}
+\DoxyCodeLine{57         pg.init()}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         \textcolor{comment}{\# Start Clock}}
+\DoxyCodeLine{60         self.mainClock = pg.time.Clock()}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \textcolor{comment}{\# Connect to Fluidsynth}}
+\DoxyCodeLine{63         self.port = port}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \textcolor{comment}{\# Get keyboard}}
+\DoxyCodeLine{66         self.keyboard = Keyboard()}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{comment}{\# Start playback controller and pass in the keyboard}}
+\DoxyCodeLine{69         self.playback\_handler = PlaybackHandler(keyboard=self.keyboard, port=self.port)}
+\DoxyCodeLine{70         self.playback\_handler.add\_channel(mode=\textcolor{stringliteral}{'freeplay'})}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \textcolor{comment}{\# Start GUI}}
+\DoxyCodeLine{73         self.gui = GUI(self.playback\_handler)}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         self.loop()}
+\DoxyCodeLine{76 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classengine_1_1_engine_ac02822e07f60130e3ecb8dd8d08d4fbb}\label{classengine_1_1_engine_ac02822e07f60130e3ecb8dd8d08d4fbb}} 
+\index{engine.Engine@{engine.Engine}!handle\_events@{handle\_events}}
+\index{handle\_events@{handle\_events}!engine.Engine@{engine.Engine}}
+\doxysubsubsection{\texorpdfstring{handle\_events()}{handle\_events()}}
+{\footnotesize\ttfamily def engine.\+Engine.\+handle\+\_\+events (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 78 of file engine.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{78     \textcolor{keyword}{def }handle\_events(self):}
+\DoxyCodeLine{79         start = time.time()}
+\DoxyCodeLine{80         events = pg.event.get()}
+\DoxyCodeLine{81         \textcolor{keywordflow}{for} e \textcolor{keywordflow}{in} events:}
+\DoxyCodeLine{82             \textcolor{keywordflow}{if} e.type == pg.KEYDOWN:}
+\DoxyCodeLine{83                 \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{84                     note = self.keyboard.key\_dict[e.key]}
+\DoxyCodeLine{85                 \textcolor{keywordflow}{except} KeyError:}
+\DoxyCodeLine{86                     \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{87                 \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{88                     self.keyboard.key\_down(note)}
+\DoxyCodeLine{89                     end = time.time()}
+\DoxyCodeLine{90                     print(end-\/start)}
+\DoxyCodeLine{91             \textcolor{keywordflow}{elif} e.type == pg.KEYUP:}
+\DoxyCodeLine{92                 \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{93                     note = self.keyboard.key\_dict[e.key]}
+\DoxyCodeLine{94                 \textcolor{keywordflow}{except} KeyError:}
+\DoxyCodeLine{95                     \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{96                 \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{97                     self.keyboard.key\_up(note)}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99         knobs = self.keyboard.get\_knobs()}
+\DoxyCodeLine{100         \textcolor{keywordflow}{if} knobs[0]:}
+\DoxyCodeLine{101             self.keyboard.use\_knob(0)}
+\DoxyCodeLine{102 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classengine_1_1_engine_a50c8030b5d256d4721004d01783e418c}\label{classengine_1_1_engine_a50c8030b5d256d4721004d01783e418c}} 
+\index{engine.Engine@{engine.Engine}!loop@{loop}}
+\index{loop@{loop}!engine.Engine@{engine.Engine}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily def engine.\+Engine.\+loop (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 104 of file engine.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{104     \textcolor{keyword}{def }loop(self):}
+\DoxyCodeLine{105         \textcolor{keywordflow}{while} \textcolor{keyword}{True}:}
+\DoxyCodeLine{106             \textcolor{comment}{\# Update GUI}}
+\DoxyCodeLine{107             self.gui.draw\_interface()}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109             \textcolor{comment}{\# Handle events}}
+\DoxyCodeLine{110             self.handle\_events()}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112             self.mainClock.tick(240)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classengine_1_1_engine_a10595c155b04637eae6669de931f150a}\label{classengine_1_1_engine_a10595c155b04637eae6669de931f150a}} 
+\index{engine.Engine@{engine.Engine}!start\_server@{start\_server}}
+\index{start\_server@{start\_server}!engine.Engine@{engine.Engine}}
+\doxysubsubsection{\texorpdfstring{start\_server()}{start\_server()}}
+{\footnotesize\ttfamily def engine.\+Engine.\+start\+\_\+server (\begin{DoxyParamCaption}\item[{}]{buffer\+\_\+count,  }\item[{}]{buffer\+\_\+size,  }\item[{}]{sr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 15 of file engine.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{15     \textcolor{keyword}{def }start\_server(buffer\_count, buffer\_size, sr):}
+\DoxyCodeLine{16         print(\textcolor{stringliteral}{'INFO: Opening stream'})}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{comment}{\# get assets directory}}
+\DoxyCodeLine{19         home\_path = os.getcwd()}
+\DoxyCodeLine{20         assets\_path = os.path.join(home\_path, \textcolor{stringliteral}{'Assets'}, \textcolor{stringliteral}{'Default.sf2'})}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{comment}{\# Change audio channel}}
+\DoxyCodeLine{23         \textcolor{keywordflow}{if} platform.system() == \textcolor{stringliteral}{'Darwin'} \textcolor{keywordflow}{or} platform.system() == \textcolor{stringliteral}{'Windows'}:}
+\DoxyCodeLine{24             audio = \textcolor{stringliteral}{'portaudio'}}
+\DoxyCodeLine{25         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{26             audio = \textcolor{stringliteral}{'alsa'}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         subprocess.Popen(}
+\DoxyCodeLine{29             [\textcolor{stringliteral}{'fluidsynth'}, \textcolor{stringliteral}{'-\/a'}, audio, \textcolor{stringliteral}{'-\/c'}, str(buffer\_count), \textcolor{stringliteral}{'-\/z'}, str(buffer\_size), \textcolor{stringliteral}{'-\/r'}, str(sr), \textcolor{stringliteral}{'-\/g'}, \textcolor{stringliteral}{'5'},}
+\DoxyCodeLine{30              assets\_path])}
+\DoxyCodeLine{31         \textcolor{comment}{\#}}
+\DoxyCodeLine{32         \textcolor{comment}{\# subprocess.Popen(}}
+\DoxyCodeLine{33         \textcolor{comment}{\#     ['fluidsynth', '-\/a', audio, '-\/g', '5',}}
+\DoxyCodeLine{34         \textcolor{comment}{\#      assets\_path])}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36         time.sleep(5)}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         mido\_streams = mido.get\_output\_names()}
+\DoxyCodeLine{39         print(\textcolor{stringliteral}{'INFO: Streams: \%s'} \% mido\_streams)}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \textcolor{comment}{\# Setup stream output}}
+\DoxyCodeLine{42         \textcolor{keywordflow}{if} platform.system() == \textcolor{stringliteral}{'Darwin'} \textcolor{keywordflow}{or} platform.system() == \textcolor{stringliteral}{'Windows'}:}
+\DoxyCodeLine{43             port = mido.open\_output()}
+\DoxyCodeLine{44         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{45             \textcolor{comment}{\# Find port number}}
+\DoxyCodeLine{46             \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} mido\_streams:}
+\DoxyCodeLine{47                 \textcolor{keywordflow}{if} \textcolor{stringliteral}{'Synth'} \textcolor{keywordflow}{in} i:}
+\DoxyCodeLine{48                     port\_num = i.split(\textcolor{stringliteral}{'('})[1].split(\textcolor{stringliteral}{')'})[0]}
+\DoxyCodeLine{49                     \textcolor{keywordflow}{break}}
+\DoxyCodeLine{50             port = mido.open\_output(\textcolor{stringliteral}{'Synth input port (\%s:0)'} \% port\_num)}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52         print(\textcolor{stringliteral}{'INFO: Established Fluidsynth connection on port \%s'} \% port)}
+\DoxyCodeLine{53         \textcolor{keywordflow}{return} port}
+\DoxyCodeLine{54 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classengine_1_1_engine_a806cc1f2f71e612838bb9976881d7baa}\label{classengine_1_1_engine_a806cc1f2f71e612838bb9976881d7baa}} 
+\index{engine.Engine@{engine.Engine}!gui@{gui}}
+\index{gui@{gui}!engine.Engine@{engine.Engine}}
+\doxysubsubsection{\texorpdfstring{gui}{gui}}
+{\footnotesize\ttfamily engine.\+Engine.\+gui}
+
+
+
+Definition at line 73 of file engine.\+py.
+
+\mbox{\Hypertarget{classengine_1_1_engine_a373b442dea5c84cc962f9b6967307fb4}\label{classengine_1_1_engine_a373b442dea5c84cc962f9b6967307fb4}} 
+\index{engine.Engine@{engine.Engine}!keyboard@{keyboard}}
+\index{keyboard@{keyboard}!engine.Engine@{engine.Engine}}
+\doxysubsubsection{\texorpdfstring{keyboard}{keyboard}}
+{\footnotesize\ttfamily engine.\+Engine.\+keyboard}
+
+
+
+Definition at line 66 of file engine.\+py.
+
+\mbox{\Hypertarget{classengine_1_1_engine_a19c736714f37e86a16b389f02091e607}\label{classengine_1_1_engine_a19c736714f37e86a16b389f02091e607}} 
+\index{engine.Engine@{engine.Engine}!mainClock@{mainClock}}
+\index{mainClock@{mainClock}!engine.Engine@{engine.Engine}}
+\doxysubsubsection{\texorpdfstring{mainClock}{mainClock}}
+{\footnotesize\ttfamily engine.\+Engine.\+main\+Clock}
+
+
+
+Definition at line 60 of file engine.\+py.
+
+\mbox{\Hypertarget{classengine_1_1_engine_afe32701b4d069b21c003188a9d9496bc}\label{classengine_1_1_engine_afe32701b4d069b21c003188a9d9496bc}} 
+\index{engine.Engine@{engine.Engine}!playback\_handler@{playback\_handler}}
+\index{playback\_handler@{playback\_handler}!engine.Engine@{engine.Engine}}
+\doxysubsubsection{\texorpdfstring{playback\_handler}{playback\_handler}}
+{\footnotesize\ttfamily engine.\+Engine.\+playback\+\_\+handler}
+
+
+
+Definition at line 69 of file engine.\+py.
+
+\mbox{\Hypertarget{classengine_1_1_engine_a8e1535937d25d484c241628b6c58f485}\label{classengine_1_1_engine_a8e1535937d25d484c241628b6c58f485}} 
+\index{engine.Engine@{engine.Engine}!port@{port}}
+\index{port@{port}!engine.Engine@{engine.Engine}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily engine.\+Engine.\+port}
+
+
+
+Definition at line 63 of file engine.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{engine_8py}{engine.\+py}}\end{DoxyCompactItemize}
