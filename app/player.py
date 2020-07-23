@@ -62,7 +62,7 @@ class Player(object):
         self.playing = False
 
     # record all the channels at the same time
-    def record(self):
+    def record(self, overwrite):
         # Stop all channels
         Synth.midi_stop(self.channels[0].port)
 
@@ -71,7 +71,8 @@ class Player(object):
         current_channel = self.channels[self.current_channel_index[0]]
         self.recordlist.append([0, self.current_channel_index[0], ['program_change', current_channel.instr]])
 
-        self.delete_channel(self.current_channel_index[0])
+        if overwrite:
+            self.delete_channel(self.current_channel_index[0])
 
         self.recording = time.time()
 

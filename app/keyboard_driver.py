@@ -75,6 +75,19 @@ class Keyboard(object):
         else:
             self.encoder_driver.start_driver()
 
+    # get keyboard_dictionary value
+    def get_key_index(self, key):
+        return self.key_dict[key]
+
+    def is_on(self, key):
+        if key in self.on_keys:
+            return True
+        return False
+
+# -----------------
+# Control keyboard interface
+# -----------------
+
     # controls the keyboard to hit a key
     def key_down(self, key_index):
         # If shift is off
@@ -129,6 +142,3 @@ class Keyboard(object):
     def use_knob(self, knob_num):
         self.event_handler.use_knob(knob_num=knob_num, index=self.encoder_counter[knob_num])
 
-    # get keyboard_dictionary value
-    def get_key_index(self, key):
-        return self.key_dict[key]

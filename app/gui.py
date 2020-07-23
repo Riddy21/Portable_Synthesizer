@@ -30,8 +30,9 @@ class Gui(object):
     # Draws whatever interface is currently on and updates
     def draw_interface(self):
         # switch interfaces if the interface changed
-        if self.events.current_mode.name != self.interface.name:
-            self.set_interface(self.events.current_mode.name)
+        mode_name = self.events.get_current_mode().name
+        if mode_name != self.interface.name:
+            self.set_interface(mode_name)
 
         # draw the interface and update
         self.interface.draw_interface()
@@ -77,7 +78,7 @@ class FreeplayInt(GuiInterface):
             self.draw_text('playing', self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)
 
         # TODO: Make api
-        channel = self.events.channels[self.channel_index[0]]
+        channel = self.events.get_current_channel()
 
         self.draw_text('channel: %s' % self.channel_index[0],
                        self.gui.font, (255, 255, 255), self.gui.screen, 20, 80)

@@ -11,9 +11,11 @@ class EventHandler(object):
     def __init__(self, port):
         # initialize channels and the keyboard
         self.channels = []
+        # Keep track of channel modes
+        self.channel_modes = []
+
 
         # Set the current mode to none
-        self.current_mode = None
         self.current_channel_index = [0]
 
         # port for connecting to fluidsynth
@@ -63,20 +65,24 @@ class EventHandler(object):
         self.current_channel_index[0] = channel_length
 
         # Make the synth and add it to channels
-        synth = Synth(mode=mode, event_handler=self, instr=instr, reverb=reverb,
+        synth = Synth(event_handler=self, instr=instr, reverb=reverb,
                       gain=gain)
         self.channels.append(synth)
+        self.add_mode(mode)
 
-        # set the current playing mode and send the synth to it
-        self.switch_mode('freeplay')
+    # adds mode object to mode list
+    def add_mode(self, mode):
+        if mode == 'freeplay':
+            self.channel_modes.append(Freeplay(self))
+        elif mode == 'test':
+            self.channel_modes.append(Test(self))
 
     # Switch the mode of the current channel
     def switch_mode(self, mode):
-        synth = self.channels[self.current_channel_index[0]]
         if mode == 'freeplay':
-            self.current_mode = Freeplay(synth, keyboard=self.keyboard, playback_handler=self)
+            self.channel_modes[self.current_channel_index[0]] = Freeplay(self)
         elif mode == 'test':
-            self.current_mode = Test(synth, keyboard=self.keyboard, playback_handler=self)
+            self.channel_modes[self.current_channel_index[0]] = Test(self)
 
     # Switch the current channel
     def switch_channel(self, channel_ind):
@@ -90,20 +96,25 @@ class EventHandler(object):
         if channel_ind >= len(self.channels):
             self.add_channel('freeplay')
 
-        # change the mode
-        self.switch_mode(self.channels[channel_ind].mode)
+    # Gets the current mode based on channel index
+    def get_current_mode(self):
+        return self.channel_modes[self.current_channel_index[0]]
+
+    # Gets the current channel based on channel index
+    def get_current_channel(self):
+        return self.channels[self.current_channel_index[0]]
 
     # ------------------
     # Interface for passing to current mode
     # ------------------
     def key_down(self, index):
-        self.current_mode.key_down(index)
+        self.get_current_mode().key_down(index)
 
     def key_up(self, index):
-        self.current_mode.key_up(index)
+        self.get_current_mode().key_up(index)
 
     def use_knob(self, index, knob_num):
         if knob_num == 0:
-            self.current_mode.use_knob(index, knob_num)
+            self.get_current_mode().use_knob(index, knob_num)
 
 

@@ -9,16 +9,13 @@ class Synth(object):
             sf2 = Sf2File(sf2_file)
         return sf2.instruments
 
-    def __init__(self, event_handler, mode='freeplay', instr=0, reverb=0.3, gain=270):
+    def __init__(self, event_handler, instr=0, reverb=0.3, gain=270):
         # initialize variable from event handler
         self.channel_ind = event_handler.current_channel_index[0]
         self.port = event_handler.port
 
         # Recorder to keep track of notes
         self.recorder = event_handler.player
-
-        # mode the synth is in
-        self.mode = mode
 
         # instrument index
         self.instr = instr
