@@ -1,86 +1,14 @@
-from synth import Synth
-from player import Player
-
-
-# Class for connecting synths with the keyboard or handling it with other players
-class PlaybackHandler(object):
-    def __init__(self, keyboard, port):
-        # initialize channels and the keyboard
-        self.channels = []
-        self.keyboard = keyboard
-
-        # Set the playback hanlder on the keyboard to be this one
-        self.keyboard.set_handler(self)
-
-        # Set the current mode to none
-        self.current_mode = None
-        self.current_channel_index = None
-
-        # port for connecting to fluidsynth
-        self.port = port
-
-        # set the player/recorder and pass channels
-        self.player = Player(self.channels, self)
-
-    # Add a new channel and declare its playing mode
-    def add_channel(self, mode, instr=0, reverb=0.3, gain=270):
-        # Find the channel number
-        channel_length = len(self.channels)
-
-        # Make the synth and add it to channels
-        synth = Synth(mode=mode, channel=channel_length, recorder=self.player, port=self.port, instr=instr, reverb=reverb,
-                      gain=gain)
-        self.channels.append(synth)
-
-        self.current_channel_index = channel_length
-
-        # set the current playing mode and send the synth to it
-        self.switch_mode('freeplay')
-
-    # Switch the mode of the current channel
-    def switch_mode(self, mode):
-        synth = self.channels[self.current_channel_index]
-        if mode == 'freeplay':
-            self.current_mode = Freeplay(synth, keyboard=self.keyboard, playback_handler=self)
-        elif mode == 'test':
-            self.current_mode = Test(synth, keyboard=self.keyboard, playback_handler=self)
-
-    # Switch the current channel
-    def switch_channel(self, channel_ind):
-        if channel_ind < 0:
-            return
-
-        # change the channel
-        self.current_channel_index = channel_ind
-
-        # if the channel doesn't exist, make new channel
-        if channel_ind >= len(self.channels):
-            self.add_channel('freeplay')
-
-        # change the mode
-        self.switch_mode(self.channels[channel_ind].mode)
-
-    # ------------------
-    # Interface for passing to current mode
-    # ------------------
-    def key_down(self, index):
-        self.current_mode.key_down(index)
-
-    def key_up(self, index):
-        self.current_mode.key_up(index)
-
-    def use_knob(self, index, knob_num):
-        if knob_num == 0:
-            self.current_mode.use_knob(index, knob_num)
-
-
 # ------------------
 # Mode controllers
 # ------------------
 
+# TODO: Change event handler to be only the needed variables
+
 # Parent object for all modes
 class Mode(object):
-    def __init__(self, name, synth, keyboard, playback_handler):
+    def __init__(self, name, synth, keyboard, event_handler):
+        self.current_channel_index = event_handler.current_channel_index
+
         self.name = name
 
         # channel set to the proper synth
@@ -90,10 +18,10 @@ class Mode(object):
         self.keyboard = keyboard
 
         # Playback handler pointer for switching modes
-        self.playback_handler = playback_handler
+        self.event_handler = event_handler
 
         # Get pointer to Player
-        self.player = playback_handler.player
+        self.player = event_handler.player
 
 
 class Freeplay(Mode):
@@ -152,7 +80,7 @@ class Freeplay(Mode):
 
             # Switch modes
             elif self.key_mappings[index] == 'octave_up':
-                self.playback_handler.switch_mode('test')
+                self.event_handler.switch_mode('test')
 
             # Switch Synth
             elif self.key_mappings[index] == 'channel_up':
@@ -196,11 +124,11 @@ class Freeplay(Mode):
 
         # Switch up a channel
         elif self.key_mappings[index] == 'channel_up':
-            self.playback_handler.switch_channel(self.playback_handler.current_channel_index + 1)
+            self.event_handler.switch_channel(self.current_channel_index[0] + 1)
 
         # Switch down a channel
         elif self.key_mappings[index] == 'channel_down':
-            self.playback_handler.switch_channel(self.playback_handler.current_channel_index - 1)
+            self.event_handler.switch_channel(self.current_channel_index[0] - 1)
 
 
     def key_up(self, index):
@@ -280,7 +208,7 @@ class Test(Mode):
             if index < 24:
                 pass
             elif self.key_mappings[index] == 'octave_down':
-                self.playback_handler.switch_mode('freeplay')
+                self.event_handler.switch_mode('freeplay')
 
         # if playing piano keys
         elif index < 24:

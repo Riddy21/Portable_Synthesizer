@@ -36,12 +36,13 @@ def \mbox{\hyperlink{classgui_1_1_startup_int_ade839951800d6ac058a6d046c37c43d3}
 \item 
 \mbox{\hyperlink{classgui_1_1_startup_int_a94a16febfa75dcb78c39eec337e97102}{gui}}
 \end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 
 
-Definition at line 92 of file gui.\+py.
+Definition at line 102 of file gui.\+py.
 
 
 
@@ -54,15 +55,19 @@ Definition at line 92 of file gui.\+py.
 
 
 
-Definition at line 93 of file gui.\+py.
+Reimplemented from \mbox{\hyperlink{classgui_1_1_gui_interface_a9700d9021b7f8745896da27e3e07da43}{gui.\+Gui\+Interface}}.
+
+
+
+Definition at line 103 of file gui.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{93     \textcolor{keyword}{def }\_\_init\_\_(self, events, gui):}
-\DoxyCodeLine{94         self.name = \textcolor{stringliteral}{'startup'}}
-\DoxyCodeLine{95         self.events = events}
-\DoxyCodeLine{96         self.gui = gui}
-\DoxyCodeLine{97 }
+\DoxyCodeLine{103     \textcolor{keyword}{def }\_\_init\_\_(self, events, gui):}
+\DoxyCodeLine{104         self.name = \textcolor{stringliteral}{'startup'}}
+\DoxyCodeLine{105         self.events = events}
+\DoxyCodeLine{106         self.gui = gui}
+\DoxyCodeLine{107 }
 
 \end{DoxyCode}
 
@@ -76,16 +81,20 @@ Definition at line 93 of file gui.\+py.
 
 
 
-Definition at line 99 of file gui.\+py.
+Reimplemented from \mbox{\hyperlink{classgui_1_1_gui_interface_ab439fc5d3f8733af1779772857960115}{gui.\+Gui\+Interface}}.
+
+
+
+Definition at line 109 of file gui.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{99     \textcolor{keyword}{def }draw\_interface(self):}
-\DoxyCodeLine{100         self.gui.screen.fill((0, 0, 255))}
-\DoxyCodeLine{101         \mbox{\hyperlink{namespacegui_aa892e8509b82e440932eadee9bf9612a}{draw\_text}}(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)}
-\DoxyCodeLine{102 }
-\DoxyCodeLine{103         test\_button = pg.Rect(50, 100, 200, 50)}
-\DoxyCodeLine{104         pg.draw.rect(self.gui.screen, (255, 0, 0), test\_button)}
+\DoxyCodeLine{109     \textcolor{keyword}{def }draw\_interface(self):}
+\DoxyCodeLine{110         self.gui.screen.fill((0, 0, 255))}
+\DoxyCodeLine{111         self.draw\_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113         test\_button = pg.Rect(50, 100, 200, 50)}
+\DoxyCodeLine{114         pg.draw.rect(self.gui.screen, (255, 0, 0), test\_button)}
 
 \end{DoxyCode}
 
@@ -99,7 +108,7 @@ Definition at line 99 of file gui.\+py.
 
 
 
-Definition at line 95 of file gui.\+py.
+Definition at line 105 of file gui.\+py.
 
 \mbox{\Hypertarget{classgui_1_1_startup_int_a94a16febfa75dcb78c39eec337e97102}\label{classgui_1_1_startup_int_a94a16febfa75dcb78c39eec337e97102}} 
 \index{gui.StartupInt@{gui.StartupInt}!gui@{gui}}
@@ -109,7 +118,7 @@ Definition at line 95 of file gui.\+py.
 
 
 
-Definition at line 96 of file gui.\+py.
+Definition at line 106 of file gui.\+py.
 
 \mbox{\Hypertarget{classgui_1_1_startup_int_a56b1e60cc385e728db878633c820e822}\label{classgui_1_1_startup_int_a56b1e60cc385e728db878633c820e822}} 
 \index{gui.StartupInt@{gui.StartupInt}!name@{name}}
@@ -119,7 +128,7 @@ Definition at line 96 of file gui.\+py.
 
 
 
-Definition at line 94 of file gui.\+py.
+Definition at line 104 of file gui.\+py.
 
 
 

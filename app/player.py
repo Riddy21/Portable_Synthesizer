@@ -6,9 +6,12 @@ from synth import Synth
 
 # player for recording and playing certain channels
 class Player(object):
-    def __init__(self, channels, playback_handler):
-        self.channels = channels
-        self.playback_handler = playback_handler
+    def __init__(self, event_handler):
+        # Variables from event handler
+        self.channels = event_handler.channels
+        self.port = event_handler.port
+        self.current_channel_index = event_handler.current_channel_index  # Is a primitive so references as address
+
         self.recording = False
         self.playing = False
 
@@ -65,12 +68,10 @@ class Player(object):
 
         # Add the initial information such as channel synth, gain, reverb, volume to the
         # beginning of the record list of the channel you are on right now of only the channel youre on right now
-        current_channel_index = self.playback_handler.current_channel_index
-        current_channel = self.channels[current_channel_index]
-        self.recordlist.append([0, current_channel_index, ['program_change', current_channel.instr]])
+        current_channel = self.channels[self.current_channel_index[0]]
+        self.recordlist.append([0, self.current_channel_index[0], ['program_change', current_channel.instr]])
 
-        # Delete everything on that channel previously
-        self.delete_channel(current_channel_index)
+        self.delete_channel(self.current_channel_index[0])
 
         self.recording = time.time()
 
@@ -88,6 +89,10 @@ class Player(object):
     def pause(self, channel_ind):
         pass
 
+    # cleans up and sorts the playlist
+    def clean_up_playlist(self):
+        pass
+
     # Deletes everything in a channel
     def delete_channel(self, channel_ind):
         start = time.time()
@@ -102,4 +107,3 @@ class Player(object):
             self.playlist.remove(event)
 
         end = time.time()
-

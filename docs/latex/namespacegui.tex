@@ -5,37 +5,11 @@
 \item 
 class \mbox{\hyperlink{classgui_1_1_freeplay_int}{Freeplay\+Int}}
 \item 
-class \mbox{\hyperlink{classgui_1_1_g_u_i}{G\+UI}}
+class \mbox{\hyperlink{classgui_1_1_gui}{Gui}}
+\item 
+class \mbox{\hyperlink{classgui_1_1_gui_interface}{Gui\+Interface}}
 \item 
 class \mbox{\hyperlink{classgui_1_1_startup_int}{Startup\+Int}}
 \item 
 class \mbox{\hyperlink{classgui_1_1_test_int}{Test\+Int}}
 \end{DoxyCompactItemize}
-\doxysubsection*{Functions}
-\begin{DoxyCompactItemize}
-\item 
-def \mbox{\hyperlink{namespacegui_aa892e8509b82e440932eadee9bf9612a}{draw\+\_\+text}} (text, font, color, surface, x, y)
-\end{DoxyCompactItemize}
-
-
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{namespacegui_aa892e8509b82e440932eadee9bf9612a}\label{namespacegui_aa892e8509b82e440932eadee9bf9612a}} 
-\index{gui@{gui}!draw\_text@{draw\_text}}
-\index{draw\_text@{draw\_text}!gui@{gui}}
-\doxysubsubsection{\texorpdfstring{draw\_text()}{draw\_text()}}
-{\footnotesize\ttfamily def gui.\+draw\+\_\+text (\begin{DoxyParamCaption}\item[{}]{text,  }\item[{}]{font,  }\item[{}]{color,  }\item[{}]{surface,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
-
-
-
-Definition at line 7 of file gui.\+py.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{7 \textcolor{keyword}{def }\mbox{\hyperlink{namespacegui_aa892e8509b82e440932eadee9bf9612a}{draw\_text}}(text, font, color, surface, x, y):}
-\DoxyCodeLine{8     textobj = font.render(text, 1, color)}
-\DoxyCodeLine{9     textrect = textobj.get\_rect()}
-\DoxyCodeLine{10     textrect.topleft = (x, y)}
-\DoxyCodeLine{11     surface.blit(textobj, textrect)}
-\DoxyCodeLine{12 }
-
-\end{DoxyCode}

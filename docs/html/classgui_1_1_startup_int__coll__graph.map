@@ -1,4 +1,5 @@
 <map id="gui.StartupInt" name="gui.StartupInt">
-<area shape="rect" id="node1" title=" " alt="" coords="5,131,132,252"/>
-<area shape="rect" id="node2" title=" " alt="" coords="40,5,97,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,329,132,451"/>
+<area shape="rect" id="node2" href="$classgui_1_1_gui_interface.html" title=" " alt="" coords="5,131,132,281"/>
+<area shape="rect" id="node3" title=" " alt="" coords="40,5,97,83"/>
 </map>

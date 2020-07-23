@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['name_49',['name',['../classgui_1_1_freeplay_int.html#af67fddd3ba88c87b2659eb7f61d79194',1,'gui.FreeplayInt.name()'],['../classgui_1_1_test_int.html#a3e3035a88d37ecf4dac3b0f5c7a00d37',1,'gui.TestInt.name()'],['../classgui_1_1_startup_int.html#a56b1e60cc385e728db878633c820e822',1,'gui.StartupInt.name()'],['../classplayback__handler_1_1_mode.html#a0583848aef966a491d36bb61455decb2',1,'playback_handler.Mode.name()']]]
+  ['octave_55',['octave',['../classsynth_1_1_synth.html#a0f696073b221a37e969287a9410c8d41',1,'synth::Synth']]],
+  ['octave_5fshift_56',['octave_shift',['../classsynth_1_1_synth.html#a1806b9151ec0ee1df081b5ee5c79c275',1,'synth::Synth']]],
+  ['on_5fkeys_57',['on_keys',['../classkeyboard__driver_1_1_keyboard.html#a0bc951b07cff14bf76f7465e39e32c4c',1,'keyboard_driver::Keyboard']]]
 ];

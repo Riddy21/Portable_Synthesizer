@@ -23,46 +23,36 @@ Collaboration diagram for gui.\+Freeplay\+Int\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{classgui_1_1_freeplay_int_afe04ff7438ffe38c96e0eb22b873ba48}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classgui_1_1_freeplay_int_a1eefc9c60a242d80c14ddd3472b468e0}{events}}, \mbox{\hyperlink{classgui_1_1_freeplay_int_a76757ad0fc67af4f8d5a8b1c100afa6a}{gui}})
+def \mbox{\hyperlink{classgui_1_1_freeplay_int_a0748a6a63dd049e88c4a91d42cdbf55f}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classgui_1_1_gui_interface_a6167c919a095bf3528000db85e8ac788}{gui}})
 \item 
 def \mbox{\hyperlink{classgui_1_1_freeplay_int_a24eaa7235aec81600e73f1449bc398fc}{draw\+\_\+interface}} (self)
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\hyperlink{classgui_1_1_freeplay_int_af67fddd3ba88c87b2659eb7f61d79194}{name}}
-\item 
-\mbox{\hyperlink{classgui_1_1_freeplay_int_a1eefc9c60a242d80c14ddd3472b468e0}{events}}
-\item 
-\mbox{\hyperlink{classgui_1_1_freeplay_int_a76757ad0fc67af4f8d5a8b1c100afa6a}{gui}}
-\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 
 
-Definition at line 54 of file gui.\+py.
+Definition at line 66 of file gui.\+py.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classgui_1_1_freeplay_int_afe04ff7438ffe38c96e0eb22b873ba48}\label{classgui_1_1_freeplay_int_afe04ff7438ffe38c96e0eb22b873ba48}} 
+\mbox{\Hypertarget{classgui_1_1_freeplay_int_a0748a6a63dd049e88c4a91d42cdbf55f}\label{classgui_1_1_freeplay_int_a0748a6a63dd049e88c4a91d42cdbf55f}} 
 \index{gui.FreeplayInt@{gui.FreeplayInt}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!gui.FreeplayInt@{gui.FreeplayInt}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily def gui.\+Freeplay\+Int.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{events,  }\item[{}]{gui }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily def gui.\+Freeplay\+Int.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{gui }\end{DoxyParamCaption})}
 
 
 
-Definition at line 55 of file gui.\+py.
+Definition at line 67 of file gui.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{55     \textcolor{keyword}{def }\_\_init\_\_(self, events, gui):}
-\DoxyCodeLine{56         self.name = \textcolor{stringliteral}{'freeplay'}}
-\DoxyCodeLine{57         self.events = events}
-\DoxyCodeLine{58         self.gui = gui}
-\DoxyCodeLine{59 }
+\DoxyCodeLine{67     \textcolor{keyword}{def }\_\_init\_\_(self, gui):}
+\DoxyCodeLine{68         super().\_\_init\_\_(\textcolor{stringliteral}{'freeplay'},gui)}
+\DoxyCodeLine{69 }
 
 \end{DoxyCode}
 
@@ -76,61 +66,33 @@ Definition at line 55 of file gui.\+py.
 
 
 
-Definition at line 61 of file gui.\+py.
+Reimplemented from \mbox{\hyperlink{classgui_1_1_gui_interface_ab439fc5d3f8733af1779772857960115}{gui.\+Gui\+Interface}}.
+
+
+
+Definition at line 71 of file gui.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{61     \textcolor{keyword}{def }draw\_interface(self):}
-\DoxyCodeLine{62         self.gui.screen.fill((0, 0, 255))}
-\DoxyCodeLine{63         \mbox{\hyperlink{namespacegui_aa892e8509b82e440932eadee9bf9612a}{draw\_text}}(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)}
-\DoxyCodeLine{64         \textcolor{keywordflow}{if} self.events.player.recording:}
-\DoxyCodeLine{65             \mbox{\hyperlink{namespacegui_aa892e8509b82e440932eadee9bf9612a}{draw\_text}}(\textcolor{stringliteral}{'recording'}, self.gui.font, (255, 255, 255), self.gui.screen, 20, 40)}
-\DoxyCodeLine{66         \textcolor{keywordflow}{if} self.events.player.playing:}
-\DoxyCodeLine{67             \mbox{\hyperlink{namespacegui_aa892e8509b82e440932eadee9bf9612a}{draw\_text}}(\textcolor{stringliteral}{'playing'}, self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)}
-\DoxyCodeLine{68 }
-\DoxyCodeLine{69         \textcolor{comment}{\# TODO: Make api}}
-\DoxyCodeLine{70         channel\_index = self.events.current\_channel\_index}
-\DoxyCodeLine{71         channel = self.events.channels[channel\_index]}
-\DoxyCodeLine{72 }
-\DoxyCodeLine{73         \mbox{\hyperlink{namespacegui_aa892e8509b82e440932eadee9bf9612a}{draw\_text}}(\textcolor{stringliteral}{'channel: \%s'} \% channel\_index, self.gui.font, (255, 255, 255), self.gui.screen, 20, 80)}
-\DoxyCodeLine{74         \mbox{\hyperlink{namespacegui_aa892e8509b82e440932eadee9bf9612a}{draw\_text}}(\textcolor{stringliteral}{'instrument: \%s'} \% channel.instr\_list[channel.instr], self.gui.font, (255, 255, 255), self.gui.screen,}
-\DoxyCodeLine{75                   20, 100)}
-\DoxyCodeLine{76 }
+\DoxyCodeLine{71     \textcolor{keyword}{def }draw\_interface(self):}
+\DoxyCodeLine{72         self.gui.screen.fill((0, 0, 255))}
+\DoxyCodeLine{73         self.draw\_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)}
+\DoxyCodeLine{74         \textcolor{keywordflow}{if} self.events.player.recording:}
+\DoxyCodeLine{75             self.draw\_text(\textcolor{stringliteral}{'recording'}, self.gui.font, (255, 255, 255), self.gui.screen, 20, 40)}
+\DoxyCodeLine{76         \textcolor{keywordflow}{if} self.events.player.playing:}
+\DoxyCodeLine{77             self.draw\_text(\textcolor{stringliteral}{'playing'}, self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79         \textcolor{comment}{\# TODO: Make api}}
+\DoxyCodeLine{80         channel = self.events.channels[self.channel\_index[0]]}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         self.draw\_text(\textcolor{stringliteral}{'channel: \%s'} \% self.channel\_index[0],}
+\DoxyCodeLine{83                        self.gui.font, (255, 255, 255), self.gui.screen, 20, 80)}
+\DoxyCodeLine{84         self.draw\_text(\textcolor{stringliteral}{'instrument: \%s'} \% channel.instr\_list[channel.instr],}
+\DoxyCodeLine{85                   self.gui.font, (255, 255, 255), self.gui.screen, 20, 100)}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 }
 
 \end{DoxyCode}
-
-
-\doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classgui_1_1_freeplay_int_a1eefc9c60a242d80c14ddd3472b468e0}\label{classgui_1_1_freeplay_int_a1eefc9c60a242d80c14ddd3472b468e0}} 
-\index{gui.FreeplayInt@{gui.FreeplayInt}!events@{events}}
-\index{events@{events}!gui.FreeplayInt@{gui.FreeplayInt}}
-\doxysubsubsection{\texorpdfstring{events}{events}}
-{\footnotesize\ttfamily gui.\+Freeplay\+Int.\+events}
-
-
-
-Definition at line 57 of file gui.\+py.
-
-\mbox{\Hypertarget{classgui_1_1_freeplay_int_a76757ad0fc67af4f8d5a8b1c100afa6a}\label{classgui_1_1_freeplay_int_a76757ad0fc67af4f8d5a8b1c100afa6a}} 
-\index{gui.FreeplayInt@{gui.FreeplayInt}!gui@{gui}}
-\index{gui@{gui}!gui.FreeplayInt@{gui.FreeplayInt}}
-\doxysubsubsection{\texorpdfstring{gui}{gui}}
-{\footnotesize\ttfamily gui.\+Freeplay\+Int.\+gui}
-
-
-
-Definition at line 58 of file gui.\+py.
-
-\mbox{\Hypertarget{classgui_1_1_freeplay_int_af67fddd3ba88c87b2659eb7f61d79194}\label{classgui_1_1_freeplay_int_af67fddd3ba88c87b2659eb7f61d79194}} 
-\index{gui.FreeplayInt@{gui.FreeplayInt}!name@{name}}
-\index{name@{name}!gui.FreeplayInt@{gui.FreeplayInt}}
-\doxysubsubsection{\texorpdfstring{name}{name}}
-{\footnotesize\ttfamily gui.\+Freeplay\+Int.\+name}
-
-
-
-Definition at line 56 of file gui.\+py.
-
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

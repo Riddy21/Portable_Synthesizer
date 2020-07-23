@@ -6,7 +6,9 @@ from threading_decorator import run_in_thread
 
 # Interfacing with the Keyboard API
 class Keyboard(object):
-    def __init__(self):
+    def __init__(self, event_handler):
+        # initialize with handler
+        self.event_handler = event_handler
 
         # init key values
         self.key_dict = self.make_key_mapping()
@@ -20,15 +22,8 @@ class Keyboard(object):
         self.encoder_driver = Driver(self.encoder_buffer, scalar=True, factor=1)
         self.start_encoder_listener()
 
-        # initialize with no play
-        self.playback_handler = None
-
         # For tracking if shift is on faster
         self.shift = False
-
-    # Change the channel were connected
-    def set_handler(self, handler):
-        self.playback_handler = handler
 
     # make list for piano keys
     @staticmethod
@@ -92,7 +87,7 @@ class Keyboard(object):
             self.on_keys.add(key_index)
 
             # play note
-            self.playback_handler.key_down(key_index)
+            self.event_handler.key_down(key_index)
 
     # controls the keyboard to release a key
     def key_up(self, key_index):
@@ -104,7 +99,7 @@ class Keyboard(object):
             self.on_keys.remove(key_index)
 
             # play note
-            self.playback_handler.key_up(key_index)
+            self.event_handler.key_up(key_index)
 
     # gets the scroll of the digital knob
     def get_knob(self, knob_num):
@@ -132,4 +127,8 @@ class Keyboard(object):
 
     # makes the playback handler use the know
     def use_knob(self, knob_num):
-        self.playback_handler.use_knob(knob_num=knob_num, index=self.encoder_counter[knob_num])
+        self.event_handler.use_knob(knob_num=knob_num, index=self.encoder_counter[knob_num])
+
+    # get keyboard_dictionary value
+    def get_key_index(self, key):
+        return self.key_dict[key]

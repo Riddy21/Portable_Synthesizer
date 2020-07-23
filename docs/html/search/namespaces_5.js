@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['start_117',['start',['../namespacestart.html',1,'']]],
-  ['synth_118',['synth',['../namespacesynth.html',1,'']]]
+  ['rotary_5fencoder_5fdriver_117',['rotary_encoder_driver',['../namespacerotary__encoder__driver.html',1,'']]]
 ];

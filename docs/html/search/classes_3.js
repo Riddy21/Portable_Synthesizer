@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['gui_102',['GUI',['../classgui_1_1_g_u_i.html',1,'gui']]]
+  ['gui_103',['Gui',['../classgui_1_1_gui.html',1,'gui']]],
+  ['guiinterface_104',['GuiInterface',['../classgui_1_1_gui_interface.html',1,'gui']]]
 ];

@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['channel_170',['channel',['../classplayback__handler_1_1_mode.html#a4f784cd3fe0e97b80512c4f4fa43fd40',1,'playback_handler.Mode.channel()'],['../classsynth_1_1_synth.html#a02421d163ac78a3ebf0c098fa35b8add',1,'synth.Synth.channel()']]],
-  ['channels_171',['channels',['../classplayback__handler_1_1_playback_handler.html#aa3764c68d988290c089eb15f2cf84d6f',1,'playback_handler.PlaybackHandler.channels()'],['../classplayer_1_1_player.html#a536dee12ad9267d240c99bf7b27850c9',1,'player.Player.channels()']]],
-  ['counter_172',['counter',['../classrotary__encoder__driver_1_1_driver.html#a6f28fae1e0865e253ced4e0da5a0bf30',1,'rotary_encoder_driver::Driver']]],
-  ['current_5fchannel_5findex_173',['current_channel_index',['../classplayback__handler_1_1_playback_handler.html#aa87b4f6eb10df3a4a96b35a1ee53dc16',1,'playback_handler::PlaybackHandler']]],
-  ['current_5fmode_174',['current_mode',['../classplayback__handler_1_1_playback_handler.html#abf61f24e846904cdfac78ee0cc5b421d',1,'playback_handler::PlaybackHandler']]]
+  ['channel_171',['channel',['../classmodes_1_1_mode.html#a9dd0eb0788607ebedfeb70cc9a97a0e6',1,'modes::Mode']]],
+  ['channel_5find_172',['channel_ind',['../classsynth_1_1_synth.html#a01987658117d00af460f0df504135f45',1,'synth::Synth']]],
+  ['channel_5findex_173',['channel_index',['../classgui_1_1_gui_interface.html#a2277b1e441edd32158ed3749afd56c3f',1,'gui::GuiInterface']]],
+  ['channels_174',['channels',['../classevent__handler_1_1_event_handler.html#a3ef66739f87be3f954c57ab3ba035789',1,'event_handler.EventHandler.channels()'],['../classplayer_1_1_player.html#a536dee12ad9267d240c99bf7b27850c9',1,'player.Player.channels()']]],
+  ['counter_175',['counter',['../classrotary__encoder__driver_1_1_driver.html#a6f28fae1e0865e253ced4e0da5a0bf30',1,'rotary_encoder_driver::Driver']]],
+  ['current_5fchannel_5findex_176',['current_channel_index',['../classevent__handler_1_1_event_handler.html#a6c9bad21c58cfe09bb9916720b1e72d6',1,'event_handler.EventHandler.current_channel_index()'],['../classmodes_1_1_mode.html#af8d3372690cdf8cb0310a1b7fa27cebd',1,'modes.Mode.current_channel_index()'],['../classplayer_1_1_player.html#aabc2974f36ce2439720178fc387b9b6c',1,'player.Player.current_channel_index()']]],
+  ['current_5fmode_177',['current_mode',['../classevent__handler_1_1_event_handler.html#a414a8fb1feb559f6a834dcf2edaf59ef',1,'event_handler::EventHandler']]]
 ];

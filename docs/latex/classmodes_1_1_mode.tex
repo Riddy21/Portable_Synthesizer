@@ -1,0 +1,152 @@
+\hypertarget{classmodes_1_1_mode}{}\doxysection{modes.\+Mode Class Reference}
+\label{classmodes_1_1_mode}\index{modes.Mode@{modes.Mode}}
+
+
+Inheritance diagram for modes.\+Mode\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{classmodes_1_1_mode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for modes.\+Mode\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{classmodes_1_1_mode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classmodes_1_1_mode_a1e7acc1c47249d67b2776a135583de6f}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classmodes_1_1_mode_ae28f438cb58ebf9d7ed10bf88e7fbc55}{name}}, synth, \mbox{\hyperlink{classmodes_1_1_mode_a922d80a82a8a240cf78055cf70a3b3fb}{keyboard}}, \mbox{\hyperlink{classmodes_1_1_mode_a387e4c373d230e0c45aa5ebe264cc1ae}{event\+\_\+handler}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmodes_1_1_mode_af8d3372690cdf8cb0310a1b7fa27cebd}{current\+\_\+channel\+\_\+index}}
+\item 
+\mbox{\hyperlink{classmodes_1_1_mode_ae28f438cb58ebf9d7ed10bf88e7fbc55}{name}}
+\item 
+\mbox{\hyperlink{classmodes_1_1_mode_a9dd0eb0788607ebedfeb70cc9a97a0e6}{channel}}
+\item 
+\mbox{\hyperlink{classmodes_1_1_mode_a922d80a82a8a240cf78055cf70a3b3fb}{keyboard}}
+\item 
+\mbox{\hyperlink{classmodes_1_1_mode_a387e4c373d230e0c45aa5ebe264cc1ae}{event\+\_\+handler}}
+\item 
+\mbox{\hyperlink{classmodes_1_1_mode_a9b5c32b35619b7ae7d1163f6701e95fb}{player}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file modes.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmodes_1_1_mode_a1e7acc1c47249d67b2776a135583de6f}\label{classmodes_1_1_mode_a1e7acc1c47249d67b2776a135583de6f}} 
+\index{modes.Mode@{modes.Mode}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!modes.Mode@{modes.Mode}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def modes.\+Mode.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{name,  }\item[{}]{synth,  }\item[{}]{keyboard,  }\item[{}]{event\+\_\+handler }\end{DoxyParamCaption})}
+
+
+
+Definition at line 9 of file modes.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9     \textcolor{keyword}{def }\_\_init\_\_(self, name, synth, keyboard, event\_handler):}
+\DoxyCodeLine{10         self.current\_channel\_index = event\_handler.current\_channel\_index}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12         self.name = name}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14         \textcolor{comment}{\# channel set to the proper synth}}
+\DoxyCodeLine{15         self.channel = synth}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17         \textcolor{comment}{\# Keybaord pointer}}
+\DoxyCodeLine{18         self.keyboard = keyboard}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{comment}{\# Playback handler pointer for switching modes}}
+\DoxyCodeLine{21         self.event\_handler = event\_handler}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23         \textcolor{comment}{\# Get pointer to Player}}
+\DoxyCodeLine{24         self.player = event\_handler.player}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classmodes_1_1_mode_a9dd0eb0788607ebedfeb70cc9a97a0e6}\label{classmodes_1_1_mode_a9dd0eb0788607ebedfeb70cc9a97a0e6}} 
+\index{modes.Mode@{modes.Mode}!channel@{channel}}
+\index{channel@{channel}!modes.Mode@{modes.Mode}}
+\doxysubsubsection{\texorpdfstring{channel}{channel}}
+{\footnotesize\ttfamily modes.\+Mode.\+channel}
+
+
+
+Definition at line 15 of file modes.\+py.
+
+\mbox{\Hypertarget{classmodes_1_1_mode_af8d3372690cdf8cb0310a1b7fa27cebd}\label{classmodes_1_1_mode_af8d3372690cdf8cb0310a1b7fa27cebd}} 
+\index{modes.Mode@{modes.Mode}!current\_channel\_index@{current\_channel\_index}}
+\index{current\_channel\_index@{current\_channel\_index}!modes.Mode@{modes.Mode}}
+\doxysubsubsection{\texorpdfstring{current\_channel\_index}{current\_channel\_index}}
+{\footnotesize\ttfamily modes.\+Mode.\+current\+\_\+channel\+\_\+index}
+
+
+
+Definition at line 10 of file modes.\+py.
+
+\mbox{\Hypertarget{classmodes_1_1_mode_a387e4c373d230e0c45aa5ebe264cc1ae}\label{classmodes_1_1_mode_a387e4c373d230e0c45aa5ebe264cc1ae}} 
+\index{modes.Mode@{modes.Mode}!event\_handler@{event\_handler}}
+\index{event\_handler@{event\_handler}!modes.Mode@{modes.Mode}}
+\doxysubsubsection{\texorpdfstring{event\_handler}{event\_handler}}
+{\footnotesize\ttfamily modes.\+Mode.\+event\+\_\+handler}
+
+
+
+Definition at line 21 of file modes.\+py.
+
+\mbox{\Hypertarget{classmodes_1_1_mode_a922d80a82a8a240cf78055cf70a3b3fb}\label{classmodes_1_1_mode_a922d80a82a8a240cf78055cf70a3b3fb}} 
+\index{modes.Mode@{modes.Mode}!keyboard@{keyboard}}
+\index{keyboard@{keyboard}!modes.Mode@{modes.Mode}}
+\doxysubsubsection{\texorpdfstring{keyboard}{keyboard}}
+{\footnotesize\ttfamily modes.\+Mode.\+keyboard}
+
+
+
+Definition at line 18 of file modes.\+py.
+
+\mbox{\Hypertarget{classmodes_1_1_mode_ae28f438cb58ebf9d7ed10bf88e7fbc55}\label{classmodes_1_1_mode_ae28f438cb58ebf9d7ed10bf88e7fbc55}} 
+\index{modes.Mode@{modes.Mode}!name@{name}}
+\index{name@{name}!modes.Mode@{modes.Mode}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily modes.\+Mode.\+name}
+
+
+
+Definition at line 12 of file modes.\+py.
+
+\mbox{\Hypertarget{classmodes_1_1_mode_a9b5c32b35619b7ae7d1163f6701e95fb}\label{classmodes_1_1_mode_a9b5c32b35619b7ae7d1163f6701e95fb}} 
+\index{modes.Mode@{modes.Mode}!player@{player}}
+\index{player@{player}!modes.Mode@{modes.Mode}}
+\doxysubsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily modes.\+Mode.\+player}
+
+
+
+Definition at line 24 of file modes.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{modes_8py}{modes.\+py}}\end{DoxyCompactItemize}

@@ -9,12 +9,16 @@ class Synth(object):
             sf2 = Sf2File(sf2_file)
         return sf2.instruments
 
-    def __init__(self, channel, port, recorder, mode='freeplay', instr=0, reverb=0.3, gain=270):
+    def __init__(self, event_handler, mode='freeplay', instr=0, reverb=0.3, gain=270):
+        # initialize variable from event handler
+        self.channel_ind = event_handler.current_channel_index[0]
+        self.port = event_handler.port
+
+        # Recorder to keep track of notes
+        self.recorder = event_handler.player
+
         # mode the synth is in
         self.mode = mode
-
-        # set channel
-        self.channel = channel
 
         # instrument index
         self.instr = instr
@@ -27,40 +31,37 @@ class Synth(object):
         # Octave shift
         self.octave = 0
 
-        self.port = port
-
-        # Recorder to keep track of notes
-        self.recorder = recorder
-
     # Plays note
     def midi_note_on(self, note, background_mode=False):
-        self.port.send(mido.Message('note_on', note=note, channel=self.channel))
+        self.port.send(mido.Message('note_on', note=note, channel=self.channel_ind))
 
         if not background_mode:
             # Send time stamp and note to recorder
-            self.recorder.record_event(time=time.time(), channel=self.channel, event=['note_on', note])
+            self.recorder.record_event(time=time.time(), channel=self.channel_ind, event=['note_on', note])
 
     # Kills note
     def midi_note_off(self, note, background_mode=False):
-        self.port.send(mido.Message('note_off', note=note, channel=self.channel))
+        self.port.send(mido.Message('note_off', note=note, channel=self.channel_ind))
 
         if not background_mode:
             # Send time stamp and note to recorder
-            self.recorder.record_event(time=time.time(), channel=self.channel, event=['note_off', note])
+            self.recorder.record_event(time=time.time(), channel=self.channel_ind, event=['note_off', note])
 
     # Changes sound
     def midi_change_synth(self, index, background_mode=False):
+        # TODO: Check for drums channel and figure out how to access other sounds
+
         if index < 0 or index >127:
             return
         # send message
-        self.port.send(mido.Message('program_change', program=index, channel=self.channel))
+        self.port.send(mido.Message('program_change', program=index, channel=self.channel_ind))
 
         # Change the self parameter
         self.instr = index
 
         if not background_mode:
             # Send time stamp and note to recorder
-            self.recorder.record_event(time=time.time(), channel=self.channel, event=['program_change', index])
+            self.recorder.record_event(time=time.time(), channel=self.channel_ind, event=['program_change', index])
 
     @staticmethod
     def midi_stop(port):

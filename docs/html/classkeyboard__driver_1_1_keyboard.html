@@ -95,10 +95,8 @@ Collaboration diagram for keyboard_driver.Keyboard:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1274b70570f0caf1b5189ebe81c1b07f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#a1274b70570f0caf1b5189ebe81c1b07f">__init__</a> (self)</td></tr>
-<tr class="separator:a1274b70570f0caf1b5189ebe81c1b07f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a378a787bae9e9b647056453e7a481e8c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#a378a787bae9e9b647056453e7a481e8c">set_handler</a> (self, handler)</td></tr>
-<tr class="separator:a378a787bae9e9b647056453e7a481e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11fc90bb4350d90b2793b747adcf9dcb"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#a11fc90bb4350d90b2793b747adcf9dcb">__init__</a> (self, <a class="el" href="classkeyboard__driver_1_1_keyboard.html#a1c60c0cc060eb63c5fb7a26ab05cc096">event_handler</a>)</td></tr>
+<tr class="separator:a11fc90bb4350d90b2793b747adcf9dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca3d777697f65fccf7e08e53543ff849"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#aca3d777697f65fccf7e08e53543ff849">start_encoder_listener</a> (self)</td></tr>
 <tr class="separator:aca3d777697f65fccf7e08e53543ff849"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afffd7bfe59563ee5bb77597d93928558"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#afffd7bfe59563ee5bb77597d93928558">key_down</a> (self, key_index)</td></tr>
@@ -111,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a93fdbeeb67a42fd7f5499a59bf9c0124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fb0379af85c49cff6061227dd4db4ca"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#a1fb0379af85c49cff6061227dd4db4ca">use_knob</a> (self, knob_num)</td></tr>
 <tr class="separator:a1fb0379af85c49cff6061227dd4db4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f12065c1978c5dd478f9e4165d6a710"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#a3f12065c1978c5dd478f9e4165d6a710">get_key_index</a> (self, key)</td></tr>
+<tr class="separator:a3f12065c1978c5dd478f9e4165d6a710"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -119,6 +119,8 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a1c60c0cc060eb63c5fb7a26ab05cc096"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#a1c60c0cc060eb63c5fb7a26ab05cc096">event_handler</a></td></tr>
+<tr class="separator:a1c60c0cc060eb63c5fb7a26ab05cc096"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a746c46467622db2ef782198d22b3a14e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#a746c46467622db2ef782198d22b3a14e">key_dict</a></td></tr>
 <tr class="separator:a746c46467622db2ef782198d22b3a14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bc951b07cff14bf76f7465e39e32c4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#a0bc951b07cff14bf76f7465e39e32c4c">on_keys</a></td></tr>
@@ -129,8 +131,6 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ad9a212aab11b08548bcd7c7621d59b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4a88b968cd573b129da46d067903caa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#aa4a88b968cd573b129da46d067903caa">encoder_driver</a></td></tr>
 <tr class="separator:aa4a88b968cd573b129da46d067903caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5cccbb5cdfc77782c18800ba5792d24"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#ac5cccbb5cdfc77782c18800ba5792d24">playback_handler</a></td></tr>
-<tr class="separator:ac5cccbb5cdfc77782c18800ba5792d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc46c709c5056a1c72fd5ab8688abbc5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkeyboard__driver_1_1_keyboard.html#acc46c709c5056a1c72fd5ab8688abbc5">shift</a></td></tr>
 <tr class="separator:acc46c709c5056a1c72fd5ab8688abbc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -138,8 +138,8 @@ Public Attributes</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00008">8</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1274b70570f0caf1b5189ebe81c1b07f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1274b70570f0caf1b5189ebe81c1b07f">&#9670;&nbsp;</a></span>__init__()</h2>
+<a id="a11fc90bb4350d90b2793b747adcf9dcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11fc90bb4350d90b2793b747adcf9dcb">&#9670;&nbsp;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,37 +148,78 @@ Public Attributes</h2></td></tr>
           <td class="memname">def keyboard_driver.Keyboard.__init__ </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>event_handler</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00009">9</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">def </span>__init__(self):</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="comment"># init key values</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        self.key_dict = self.make_key_mapping()</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        self.on_keys = set()</div>
+<div class="fragment"><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">def </span>__init__(self, event_handler):</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <span class="comment"># initialize with handler</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        self.event_handler = event_handler</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="comment"># init key values</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        self.key_dict = self.make_key_mapping()</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="comment"># init digital knobs</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="comment"># change to arrow keys on mac</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        self.encoder_counter = [0] * 4</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        self.encoder_buffer = [0] * 4</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        self.encoder_driver = Driver(self.encoder_buffer, scalar=<span class="keyword">True</span>, factor=1)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        self.start_encoder_listener()</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="comment"># initialize with no play</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        self.playback_handler = <span class="keywordtype">None</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="comment"># For tracking if shift is on faster</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        self.shift = <span class="keyword">False</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        self.on_keys = set()</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="comment"># init digital knobs</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="comment"># change to arrow keys on mac</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        self.encoder_counter = [0] * 4</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        self.encoder_buffer = [0] * 4</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        self.encoder_driver = Driver(self.encoder_buffer, scalar=<span class="keyword">True</span>, factor=1)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        self.start_encoder_listener()</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="comment"># For tracking if shift is on faster</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        self.shift = <span class="keyword">False</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3f12065c1978c5dd478f9e4165d6a710"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f12065c1978c5dd478f9e4165d6a710">&#9670;&nbsp;</a></span>get_key_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def keyboard_driver.Keyboard.get_key_index </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00133">133</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keyword">def </span>get_key_index(self, key):</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">return</span> self.key_dict[key]</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a4386990c3b236dec6653f7bf565d743e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4386990c3b236dec6653f7bf565d743e">&#9670;&nbsp;</a></span>get_knob()</h2>
 
@@ -205,17 +246,17 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00110">110</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">def </span>get_knob(self, knob_num):</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="comment"># if the digital_buffer changes</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">if</span> self.encoder_buffer[knob_num] != self.encoder_counter[knob_num]:</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="comment"># send the new value and update</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            self.encoder_counter[knob_num] = self.encoder_buffer[knob_num]</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordflow">return</span> self.encoder_counter[knob_num]</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="comment"># if the digital_buffer is still the same return false</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00105">105</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">def </span>get_knob(self, knob_num):</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="comment"># if the digital_buffer changes</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">if</span> self.encoder_buffer[knob_num] != self.encoder_counter[knob_num]:</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="comment"># send the new value and update</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            self.encoder_counter[knob_num] = self.encoder_buffer[knob_num]</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">return</span> self.encoder_counter[knob_num]</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="comment"># if the digital_buffer is still the same return false</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">False</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -235,19 +276,19 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00121">121</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">def </span>get_knobs(self):</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        knobs = [<span class="keyword">False</span>] * 4</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="comment"># Update all 4 knobs</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">for</span> knob_num <span class="keywordflow">in</span> range(4):</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <span class="comment"># if the digital_buffer changes</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordflow">if</span> self.encoder_buffer[knob_num] != self.encoder_counter[knob_num]:</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                <span class="comment"># send the new value and update</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                self.encoder_counter[knob_num] = self.encoder_buffer[knob_num]</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                knobs[knob_num] = self.encoder_counter[knob_num]</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">return</span> knobs</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00116">116</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">def </span>get_knobs(self):</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        knobs = [<span class="keyword">False</span>] * 4</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="comment"># Update all 4 knobs</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordflow">for</span> knob_num <span class="keywordflow">in</span> range(4):</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="comment"># if the digital_buffer changes</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <span class="keywordflow">if</span> self.encoder_buffer[knob_num] != self.encoder_counter[knob_num]:</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                <span class="comment"># send the new value and update</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                self.encoder_counter[knob_num] = self.encoder_buffer[knob_num]</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                knobs[knob_num] = self.encoder_counter[knob_num]</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">return</span> knobs</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -277,20 +318,20 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00084">84</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">def </span>key_down(self, key_index):</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment"># If shift is off</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">if</span> key_index == 24 <span class="keywordflow">and</span> <span class="keywordflow">not</span> self.shift:</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            self.shift = <span class="keyword">True</span></div>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00079">79</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">def </span>key_down(self, key_index):</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="comment"># If shift is off</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">if</span> key_index == 24 <span class="keywordflow">and</span> <span class="keywordflow">not</span> self.shift:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            self.shift = <span class="keyword">True</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="comment"># Checks the if the key is on and adds key to on keys if not on</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">elif</span> key_index <span class="keywordflow">not</span> <span class="keywordflow">in</span> self.on_keys:</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="comment"># add key to on_notes</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            self.on_keys.add(key_index)</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="comment"># Checks the if the key is on and adds key to on keys if not on</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">elif</span> key_index <span class="keywordflow">not</span> <span class="keywordflow">in</span> self.on_keys:</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="comment"># add key to on_notes</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            self.on_keys.add(key_index)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="comment"># play note</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            self.playback_handler.key_down(key_index)</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="comment"># play note</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            self.event_handler.key_down(key_index)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -320,18 +361,18 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00098">98</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">def </span>key_up(self, key_index):</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">if</span> key_index == 24 <span class="keywordflow">and</span> self.shift:</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            self.shift = <span class="keyword">False</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">elif</span> key_index <span class="keywordflow">in</span> self.on_keys:</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="comment"># remove key from on_notes</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            self.on_keys.remove(key_index)</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="comment"># play note</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            self.playback_handler.key_up(key_index)</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00093">93</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">def </span>key_up(self, key_index):</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">if</span> key_index == 24 <span class="keywordflow">and</span> self.shift:</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            self.shift = <span class="keyword">False</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">elif</span> key_index <span class="keywordflow">in</span> self.on_keys:</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="comment"># remove key from on_notes</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            self.on_keys.remove(key_index)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="comment"># play note</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            self.event_handler.key_up(key_index)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -358,80 +399,47 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00035">35</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">def </span>make_key_mapping():</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        key_list = [</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            pg.K_z,  <span class="comment"># C1</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            pg.K_s,  <span class="comment"># C#1</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            pg.K_x,  <span class="comment"># D1</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            pg.K_d,  <span class="comment"># D#1</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            pg.K_c,  <span class="comment"># E1</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            pg.K_v,  <span class="comment"># F1</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            pg.K_g,  <span class="comment"># F#1</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            pg.K_b,  <span class="comment"># G1</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            pg.K_h,  <span class="comment"># G#1</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            pg.K_n,  <span class="comment"># A1</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            pg.K_j,  <span class="comment"># A#1</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            pg.K_m,  <span class="comment"># B1</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            pg.K_q,  <span class="comment"># C2</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            pg.K_2,  <span class="comment"># C#2</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            pg.K_w,  <span class="comment"># D2</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            pg.K_3,  <span class="comment"># D#2</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            pg.K_e,  <span class="comment"># E2</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            pg.K_r,  <span class="comment"># F2</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            pg.K_5,  <span class="comment"># F#2</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            pg.K_t,  <span class="comment"># G2</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            pg.K_6,  <span class="comment"># G#2</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            pg.K_y,  <span class="comment"># A2</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            pg.K_7,  <span class="comment"># A#2</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            pg.K_u,  <span class="comment"># B2</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            pg.K_LSHIFT,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            pg.K_LEFT,  <span class="comment"># left arrow</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            pg.K_RIGHT,  <span class="comment"># right arrow</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            pg.K_RSHIFT,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            pg.K_BACKSPACE,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            pg.K_RETURN,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            pg.K_UP,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            pg.K_DOWN</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        ]</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        mapping = {}</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(len(key_list)):</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            mapping[key_list[i]] = (i)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">return</span> mapping</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a378a787bae9e9b647056453e7a481e8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a378a787bae9e9b647056453e7a481e8c">&#9670;&nbsp;</a></span>set_handler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def keyboard_driver.Keyboard.set_handler </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>handler</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
 <p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00030">30</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">def </span>set_handler(self, handler):</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        self.playback_handler = handler</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">def </span>make_key_mapping():</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        key_list = [</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            pg.K_z,  <span class="comment"># C1</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            pg.K_s,  <span class="comment"># C#1</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            pg.K_x,  <span class="comment"># D1</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            pg.K_d,  <span class="comment"># D#1</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            pg.K_c,  <span class="comment"># E1</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            pg.K_v,  <span class="comment"># F1</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            pg.K_g,  <span class="comment"># F#1</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            pg.K_b,  <span class="comment"># G1</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            pg.K_h,  <span class="comment"># G#1</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            pg.K_n,  <span class="comment"># A1</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            pg.K_j,  <span class="comment"># A#1</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            pg.K_m,  <span class="comment"># B1</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            pg.K_q,  <span class="comment"># C2</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            pg.K_2,  <span class="comment"># C#2</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            pg.K_w,  <span class="comment"># D2</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            pg.K_3,  <span class="comment"># D#2</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            pg.K_e,  <span class="comment"># E2</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            pg.K_r,  <span class="comment"># F2</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            pg.K_5,  <span class="comment"># F#2</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            pg.K_t,  <span class="comment"># G2</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            pg.K_6,  <span class="comment"># G#2</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            pg.K_y,  <span class="comment"># A2</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            pg.K_7,  <span class="comment"># A#2</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            pg.K_u,  <span class="comment"># B2</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            pg.K_LSHIFT,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            pg.K_LEFT,  <span class="comment"># left arrow</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            pg.K_RIGHT,  <span class="comment"># right arrow</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            pg.K_RSHIFT,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            pg.K_BACKSPACE,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            pg.K_RETURN,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            pg.K_UP,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            pg.K_DOWN</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        ]</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        mapping = {}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(len(key_list)):</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            mapping[key_list[i]] = (i)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> mapping</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -451,13 +459,13 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00077">77</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">def </span>start_encoder_listener(self):</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">if</span> platform.system() == <span class="stringliteral">&#39;Darwin&#39;</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            self.encoder_driver.start_mac_tester()</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            self.encoder_driver.start_driver()</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00072">72</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">def </span>start_encoder_listener(self):</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">if</span> platform.system() == <span class="stringliteral">&#39;Darwin&#39;</span>:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            self.encoder_driver.start_mac_tester()</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            self.encoder_driver.start_driver()</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -487,9 +495,10 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00134">134</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keyword">def </span>use_knob(self, knob_num):</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        self.playback_handler.use_knob(knob_num=knob_num, index=self.encoder_counter[knob_num])</div>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00129">129</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">def </span>use_knob(self, knob_num):</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        self.event_handler.use_knob(knob_num=knob_num, index=self.encoder_counter[knob_num])</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -506,7 +515,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00019">19</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00021">21</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
 
 </div>
 </div>
@@ -522,7 +531,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00018">18</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00020">20</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
 
 </div>
 </div>
@@ -538,7 +547,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00020">20</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00022">22</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+
+</div>
+</div>
+<a id="a1c60c0cc060eb63c5fb7a26ab05cc096"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c60c0cc060eb63c5fb7a26ab05cc096">&#9670;&nbsp;</a></span>event_handler</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">keyboard_driver.Keyboard.event_handler</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00011">11</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
 
 </div>
 </div>
@@ -554,7 +579,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00012">12</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00014">14</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
 
 </div>
 </div>
@@ -570,23 +595,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00014">14</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
-
-</div>
-</div>
-<a id="ac5cccbb5cdfc77782c18800ba5792d24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5cccbb5cdfc77782c18800ba5792d24">&#9670;&nbsp;</a></span>playback_handler</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">keyboard_driver.Keyboard.playback_handler</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00024">24</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00016">16</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
 
 </div>
 </div>
@@ -602,7 +611,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00027">27</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="keyboard__driver_8py_source.html#l00026">26</a> of file <a class="el" href="keyboard__driver_8py_source.html">keyboard_driver.py</a>.</p>
 
 </div>
 </div>

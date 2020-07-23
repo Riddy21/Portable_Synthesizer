@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['octave_5fshift_150',['octave_shift',['../classsynth_1_1_synth.html#a1806b9151ec0ee1df081b5ee5c79c275',1,'synth::Synth']]]
+  ['pause_154',['pause',['../classplayer_1_1_player.html#aeb35323345eb1bdceef823d278b0948a',1,'player::Player']]],
+  ['play_5fall_155',['play_all',['../classplayer_1_1_player.html#a53c94329f860fb7059725de27bfbe11a',1,'player::Player']]]
 ];

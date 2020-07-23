@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['playback_5fhandler_193',['playback_handler',['../classengine_1_1_engine.html#afe32701b4d069b21c003188a9d9496bc',1,'engine.Engine.playback_handler()'],['../classkeyboard__driver_1_1_keyboard.html#ac5cccbb5cdfc77782c18800ba5792d24',1,'keyboard_driver.Keyboard.playback_handler()'],['../classplayback__handler_1_1_mode.html#ac2990e6bb04fca888bdc6872c74597c5',1,'playback_handler.Mode.playback_handler()'],['../classplayer_1_1_player.html#a11a8614fa0809e063e643a90341e8cb8',1,'player.Player.playback_handler()']]],
-  ['player_194',['player',['../classplayback__handler_1_1_playback_handler.html#a4fb949120b26c3e65af60e757f018e43',1,'playback_handler.PlaybackHandler.player()'],['../classplayback__handler_1_1_mode.html#a2be6a6e4733259905b7b3b5e41d9b7cc',1,'playback_handler.Mode.player()']]],
-  ['playing_195',['playing',['../classplayer_1_1_player.html#a24985e601e2244a1632735ca41b9c031',1,'player::Player']]],
-  ['playlist_196',['playlist',['../classplayer_1_1_player.html#a328d6fd7cb8e4d3a247d86d584598d8a',1,'player::Player']]],
-  ['port_197',['port',['../classengine_1_1_engine.html#a8e1535937d25d484c241628b6c58f485',1,'engine.Engine.port()'],['../classplayback__handler_1_1_playback_handler.html#a5d17efdcf280b061fff76c8a6dd67797',1,'playback_handler.PlaybackHandler.port()'],['../classsynth_1_1_synth.html#a83f4690b79319afdd4015af516b41d07',1,'synth.Synth.port()']]]
+  ['player_196',['player',['../classevent__handler_1_1_event_handler.html#aee24722466bc10341c6f047aaba1737a',1,'event_handler.EventHandler.player()'],['../classmodes_1_1_mode.html#a9b5c32b35619b7ae7d1163f6701e95fb',1,'modes.Mode.player()']]],
+  ['playing_197',['playing',['../classplayer_1_1_player.html#a24985e601e2244a1632735ca41b9c031',1,'player::Player']]],
+  ['playlist_198',['playlist',['../classplayer_1_1_player.html#a328d6fd7cb8e4d3a247d86d584598d8a',1,'player::Player']]],
+  ['port_199',['port',['../classevent__handler_1_1_event_handler.html#af8c59f99de472b1c5e35574b85a1ee9b',1,'event_handler.EventHandler.port()'],['../classplayer_1_1_player.html#a035ceede4ec4e0c1ca99b4360d1d2f0d',1,'player.Player.port()'],['../classsynth_1_1_synth.html#a83f4690b79319afdd4015af516b41d07',1,'synth.Synth.port()']]]
 ];
