@@ -56,8 +56,8 @@ class Player(object):
                 channel.midi_note_on(event[2][1], background_mode=True)
             elif event[2][0] == 'note_off':
                 channel.midi_note_off(event[2][1], background_mode=True)
-            if event[2][0] == 'program_change':
-                channel.midi_change_synth(event[2][1], background_mode=True)
+            if event[2][0] == 'synth_change':
+                channel.midi_change_synth(bank=event[2][1], program=event[2][2], background_mode=True)
 
         self.playing = False
 
@@ -69,7 +69,8 @@ class Player(object):
         # Add the initial information such as channel synth, gain, reverb, volume to the
         # beginning of the record list of the channel you are on right now of only the channel youre on right now
         current_channel = self.channels[self.current_channel_index[0]]
-        self.recordlist.append([0, self.current_channel_index[0], ['program_change', current_channel.instr]])
+        self.recordlist.append([0, self.current_channel_index[0],
+                                ['synth_change', current_channel.instr[0], current_channel.instr[1]]])
 
         if overwrite:
             self.delete_channel(self.current_channel_index[0])

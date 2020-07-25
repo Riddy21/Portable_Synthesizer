@@ -1,6 +1,6 @@
 from synth import Synth
 from player import Player
-from modes import Freeplay, Test
+from modes import Freeplay, Test, SoundSelect
 from keyboard_driver import Keyboard
 import time
 import pygame as pg
@@ -13,7 +13,6 @@ class EventHandler(object):
         self.channels = []
         # Keep track of channel modes
         self.channel_modes = []
-
 
         # Set the current mode to none
         self.current_channel_index = [0]
@@ -58,14 +57,18 @@ class EventHandler(object):
             self.keyboard.use_knob(0)
 
     # Add a new channel and declare its playing mode
-    def add_channel(self, mode, instr=0, reverb=0.3, gain=270):
+    def add_channel(self, mode, instr=(0, 0), reverb=0.3, gain=270):
         # Find the channel number
         channel_length = len(self.channels)
 
         self.current_channel_index[0] = channel_length
 
         # Make the synth and add it to channels
-        synth = Synth(event_handler=self, instr=instr, reverb=reverb,
+        if channel_length == 9:
+            synth = Synth(event_handler=self, instr=(120, 0), reverb=reverb,
+                          gain=gain)
+        else:
+            synth = Synth(event_handler=self, instr=instr, reverb=reverb,
                       gain=gain)
         self.channels.append(synth)
         self.add_mode(mode)
@@ -76,6 +79,8 @@ class EventHandler(object):
             self.channel_modes.append(Freeplay(self))
         elif mode == 'test':
             self.channel_modes.append(Test(self))
+        elif mode == 'soundselect':
+            self.channel_modes.append(SoundSelect(self))
 
     # Switch the mode of the current channel
     def switch_mode(self, mode):
@@ -83,10 +88,12 @@ class EventHandler(object):
             self.channel_modes[self.current_channel_index[0]] = Freeplay(self)
         elif mode == 'test':
             self.channel_modes[self.current_channel_index[0]] = Test(self)
+        elif mode == 'soundselect':
+            self.channel_modes[self.current_channel_index[0]] = SoundSelect(self)
 
     # Switch the current channel
     def switch_channel(self, channel_ind):
-        if channel_ind < 0:
+        if channel_ind < 0 or channel_ind > 15:
             return
 
         # change the channel

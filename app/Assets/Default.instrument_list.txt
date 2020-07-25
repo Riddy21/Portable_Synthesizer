@@ -1,0 +1,258 @@
+000-000-Stereo Grand
+000-001-Bright Grand
+000-002-Electric Grand
+000-003-Honky Tonk
+000-004-Tine Electric Piano
+000-005-FM Electric Piano
+000-006-Harpsichord
+000-007-Clavinet
+000-008-Celeste
+000-009-Glockenspiel
+000-010-Music Box
+000-011-Vibraphone
+000-012-Marimba
+000-013-Xylophone
+000-014-Tubular Bells
+000-015-Dulcimer
+000-016-Tonewheel Organ
+000-017-Percussive Organ
+000-018-Rock Organ
+000-019-Pipe Organ
+000-020-Reed Organ
+000-021-Accordian
+000-022-Harmonica
+000-023-Bandoneon
+000-024-Nylon Guitar
+000-025-Steel Guitar
+000-026-Jazz Guitar
+000-027-Clean Guitar
+000-028-Muted Guitar
+000-029-Overdrive Guitar
+000-030-Distortion Guitar
+000-031-Guitar Harmonics
+000-032-Acoustic Bass
+000-033-Finger Bass
+000-034-Pick Bass
+000-035-Fretless Bass
+000-036-Slap Bass 1
+000-037-Slap Bass 2
+000-038-Synth Bass 1
+000-039-Synth Bass 2
+000-040-Violin
+000-041-Viola
+000-042-Cello
+000-043-Double Bass
+000-044-Stereo Strings Trem
+000-045-Pizzicato Strings
+000-046-Orchestral Harp
+000-047-Timpani
+000-048-Stereo Strings Fast
+000-049-Stereo Strings Slow
+000-050-Synth Strings 1
+000-051-Synth Strings 2
+000-052-Concert Choir
+000-053-Voice Oohs
+000-054-Synth Voice
+000-055-Orchestra Hit
+000-056-Trumpet
+000-057-Trombone
+000-058-Tuba
+000-059-Muted Trumpet
+000-060-French Horns
+000-061-Brass Section
+000-062-Synth Brass 1
+000-063-Synth Brass 2
+000-064-Soprano Sax
+000-065-Alto Sax
+000-066-Tenor Sax
+000-067-Baritone Sax
+000-068-Oboe
+000-069-English Horn
+000-070-Bassoon
+000-071-Clarinet
+000-072-Piccolo
+000-073-Flute
+000-074-Recorder
+000-075-Pan Flute
+000-076-Bottle Blow
+000-077-Shakuhachi
+000-078-Irish Tin Whistle
+000-079-Ocarina
+000-080-Square Lead
+000-081-Saw Lead
+000-082-Synth Calliope
+000-083-Chiffer Lead
+000-084-Charang
+000-085-Solo Vox
+000-086-5th Saw Wave
+000-087-Bass & Lead
+000-088-Fantasia
+000-089-Warm Pad
+000-090-Polysynth
+000-091-Space Voice
+000-092-Bowed Glass
+000-093-Metal Pad
+000-094-Halo Pad
+000-095-Sweep Pad
+000-096-Ice Rain
+000-097-Soundtrack
+000-098-Crystal
+000-099-Atmosphere
+000-100-Brightness
+000-101-Goblin
+000-102-Echo Drops
+000-103-Star Theme
+000-104-Sitar
+000-105-Banjo
+000-106-Shamisen
+000-107-Koto
+000-108-Kalimba
+000-109-Bagpipes
+000-110-Fiddle
+000-111-Shenai
+000-112-Tinker Bell
+000-113-Agogo
+000-114-Steel Drums
+000-115-Wood Block
+000-116-Taiko Drum
+000-117-Melodic Tom
+000-118-Synth Drum
+000-119-Reverse Cymbal
+000-120-Fret Noise
+000-121-Breath Noise
+000-122-Seashore
+000-123-Birds
+000-124-Telephone 1
+000-125-Helicopter
+000-126-Applause
+000-127-Gun Shot
+001-038-Synth Bass 101
+001-044-Mono Strings Trem
+001-048-Mono Strings Fast
+001-049-Mono Strings Slow
+001-052-Concert Choir Mono
+001-056-Trumpet 2
+001-057-Trombone 2
+001-059-Muted Trumpet 2
+001-060-Solo French Horn
+001-061-Brass Section Mono
+001-080-Square Wave
+001-081-Saw Wave
+001-098-Synth Mallet
+001-120-Cut Noise
+001-121-Fl. Key Click
+001-122-Rain
+001-123-Dog
+001-124-Telephone 2
+001-125-Car Engine
+001-126-Laughing
+001-127-Machine Gun
+002-102-Echo Pan
+002-120-String Slap
+002-122-Thunder
+002-123-Horse Gallop
+002-124-Door Creaking
+002-125-Car Stop
+002-126-Scream
+002-127-Lasergun
+003-122-Howling Winds
+003-123-Bird 2
+003-124-Door
+003-125-Car Pass
+003-126-Punch
+003-127-Explosion
+004-122-Stream
+004-123-Scratch
+004-125-Car Crash
+004-126-Heart Beat
+005-122-Bubbles
+005-124-Windchime
+005-125-Siren
+005-126-Footsteps
+006-125-Train
+007-125-Jet Plane
+008-004-Chorused Tine EP
+008-005-Chorused FM EP
+008-006-Coupled Harpsichord
+008-014-Church Bells
+008-016-Detuned Tnwl. Organ
+008-017-Detuned Perc. Organ
+008-019-Pipe Organ 2
+008-021-Italian Accordian
+008-024-Ukulele
+008-025-12-String Guitar
+008-026-Hawaiian Guitar
+008-027-Chorused Clean Gt.
+008-028-Funk Guitar
+008-030-Feedback Guitar
+008-031-Guitar Feedback
+008-038-Synth Bass 3
+008-039-Synth Bass 4
+008-048-Orchestra Pad
+008-050-Synth Strings 3
+008-061-Brass Section 2
+008-062-Synth Brass 3
+008-063-Synth Brass 4
+008-080-Sine Wave
+008-081-Doctor Solo
+008-107-Taisho Koto
+008-115-Castanets
+008-116-Concert Bass Drum
+008-117-Melodic Tom 2
+008-118-808-Tom
+008-125-Starship
+009-014-Carillon
+009-125-Burst Noise
+011-000-Piano & Str. Fade
+011-001-Piano & Str. Sus
+011-004-Tine & FM EPs
+011-005-Piano & FM EP
+011-008-Tinkling Bells
+011-014-Bell Tower
+011-038-Techno Bass
+011-039-Pulse Bass
+011-049-Stereo Strings Velo
+011-050-Synth Strings 4
+011-051-Synth Strings 5
+011-061-Brass Section 3
+011-078-Whistlin'
+011-081-Sawtooth Stab
+011-087-Doctor's Solo
+011-088-Harpsi Pad
+011-089-Solar Wind
+011-096-Mystery Pad
+011-098-Synth Chime
+011-100-Bright Saw Stack
+011-119-Cymbal Crash
+011-121-Filter Snap
+011-127-Interference
+012-000-Bell Piano
+012-004-Bell Tine EP
+012-010-Christmas Bells
+012-027-Clean Guitar 2
+012-038-Mean Saw Bass
+012-048-Full Orchestra
+012-049-Mono Strings Velo
+012-080-Square Lead 2
+012-081-Saw Lead 2
+012-088-Fantasia 2
+012-089-Solar Wind 2
+012-119-Tambourine
+012-122-White Noise Wave
+012-127-Shooting Star
+013-048-Woodwind Choir
+013-080-Square Lead 3
+013-081-Saw Lead 3
+013-088-Night Vision
+016-025-Mandolin
+120-000-Standard Drums
+120-001-Standard 2 Drums
+120-008-Room Drums
+120-016-Power Drums
+120-024-Electronic Drums
+120-025-808/909 Drums
+120-026-Dance Drums
+120-032-Jazz Drums
+120-040-Brush Drums
+120-048-Orchestral Perc.
+120-056-SFX Kit

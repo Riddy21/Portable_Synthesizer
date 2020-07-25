@@ -18,14 +18,21 @@ class Gui(object):
         # Get the playback handler to get all the events
         self.events = event_handler
 
+        self.interface_dict = self._initialize_interfaces()
+
         self.interface = StartupInt(self.events, self)
+
+    def _initialize_interfaces(self):
+        interfaces = dict()
+        interfaces['freeplay'] = FreeplayInt(self)
+        interfaces['soundselect'] = SoundSelectInt(self)
+        interfaces['test'] = TestInt(self)
+        return interfaces
+
 
     # sets the interface of the OP1 and passes in the pointer to the player
     def set_interface(self, mode):
-        if mode == 'freeplay':
-            self.interface = FreeplayInt(self)
-        elif mode == 'test':
-            self.interface = TestInt(self)
+        self.interface = self.interface_dict[mode]
 
     # Draws whatever interface is currently on and updates
     def draw_interface(self):
@@ -64,9 +71,10 @@ class GuiInterface(object):
     def draw_interface(self):
         pass
 
-class FreeplayInt(GuiInterface):
+
+class SoundSelectInt(GuiInterface):
     def __init__(self, gui):
-        super().__init__('freeplay',gui)
+        super().__init__('soundselect', gui)
 
     # draws the interface on the screen
     def draw_interface(self):
@@ -82,8 +90,31 @@ class FreeplayInt(GuiInterface):
 
         self.draw_text('channel: %s' % self.channel_index[0],
                        self.gui.font, (255, 255, 255), self.gui.screen, 20, 80)
-        self.draw_text('instrument: %s' % channel.instr_list[channel.instr],
-                  self.gui.font, (255, 255, 255), self.gui.screen, 20, 100)
+        self.draw_text('bank & program: %s, %s' % (channel.instr[0], channel.instr[1]),
+                       self.gui.font, (255, 255, 255), self.gui.screen, 20, 100)
+        self.draw_text('instrument: %s' % channel.instr_dict[channel.instr],
+                       self.gui.font, (255, 255, 255), self.gui.screen, 20, 120)
+
+
+class FreeplayInt(GuiInterface):
+    def __init__(self, gui):
+        super().__init__('freeplay', gui)
+
+    # draws the interface on the screen
+    def draw_interface(self):
+        self.gui.screen.fill((0, 0, 255))
+        self.draw_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)
+        if self.events.player.recording:
+            self.draw_text('recording', self.gui.font, (255, 255, 255), self.gui.screen, 20, 40)
+        if self.events.player.playing:
+            self.draw_text('playing', self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)
+
+        channel = self.events.get_current_channel()
+
+        self.draw_text('channel: %s' % self.channel_index[0],
+                       self.gui.font, (255, 255, 255), self.gui.screen, 20, 80)
+        self.draw_text('instrument: %s' % channel.instr_dict[channel.instr],
+                       self.gui.font, (255, 255, 255), self.gui.screen, 20, 100)
 
 
 class TestInt(GuiInterface):
