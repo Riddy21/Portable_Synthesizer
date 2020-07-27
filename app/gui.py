@@ -13,14 +13,15 @@ class Gui(object):
             self.screen = pg.display.set_mode((480, 320), FULLSCREEN | DOUBLEBUF, 32)
 
         # Fonts
-        self.font = pg.font.SysFont('Helvetica', 20)
+        self.font = pg.font.SysFont('robotomonolightforpowerlinettf', 15)
 
         # Get the playback handler to get all the events
         self.events = event_handler
 
         self.interface_dict = self._initialize_interfaces()
 
-        self.interface = StartupInt(self.events, self)
+        # Make startup interface
+        self.interface = self.interface_dict['freeplay']
 
     def _initialize_interfaces(self):
         interfaces = dict()
@@ -28,7 +29,6 @@ class Gui(object):
         interfaces['soundselect'] = SoundSelectInt(self)
         interfaces['test'] = TestInt(self)
         return interfaces
-
 
     # sets the interface of the OP1 and passes in the pointer to the player
     def set_interface(self, mode):
@@ -102,7 +102,7 @@ class FreeplayInt(GuiInterface):
 
     # draws the interface on the screen
     def draw_interface(self):
-        self.gui.screen.fill((0, 0, 255))
+        self.gui.screen.fill((0, 0, 0))
         self.draw_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)
         if self.events.player.recording:
             self.draw_text('recording', self.gui.font, (255, 255, 255), self.gui.screen, 20, 40)

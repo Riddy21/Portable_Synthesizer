@@ -22,8 +22,10 @@ class Keyboard(object):
         self.encoder_driver = Driver(self.encoder_buffer, scalar=True, factor=1)
         self.start_encoder_listener()
 
-        # For tracking if shift is on faster
+        # For tracking commonly used keys faster
         self.shift = False
+        self.play = False
+        self.record = False
 
     # make list for piano keys
     @staticmethod
@@ -103,6 +105,12 @@ class Keyboard(object):
             # play note
             self.event_handler.key_down(key_index)
 
+            # Track record button and play button
+            if key_index == 27:
+                self.record = True
+            elif key_index == 29:
+                self.play = True
+
     # controls the keyboard to release a key
     def key_up(self, key_index):
         if key_index == 24 and self.shift:
@@ -114,6 +122,12 @@ class Keyboard(object):
 
             # play note
             self.event_handler.key_up(key_index)
+
+            # Track record button
+            if key_index == 27:
+                self.record = False
+            elif key_index == 29:
+                self.play = False
 
     # gets the scroll of the digital knob
     def get_knob(self, knob_num):
