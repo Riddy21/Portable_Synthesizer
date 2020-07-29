@@ -16,20 +16,21 @@ class Player(object):
         self.playing = False
 
         self.recordlist = []
-        self.playlist = []
+        self.playlist = set()
 
-    def record_event(self, time, channel, event):
+    def record_event(self, time, msg):
         # if is recording
         if self.recording:
             # add event to playlist
-            self.recordlist.append([time - self.recording, channel, event])
+            self.recordlist.append((time, msg))
 
     # plays all the channels at the same time
     @run_in_thread
     def play_all(self):
         self.playing = True
-        # sort the list by time
-        self.playlist = sorted(self.playlist, key=lambda l: l[0])
+
+        # reorganize and sort playlist
+        self.clean_up_playlist()
 
         # Tracks starting time
         start_time = time.time()
@@ -69,8 +70,7 @@ class Player(object):
         # Add the initial information such as channel synth, gain, reverb, volume to the
         # beginning of the record list of the channel you are on right now of only the channel youre on right now
         current_channel = self.channels[self.current_channel_index[0]]
-        self.recordlist.append([0, self.current_channel_index[0],
-                                ['synth_change', current_channel.instr[0], current_channel.instr[1]]])
+        current_channel.record_setup()
 
         if overwrite:
             self.delete_channel(self.current_channel_index[0])
@@ -93,11 +93,12 @@ class Player(object):
 
     # cleans up and sorts the playlist
     def clean_up_playlist(self):
-        pass
+        # sort the list by time
+        self.playlist = sorted(self.playlist, key=lambda l: l[0])
 
     # Deletes everything in a channel
     def delete_channel(self, channel_ind):
-        start = time.time()
+        # start = time.time()
         remove_list = []
         # find
         for event in self.playlist:
@@ -108,4 +109,8 @@ class Player(object):
         for event in remove_list:
             self.playlist.remove(event)
 
-        end = time.time()
+        # end = time.time()
+
+    def get_playlist(self):
+        return self.playlist
+

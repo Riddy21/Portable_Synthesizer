@@ -24,8 +24,11 @@ class Synth(object):
 
         return instr_dict
 
-    def __init__(self, event_handler, instr=(0, 0), reverb=0.3, gain=270):
+    def __init__(self, event_handler, instr=None, reverb=0.3, gain=270):
         # initialize variable from event handler
+        if instr is None:
+            instr = [0, 0]
+
         self.channel_ind = event_handler.current_channel_index[0]
         self.port = event_handler.port
 
@@ -48,33 +51,51 @@ class Synth(object):
 
     # Plays note
     def midi_note_on(self, note, background_mode=False):
-        self.port.send(mido.Message('note_on', note=note, channel=self.channel_ind))
+        msg = mido.Message('note_on', note=note, channel=self.channel_ind, time=time.time())
+        print(msg)
+        self.port.send(msg)
 
         if not background_mode:
             # Send time stamp and note to recorder
-            self.recorder.record_event(time=time.time(), channel=self.channel_ind, event=['note_on', note])
+            self.recorder.record_event(time=time.time(), msg=msg.bytes())
 
     # Kills note
     def midi_note_off(self, note, background_mode=False):
-        self.port.send(mido.Message('note_off', note=note, channel=self.channel_ind))
+        msg = mido.Message('note_off', note=note, channel=self.channel_ind, time=time.time())
+        self.port.send(msg)
 
         if not background_mode:
             # Send time stamp and note to recorder
-            self.recorder.record_event(time=time.time(), channel=self.channel_ind, event=['note_off', note])
+            self.recorder.record_event(time=time.time(), msg=msg.bytes())
 
     # Changes sound
     def midi_change_synth(self, bank, program, background_mode=False):
+        msg1 = mido.Message('control_change', control=0, value=bank, channel=self.channel_ind, time=time.time())
+        msg2 = mido.Message('program_change', program=program, channel=self.channel_ind, time=time.time())
         # send message
-        self.port.send(mido.Message('control_change', control=0, value=bank, channel=self.channel_ind))
-        self.port.send(mido.Message('program_change', program=program, channel=self.channel_ind))
+        self.port.send(msg1)
+        self.port.send(msg2)
 
         # Change the self parameter
-        self.instr = (bank, program)
+        self.instr = [bank, program]
 
+        # TODO: Remove background mode
+        # TODO: Remove time message
         if not background_mode:
             # Send time stamp and note to recorder
-            self.recorder.record_event(time=time.time(), channel=self.channel_ind,
-                                       event=['synth_change', bank, program])
+            self.recorder.record_event(time=time.time(), msg=msg1.bytes())
+            self.recorder.record_event(time=time.time(), msg=msg2.bytes())
+
+    # TODO: Sends midi message through midi
+    def send_msg(self, msg):
+        pass
+
+    # returns the midi message of what you want to send
+    def record_setup(self):
+        msg1 = mido.Message('control_change', control=0, value=self.instr[0], channel=self.channel_ind)
+        msg2 = mido.Message('program_change', program=self.instr[1], channel=self.channel_ind)
+        self.recorder.record_event(time=0, msg=msg1.bytes())
+        self.recorder.record_event(time=0, msg=msg2.bytes())
 
     @staticmethod
     def midi_stop(port):

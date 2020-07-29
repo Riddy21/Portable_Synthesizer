@@ -43,18 +43,21 @@ class Mode(object):
     def switch_mode(self, mode):
         self.event_handler.switch_mode(mode)
 
-    def record(self, overwrite=True):
+    def record_and_play(self, overwrite=True):
         if not self.player.recording and not self.player.playing:
             # Record
             self.player.record(overwrite=overwrite)
 
-            # plays all channels
-            self.player.play_all()
+            if self.player.get_playlist():
+                # plays all channels
+                self.player.play_all()
 
     def play(self):
         # if any channels are not recording or player play
         if not self.player.recording and not self.player.playing:
-            self.player.play_all()
+            if self.player.get_playlist():
+                # plays all channels
+                self.player.play_all()
 
     def stop(self):
         self.player.stop_all()
@@ -293,14 +296,14 @@ class Freeplay(Mode):
                 self.release_note(index)
 
             elif self.key_mappings[index] == 'record':
-                self.record(overwrite=False)
+                self.record_and_play(overwrite=False)
 
         elif index < 24:
             self.release_note(index)
 
         # record function
         elif self.key_mappings[index] == 'record':
-            self.record(overwrite=True)
+            self.record_and_play(overwrite=True)
 
         elif self.key_mappings[index] == 'play':
             self.play()
@@ -396,14 +399,14 @@ class Test(Mode):
                 self.release_note(index)
 
             elif self.key_mappings[index] == 'record':
-                self.record(overwrite=False)
+                self.record_and_play(overwrite=False)
 
         elif index < 24:
             self.release_note(index)
 
         # record function
         elif self.key_mappings[index] == 'record':
-            self.record(overwrite=True)
+            self.record_and_play(overwrite=True)
 
         elif self.key_mappings[index] == 'play':
             self.play()

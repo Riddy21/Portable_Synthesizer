@@ -92,7 +92,7 @@ class SoundSelectInt(GuiInterface):
                        self.gui.font, (255, 255, 255), self.gui.screen, 20, 80)
         self.draw_text('bank & program: %s, %s' % (channel.instr[0], channel.instr[1]),
                        self.gui.font, (255, 255, 255), self.gui.screen, 20, 100)
-        self.draw_text('instrument: %s' % channel.instr_dict[channel.instr],
+        self.draw_text('instrument: %s' % channel.instr_dict[channel.instr[0], channel.instr[1]],
                        self.gui.font, (255, 255, 255), self.gui.screen, 20, 120)
 
 
@@ -113,7 +113,7 @@ class FreeplayInt(GuiInterface):
 
         self.draw_text('channel: %s' % self.channel_index[0],
                        self.gui.font, (255, 255, 255), self.gui.screen, 20, 80)
-        self.draw_text('instrument: %s' % channel.instr_dict[channel.instr],
+        self.draw_text('instrument: %s' % channel.instr_dict[channel.instr[0], channel.instr[1]],
                        self.gui.font, (255, 255, 255), self.gui.screen, 20, 100)
 
 
