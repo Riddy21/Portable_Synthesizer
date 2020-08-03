@@ -1,5 +1,6 @@
 import time
 import pygame
+import os
 from threading_decorator import run_in_thread
 from synth import Synth
 
@@ -133,11 +134,57 @@ class Player(object):
 
     # TODO: Save playlist as a file
     def save_to_file(self):
-        pass
+        timestr = time.strftime("Data/Date: %m_%d_%Y Time:%H_%M_%S")
+        file = open(timestr+'.txt', 'w')
+        
+        string = ""
+        for event in self.playlist:
+            string += str(event[0])
+            for elem in event[1]:
+                string += ' ' + str(elem)
+            string += '\n'
+
+        file.write(string)
+        file.close()
+
+
+    # TODO: Gets list of projects you are working on
+    def get_projects(self):
+        return os.listdir('Data/')
 
     # TODO: Load a playlist as an object
-    def load_to_file(self):
-        pass
+    def load_from_file(self, filename):
+        # Get file
+        filepath = os.path.join('Data', filename)
+        file = open(filepath, 'r')
+
+        # Parse playlist_data
+        playlist_data = file.read()
+        playlist_data = playlist_data.split('\n')
+
+        # Make empty set
+        new_playlist = set()
+
+        # parse into 2D list
+        for line_index in range(len(playlist_data)):
+            playlist_data[line_index] = playlist_data[line_index].split(' ')
+    
+        # remove empty elements
+        try:
+            playlist_data.remove([''])
+            print('removed!')
+        except ValueError:
+            pass
+
+        # Save back into set format
+        for elem in playlist_data:
+            time = float(elem[0])
+            tmplist = []
+            for i in range(1,len(elem)):
+                tmplist.append(int(elem[i]))
+            new_playlist.add((time, tuple(tmplist)))
+        
+        self.playlist = new_playlist
 
     # sets the start time
     def set_start_time(self, start_time):
