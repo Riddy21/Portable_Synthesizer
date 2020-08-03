@@ -96,7 +96,7 @@ class SoundSelect(Mode):
             self.instr_key_list = drum_list
 
         # Get index of current instrument address in instr_key_list
-        self.curr_instr = self.instr_key_list.index(self.channel.instr)
+        self.curr_instr = self.instr_key_list.index(tuple(self.channel.instr))
 
     def switch_instr(self, instr_num):
         self.curr_instr = (instr_num) % len(self.instr_key_list)
@@ -194,15 +194,15 @@ class SoundSelect(Mode):
                 self.release_note(index)
 
             # Recording without overwriting channel
-            elif self.key_mappings[index] == 'record':
-                self.record(overwrite=False)
+            # elif self.key_mappings[index] == 'record':
+            #     self.record(overwrite=False)
 
         elif index < 24:
             self.release_note(index)
 
         # Recording with overwriting channel
-        elif self.key_mappings[index] == 'record':
-            self.record(overwrite=True)
+        # elif self.key_mappings[index] == 'record':
+        #     self.record(overwrite=True)
 
         elif self.key_mappings[index] == 'play':
             self.play()

@@ -6,11 +6,15 @@ from synth import Synth
 
 # player for recording and playing certain channels
 class Player(object):
+
     def __init__(self, event_handler):
         # Variables from event handler
         self.channels = event_handler.channels
         self.port = event_handler.port
         self.current_channel_index = event_handler.current_channel_index  # Is a primitive so references as address
+
+        # Time at which playing and recording starts at
+        self.start_time = 0
 
         self.recording = False
         self.playing = False
@@ -18,11 +22,16 @@ class Player(object):
         self.recordlist = []
         self.playlist = set()
 
-    def record_event(self, time, msg):
+    def record_event(self, msg, time):
         # if is recording
         if self.recording:
+            # Get the time in reference to the starting of the recording
+            timestamp = time - self.recording + self.start_time
+
+            event = (timestamp, tuple(msg))
+
             # add event to playlist
-            self.recordlist.append((time, msg))
+            self.recordlist.append(event)
 
     # plays all the channels at the same time
     @run_in_thread
@@ -30,20 +39,16 @@ class Player(object):
         self.playing = True
 
         # reorganize and sort playlist
-        self.clean_up_playlist()
+        event_list = self.make_event_list()
 
         # Tracks starting time
         start_time = time.time()
 
-        for event in self.playlist:
-            # Get the proper channel to play
-            channel = self.channels[event[1]]
-
+        for event in event_list:
             # If was stopped
             if not self.playing:
                 # turn off all notes
-                Synth.midi_stop(channel.port)
-
+                Synth.midi_stop(self.port)
                 break
 
             note_time = event[0]
@@ -52,13 +57,7 @@ class Player(object):
             while time.time() - start_time <= note_time:
                 pygame.time.delay(1)
 
-            # play the event directly to avoid keyboard interface
-            if event[2][0] == 'note_on':
-                channel.midi_note_on(event[2][1], background_mode=True)
-            elif event[2][0] == 'note_off':
-                channel.midi_note_off(event[2][1], background_mode=True)
-            if event[2][0] == 'synth_change':
-                channel.midi_change_synth(bank=event[2][1], program=event[2][2], background_mode=True)
+            Synth.send_msg(self.channels, event[1])
 
         self.playing = False
 
@@ -66,6 +65,8 @@ class Player(object):
     def record(self, overwrite):
         # Stop all channels
         Synth.midi_stop(self.channels[0].port)
+
+        self.recording = time.time()
 
         # Add the initial information such as channel synth, gain, reverb, volume to the
         # beginning of the record list of the channel you are on right now of only the channel youre on right now
@@ -75,26 +76,73 @@ class Player(object):
         if overwrite:
             self.delete_channel(self.current_channel_index[0])
 
-        self.recording = time.time()
-
     # Stops all playing and stops recording
     def stop_all(self):
         # turn off all notes
         Synth.midi_stop(self.channels[0].port)
         # move record list to play list and clear record list
         if self.recording:
-            self.playlist += self.recordlist
+            self.playlist = self.playlist.union(self.recordlist)
             self.recordlist = []
         self.recording = False
         self.playing = False
 
-    def pause(self, channel_ind):
+    # cleans up and sorts the playlist
+    def make_event_list(self):
+        event_list = []
+
+        # Make an empty list of 16 dictionaries to store all information about setup
+        setup = []
+        for channel in range(16):
+            setup.append(dict())
+
+        # Loop through all events
+        for event in self.playlist:
+
+            # Decode message
+            msg = Synth.bytes2msg(event[1])
+            timestamp = event[0]
+
+            # If the event was before the start time
+            if timestamp < self.start_time:
+                # Save latest program changes and control changes to setup the sound environment
+                if msg.type == 'program_change':
+                    setup[msg.channel]['program'] = msg
+                elif msg.type == 'control_change':
+                    if msg.control == 0:
+                        setup[msg.channel]['bank'] = msg
+
+                # Dont add to curated list
+            else:
+                msg = Synth.bytes2msg(event[1])
+                # shift the timing to align with the start_time
+                event_list.append((event[0] - self.start_time, msg))
+
+        # add all of setup msgs to the list with time at 0
+        for channel in setup:
+            for setting in channel.values():
+                # must change program before changing bank
+
+                # If program change, set the event timestamp as 0.0001
+                if setting.type == 'program_change':
+                    event_list.append((0.0001, setting))
+                else:
+                    event_list.append((0, setting))
+
+        return sorted(event_list, key=lambda l: l[0])
+
+    # TODO: Save playlist as a file
+    def save_to_file(self):
         pass
 
-    # cleans up and sorts the playlist
-    def clean_up_playlist(self):
-        # sort the list by time
-        self.playlist = sorted(self.playlist, key=lambda l: l[0])
+    # TODO: Load a playlist as an object
+    def load_to_file(self):
+        pass
+
+    # sets the start time
+    def set_start_time(self, start_time):
+        if start_time >= 0:
+            self.start_time = start_time
 
     # Deletes everything in a channel
     def delete_channel(self, channel_ind):
@@ -102,7 +150,8 @@ class Player(object):
         remove_list = []
         # find
         for event in self.playlist:
-            if event[1] == channel_ind:
+            msg = Synth.bytes2msg(event[1])
+            if msg.channel == channel_ind:
                 remove_list.append(event)
 
         # Remove
@@ -113,4 +162,3 @@ class Player(object):
 
     def get_playlist(self):
         return self.playlist
-
