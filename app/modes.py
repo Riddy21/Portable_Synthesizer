@@ -201,8 +201,9 @@ class SoundSelect(Mode):
             self.release_note(index)
 
         # Recording with overwriting channel
-        # elif self.key_mappings[index] == 'record':
-        #     self.record(overwrite=True)
+        elif self.key_mappings[index] == 'record':
+            self.record_and_play(overwrite=True)
+            self.switch_mode('freeplay')
 
         elif self.key_mappings[index] == 'play':
             self.play()

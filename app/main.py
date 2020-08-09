@@ -3,6 +3,12 @@ import pygame as pg
 from event_handler import EventHandler
 from keyboard_driver import Keyboard
 from gui import Gui
+from threading_decorator import run_in_thread
+
+@run_in_thread
+def draw_interface_parallel(gui):
+    while True:
+        gui.draw_interface()
 
 # Start program
 def main():
@@ -22,10 +28,9 @@ def main():
     # Start GUI and pass event_handler to look at events
     gui = Gui(event_handler)
 
-    while True:
-        # Update GUI
-        gui.draw_interface()
+    draw_interface_parallel(gui)
 
+    while True:
         # Handle events
         event_handler.handle_events()
 

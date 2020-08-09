@@ -132,7 +132,7 @@ class Player(object):
 
         return sorted(event_list, key=lambda l: l[0])
 
-    # TODO: Save playlist as a file
+    # Save playlist as a file
     def save_to_file(self):
         timestr = time.strftime("Data/Date: %m_%d_%Y Time:%H_%M_%S")
         file = open(timestr+'.txt', 'w')
@@ -148,11 +148,11 @@ class Player(object):
         file.close()
 
 
-    # TODO: Gets list of projects you are working on
+    # Gets list of projects you are working on
     def get_projects(self):
         return os.listdir('Data/')
 
-    # TODO: Load a playlist as an object
+    # Load a playlist as an object
     def load_from_file(self, filename):
         # Get file
         filepath = os.path.join('Data', filename)
@@ -191,14 +191,14 @@ class Player(object):
         if start_time >= 0:
             self.start_time = start_time
 
-    # Deletes everything in a channel
+    # Deletes everything in a channel from a time onwards
     def delete_channel(self, channel_ind):
         # start = time.time()
         remove_list = []
         # find
         for event in self.playlist:
             msg = Synth.bytes2msg(event[1])
-            if msg.channel == channel_ind:
+            if msg.channel == channel_ind and event[0] >= self.start_time:
                 remove_list.append(event)
 
         # Remove

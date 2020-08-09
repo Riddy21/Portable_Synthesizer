@@ -5,13 +5,14 @@ import platform
 import time
 import subprocess
 
+
 # starts the server before running the Engine
 def start_server(buffer_count, buffer_size, sr):
     print('INFO: Opening stream')
 
     # get assets directory
     home_path = os.getcwd()
-    assets_path = os.path.join(home_path, 'Assets', 'Default.sf2')
+    assets_path = os.path.join(home_path, 'Assets', 'SoundFonts', 'Default.sf2')
 
     # Change audio channel
     if platform.system() == 'Darwin' or platform.system() == 'Windows':

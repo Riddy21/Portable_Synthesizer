@@ -1,6 +1,7 @@
 import pygame as pg
 from pygame.locals import *
 import platform
+from pygame_functions import makeSprite, showSprite, moveSprite
 
 
 class Gui(object):
@@ -74,11 +75,17 @@ class GuiInterface(object):
 
 class SoundSelectInt(GuiInterface):
     def __init__(self, gui):
+        self.casset = makeSprite('Assets/Sprites/Recording_Background_Sprite.png', 5).images
+        self.casset_count = 0
         super().__init__('soundselect', gui)
 
     # draws the interface on the screen
     def draw_interface(self):
-        self.gui.screen.fill((0, 0, 255))
+        self.gui.screen.fill((0, 0, 0))
+
+        self.gui.screen.blit(self.casset[int(self.casset_count)], (0,0))
+        self.casset_count = (self.casset_count - 0.1) % 5
+
         self.draw_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)
         if self.events.player.recording:
             self.draw_text('recording', self.gui.font, (255, 255, 255), self.gui.screen, 20, 40)

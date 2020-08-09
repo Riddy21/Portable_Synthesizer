@@ -6,7 +6,7 @@ from sf2utils.sf2parse import Sf2File
 class Synth(object):
     @staticmethod
     def get_instruments():
-        file = open('Assets/Default.instrument_list.txt', 'r')
+        file = open('Assets/InstumentLists/Default.instrument_list.txt', 'r')
         instr_dict = dict()
         instr_str = file.read()
 
