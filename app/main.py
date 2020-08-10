@@ -23,7 +23,6 @@ def main():
 
     # Start playback controller and pass in the keyboard and the port
     event_handler = EventHandler(port=port)
-    event_handler.add_channel(mode='freeplay')
 
     # Start GUI and pass event_handler to look at events
     gui = Gui(event_handler)

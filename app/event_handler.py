@@ -26,6 +26,11 @@ class EventHandler(object):
         # set the player/recorder and pass channels
         self.player = Player(self)
 
+        for i in range(16):
+            self.add_channel('freeplay',(0,0), 0)
+
+        self.switch_channel(0)
+
     # ----------------------
     # API public methods
     # ----------------------
