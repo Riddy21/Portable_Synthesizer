@@ -27,12 +27,14 @@ class Mode(object):
     # Command to play note in context with record and play,
     # Will start recording or playing when note is played if record or play is held
     def play_note(self, index, key_up):
-        # if the record button or play button is held
+        # Normal press
         if not self.keyboard.record and not self.keyboard.play:
             self.channel.key_down(index)
+        # If play button is held
         elif self.keyboard.record:
             key_up(27)
             self.channel.key_down(index)
+        # If record button is held
         elif self.keyboard.play:
             key_up(29)
             self.channel.key_down(index)
@@ -138,7 +140,7 @@ class SoundSelect(Mode):
             "play",  # Enter
             "channel_up",  # Up arrow
             "channel_down",  # Down arrow
-            "select",  # Space bar
+            "select"  # Space bar
         ]
 
         return key_list
@@ -358,24 +360,17 @@ class Test(Mode):
             "play",  # Enter
             "channel_up",  # Up arrow
             "channel_down",  # Down arrow
+            "select",  # Spacebar
+            "knob_1_up",  # KP 7
+            "knob_1_down"  # KP 4
         ]
 
         return key_list
 
     def key_down(self, index):
-        # if shift is pressed
-        if self.keyboard.shift:
-
-            # if playing piano keys
-            if index < 24:
-                self.play_note(index, self.key_up)
-
-            # Switch modes
-            elif self.key_mappings[index] == 'octave_down':
-                self.switch_mode('soundselect')
 
         # if playing piano keys
-        elif index < 24:
+        if index < 24:
             self.play_note(index, self.key_up)
 
         elif self.key_mappings[index] == 'octave_up':
@@ -384,36 +379,13 @@ class Test(Mode):
         elif self.key_mappings[index] == 'octave_down':
             self.octave_shift(-1)
 
-        # Switch up a channel
-        elif self.key_mappings[index] == 'channel_up':
-            self.switch_channel(self.current_channel_index[0] + 1)
-
-        # Switch down a channel
-        elif self.key_mappings[index] == 'channel_down':
-            self.switch_channel(self.current_channel_index[0] - 1)
+        # Trying knob up and knob down functions
+        elif self.key_mappings[index] == 'knob_1_up':
+            pass
 
     def key_up(self, index):
-        # if shift is pressed
-        if self.keyboard.shift:
-            # if playing piano keys
-            if index < 24:
-                self.release_note(index)
-
-            elif self.key_mappings[index] == 'record':
-                self.record_and_play(overwrite=False)
-
-        elif index < 24:
+        if index < 24:
             self.release_note(index)
-
-        # record function
-        elif self.key_mappings[index] == 'record':
-            self.record_and_play(overwrite=True)
-
-        elif self.key_mappings[index] == 'play':
-            self.play()
-
-        elif self.key_mappings[index] == 'stop':
-            self.stop()
 
     def use_knob(self, index, knob_num):
         if knob_num == 0:

@@ -42,7 +42,7 @@ class Synth(object):
             for channel in range(16):
                 port.send(mido.Message('note_off', note=note, channel=channel))
 
-    def __init__(self, event_handler, instr=None, reverb=0.3, gain=270):
+    def __init__(self, event_handler, instr=None, reverb=0.3, gain=270, volume=64):
         # initialize variable from event handler
         if instr is None:
             instr = [0, 0]
@@ -63,12 +63,13 @@ class Synth(object):
 
         # Effects
         self.reverb = reverb
+        self.volume = volume
 
         # Octave shift
         self.octave = 0
 
     # Plays note
-    def midi_note_on(self, note, background_mode=False):
+    def midi_note_on(self, note):
         msg = mido.Message('note_on', note=note, channel=self.channel_ind)
         self.port.send(msg)
 
@@ -76,7 +77,7 @@ class Synth(object):
         self.recorder.record_event(msg=msg.bytes(), time=time.time())
 
     # Kills note
-    def midi_note_off(self, note, background_mode=False):
+    def midi_note_off(self, note):
         msg = mido.Message('note_off', note=note, channel=self.channel_ind)
         self.port.send(msg)
 
@@ -91,12 +92,19 @@ class Synth(object):
         self.port.send(msg1)
         self.port.send(msg2)
 
-        # Change the self parameter
-        self.instr = [bank, program]
-
-        # Send time stamp and note to recorder
+        # Send time stamp and msg to recorder
         self.recorder.record_event(msg=msg1.bytes(), time=time.time())
+        # 0.0001 is needed to make sure it comes after the control change but still stay instantly after
         self.recorder.record_event(msg=msg2.bytes(), time=time.time() + 0.0001)
+
+    # Change volume
+    def midi_change_volume(self, volume):
+        msg = mido.Message('control_change', control=7, value=volume, channel=self.channel_ind)
+        # send message
+        self.port.send(msg)
+
+        # Send time stamp and message to recorder
+        self.recorder.record_event(msg=msg.bytes(), time=time.time())
 
     # sends a midi message
     def midi_send_msg(self, msg):
@@ -104,7 +112,8 @@ class Synth(object):
 
         # check for all the correspinding set values and change them
         if msg.type == 'control_change':
-            self.instr[0] = msg.value
+            if msg.control == 0:
+                self.instr[0] = msg.value
         elif msg.type == 'program_change':
             self.instr[1] = msg.program
         # TODO: add other possible controls
@@ -129,6 +138,9 @@ class Synth(object):
         self.midi_note_off(note)
 
     def change_synth(self, bank, program):
+        # Change the self parameter
+        self.instr = [bank, program]
+        # Send message
         self.midi_change_synth(bank, program)
 
     def octave_shift(self, shift):

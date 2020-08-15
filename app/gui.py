@@ -29,6 +29,7 @@ class Gui(object):
         interfaces['freeplay'] = FreeplayInt(self)
         interfaces['soundselect'] = SoundSelectInt(self)
         interfaces['test'] = TestInt(self)
+        interfaces['recorder'] = RecorderInt(self)
         return interfaces
 
     # sets the interface of the OP1 and passes in the pointer to the player
@@ -72,6 +73,16 @@ class GuiInterface(object):
     def draw_interface(self):
         pass
 
+class RecorderInt(GuiInterface):
+    def __init__(self, gui):
+        self.casset = makeSprite('Assets/Sprites/Recording_Background_Sprite.png', 5).images
+        self.casset_count = 0
+        super().__init__('recorder', gui)
+
+    def draw_interface(self):
+        self.gui.screen.fill((0, 0, 0))
+        self.gui.screen.blit(self.casset[int(self.casset_count)], (0,0))
+        self.casset_count = (self.casset_count - 0.1) % 5
 
 class SoundSelectInt(GuiInterface):
     def __init__(self, gui):
@@ -82,9 +93,6 @@ class SoundSelectInt(GuiInterface):
     # draws the interface on the screen
     def draw_interface(self):
         self.gui.screen.fill((0, 0, 0))
-
-        self.gui.screen.blit(self.casset[int(self.casset_count)], (0,0))
-        self.casset_count = (self.casset_count - 0.1) % 5
 
         self.draw_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)
         if self.events.player.recording:

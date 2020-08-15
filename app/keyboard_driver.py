@@ -23,6 +23,7 @@ class Keyboard(object):
         self.start_encoder_listener()
 
         # For tracking commonly used keys faster
+        # Hard coded for faster access
         self.shift = False
         self.play = False
         self.record = False
@@ -63,7 +64,9 @@ class Keyboard(object):
             pg.K_RETURN,
             pg.K_UP,
             pg.K_DOWN,
-            pg.K_SPACE
+            pg.K_SPACE,
+            pg.K_KP_7,  # Knob 1 up
+            pg.K_KP_4  # Knob 1 down
         ]
         mapping = {}
         for i in range(len(key_list)):
@@ -153,7 +156,17 @@ class Keyboard(object):
 
         return knobs
 
-    # makes the playback handler use the know
-    def use_knob(self, knob_num):
-        self.event_handler.use_knob(knob_num=knob_num, index=self.encoder_counter[knob_num])
+    # Gets all the knobs and if one changes, sends message to event handler
+    def check_knobs(self):
+        # TODO: Try parallel then try serial if too slow
+        knobs = self.get_knobs()
+        if knobs[0]:
+            self.event_handler.use_knob(knob_num=0, index=self.encoder_counter[0])
+        if knobs[1]:
+            self.event_handler.use_knob(knob_num=1, index=self.encoder_counter[0])
+        if knobs[2]:
+            self.event_handler.use_knob(knob_num=2, index=self.encoder_counter[0])
+        if knobs[3]:
+            self.event_handler.use_knob(knob_num=3, index=self.encoder_counter[0])
+
 

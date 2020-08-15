@@ -13,7 +13,7 @@ def draw_interface_parallel(gui):
 # Start program
 def main():
     # Start the Fluidsynth server
-    port = start_server(buffer_count=3, buffer_size=1024, sr=80000)
+    port = start_server(buffer_count=3, buffer_size=1024, sr=48000)
 
     # start pygame stuff
     pg.init()

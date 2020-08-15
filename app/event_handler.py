@@ -57,9 +57,7 @@ class EventHandler(object):
                 else:
                     self.keyboard.key_up(note)
 
-        knobs = self.keyboard.get_knobs()
-        if knobs[0]:
-            self.keyboard.use_knob(0)
+
 
     # Add a new channel and declare its playing mode
     def add_channel(self, mode, instr=(0, 0), reverb=0.3, gain=270):
