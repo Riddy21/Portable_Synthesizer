@@ -4,6 +4,7 @@ from modes import Freeplay, Test, SoundSelect
 from keyboard_driver import Keyboard
 import time
 import pygame as pg
+from synth import end
 
 
 # Class for connecting synths with the keyboard or handling it with other players
@@ -27,9 +28,12 @@ class EventHandler(object):
         self.player = Player(self)
 
         for i in range(16):
-            self.add_channel('freeplay',(0,0), 0)
+            self.add_channel('freeplay', (0, 0))
 
         self.switch_channel(0)
+
+        # Knob queue for holding knob actions
+        self.knob_queue = []
 
     # ----------------------
     # API public methods
@@ -42,37 +46,39 @@ class EventHandler(object):
         for e in events:
             if e.type == pg.KEYDOWN:
                 try:
-                    note = self.keyboard.get_key_index(e.key)
+                    value = self.keyboard.get_key_index(e.key)
                 except KeyError:
                     pass
                 else:
-                    self.keyboard.key_down(note)
-                    end = time.time()
-                    print(end - start)
+                    self.keyboard.key_down(value)
+                    print(end[0] - start)
             elif e.type == pg.KEYUP:
                 try:
-                    note = self.keyboard.get_key_index(e.key)
+                    value = self.keyboard.get_key_index(e.key)
                 except KeyError:
                     pass
                 else:
-                    self.keyboard.key_up(note)
-
-
+                    self.keyboard.key_up(value)
+        # collect knob events to knob queue
+        self.keyboard.append_to_queue(self.knob_queue)
+        # Do one change from the knob queue
+        if self.knob_queue:
+            knob_event = self.knob_queue.pop(0)
+            self.use_knob(knob_num=knob_event[0], change=knob_event[1])
 
     # Add a new channel and declare its playing mode
-    def add_channel(self, mode, instr=(0, 0), reverb=0.3, gain=270):
+    def add_channel(self, mode, instr=(0, 0), volume=64, modulation=0, pitch=0):
         # Find the channel number
         channel_length = len(self.channels)
 
         self.current_channel_index[0] = channel_length
 
         # Make the synth and add it to channels
-        if channel_length == 9:
-            synth = Synth(event_handler=self, instr=(120, 0), reverb=reverb,
-                          gain=gain)
-        else:
-            synth = Synth(event_handler=self, instr=instr, reverb=reverb,
-                      gain=gain)
+        if channel_length == 9:  # Set to standard piano if number 9 nine, default is drum
+            instr = (120, 0)
+
+        synth = Synth(event_handler=self,
+                      instr=instr)
         self.channels.append(synth)
         self.add_mode(mode)
 
@@ -123,8 +129,5 @@ class EventHandler(object):
     def key_up(self, index):
         self.get_current_mode().key_up(index)
 
-    def use_knob(self, index, knob_num):
-        if knob_num == 0:
-            self.get_current_mode().use_knob(index, knob_num)
-
-
+    def use_knob(self, change, knob_num):
+        self.get_current_mode().use_knob(change, knob_num)

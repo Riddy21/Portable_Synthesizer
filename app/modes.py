@@ -4,6 +4,7 @@
 
 # Parent object for all modes
 import time
+from synth import Synth
 
 
 class Mode(object):
@@ -26,17 +27,20 @@ class Mode(object):
 
     # Command to play note in context with record and play,
     # Will start recording or playing when note is played if record or play is held
-    def play_note(self, index, key_up):
+    def play_note(self, index):
         # Normal press
-        if not self.keyboard.record and not self.keyboard.play:
+        if not self.player.recording and not self.player.playing:
             self.channel.key_down(index)
         # If play button is held
-        elif self.keyboard.record:
-            key_up(27)
+        elif self.player.recording:
+            if self.keyboard.shift:
+                self.record_and_play(overwrite=False)
+            else:
+                self.record_and_play(overwrite=True)
             self.channel.key_down(index)
         # If record button is held
-        elif self.keyboard.play:
-            key_up(29)
+        elif self.player.playing:
+            self.play()
             self.channel.key_down(index)
 
     def release_note(self, index):
@@ -71,11 +75,31 @@ class Mode(object):
             for i in range(24):
                 if i in self.keyboard.on_keys:
                     # Release the key
-                    self.channel.key_up(i - octaves*12)
+                    self.channel.key_up(i - octaves * 12)
+                    # Play new notes
                     self.channel.key_down(i)
+
+    def increment_volume(self, change):
+        self.channel.increment_volume(change)
+
+    def increment_modulation(self, change):
+        self.channel.increment_modulation(change)
+
+    def increment_pitch(self, change):
+        self.channel.increment_pitch(change)
+
+    def increment_balance(self, change):
+        self.channel.increment_balance(change)
+
+    def increment_pan(self, change):
+        self.channel.increment_pan(change)
+
+    def change_sustain(self, sustain):
+        self.channel.change_sustain(sustain)
 
     def switch_channel(self, channel_num):
         self.event_handler.switch_channel(channel_num)
+        Synth.midi_stop(self.channel.port)
 
 
 class SoundSelect(Mode):
@@ -100,10 +124,14 @@ class SoundSelect(Mode):
         # Get index of current instrument address in instr_key_list
         self.curr_instr = self.instr_key_list.index(tuple(self.channel.instr))
 
-    def switch_instr(self, instr_num):
-        self.curr_instr = (instr_num) % len(self.instr_key_list)
+    def increment_instr(self, change):
+        self.curr_instr = (self.curr_instr + change) % len(self.instr_key_list)
         self.channel.change_synth(self.instr_key_list[self.curr_instr][0],
                                   self.instr_key_list[self.curr_instr][1])
+
+    def change_instr(self, bank, program):
+        self.channel.change_synth(bank, program)
+        self.curr_instr = self.instr_key_list.index(tuple(self.channel.instr))
 
     @staticmethod
     def map_index2function():
@@ -151,7 +179,7 @@ class SoundSelect(Mode):
 
             # if playing piano keys
             if index < 24:
-                self.play_note(index, self.key_up)
+                self.play_note(index)
 
             # Switch modes
             elif self.key_mappings[index] == 'octave_up':
@@ -163,16 +191,16 @@ class SoundSelect(Mode):
 
             # Switch up an instrument
             elif self.key_mappings[index] == 'channel_up':
-                self.switch_instr(self.curr_instr + 1)
+                self.increment_instr(1)
 
             # Switch down an instrument
             elif self.key_mappings[index] == 'channel_down':
-                self.switch_instr(self.curr_instr - 1)
+                self.increment_instr(-1)
 
         # if playing piano keys
         elif index < 24:
             # if the record button or play button is held
-            self.play_note(index, self.key_up)
+            self.play_note(index)
 
         elif self.key_mappings[index] == 'octave_up':
             self.octave_shift(1)
@@ -212,6 +240,9 @@ class SoundSelect(Mode):
 
         elif self.key_mappings[index] == 'stop':
             self.stop()
+
+    def use_knob(self, index, knob_num):
+        print(index, knob_num)
 
 
 class Freeplay(Mode):
@@ -267,7 +298,7 @@ class Freeplay(Mode):
 
             # if playing piano keys
             if index < 24:
-                self.play_note(index, self.key_up)
+                self.play_note(index)
 
             # Switch modes
             elif self.key_mappings[index] == 'octave_up':
@@ -275,7 +306,7 @@ class Freeplay(Mode):
 
         # if playing piano keys
         elif index < 24:
-            self.play_note(index, self.key_up)
+            self.play_note(index)
 
         elif self.key_mappings[index] == 'octave_up':
             self.octave_shift(1)
@@ -318,6 +349,7 @@ class Freeplay(Mode):
         if knob_num == 0:
             pass
 
+
 class Test(Mode):
     def __init__(self, event_handler):
         super().__init__('test', event_handler)
@@ -353,25 +385,34 @@ class Test(Mode):
             "noteA#2",  # A#2
             "noteB2",  # B2
             "shift",  # LShift
-            "octave_down",  # left arrow
-            "octave_up",  # right arrow
+            "left",  # left arrow
+            "right",  # right arrow
             "record",  # RShift
             "stop",  # Delete
             "play",  # Enter
-            "channel_up",  # Up arrow
-            "channel_down",  # Down arrow
-            "select",  # Spacebar
+            "up",  # Up arrow
+            "down",  # Down arrow
+            "spacebar",  # Spacebar
             "knob_1_up",  # KP 7
-            "knob_1_down"  # KP 4
+            "knob_1_down",  # KP 4
+            "knob_2_up",  # KP 8
+            "knob_2_down",  # KP 5
+            "knob_3_up",  # KP 9
+            "knob_3_down",  # KP 6
+            "knob_4_up",  # KP -
+            "knob_4_down",  # KP +
         ]
 
         return key_list
 
     def key_down(self, index):
+        if self.keyboard.shift:
+            if self.key_mappings[index] == 'octave_down':
+                self.switch_mode('soundselect')
 
         # if playing piano keys
-        if index < 24:
-            self.play_note(index, self.key_up)
+        elif index < 24:
+            self.play_note(index)
 
         elif self.key_mappings[index] == 'octave_up':
             self.octave_shift(1)
@@ -379,14 +420,47 @@ class Test(Mode):
         elif self.key_mappings[index] == 'octave_down':
             self.octave_shift(-1)
 
-        # Trying knob up and knob down functions
+        # TODO: Trying knob up and knob down functions delete when actual knobs are connected
         elif self.key_mappings[index] == 'knob_1_up':
-            pass
+            self.use_knob(5, 0)
+
+        elif self.key_mappings[index] == 'knob_1_down':
+            self.use_knob(-5, 0)
+
+        elif self.key_mappings[index] == 'knob_2_up':
+            self.use_knob(5, 1)
+
+        elif self.key_mappings[index] == 'knob_2_down':
+            self.use_knob(-5, 1)
+
+        elif self.key_mappings[index] == 'knob_3_up':
+            self.use_knob(200, 2)
+
+        elif self.key_mappings[index] == 'knob_3_down':
+            self.use_knob(-200, 2)
+
+        elif self.key_mappings[index] == 'knob_4_up':
+            self.use_knob(5, 3)
+
+        elif self.key_mappings[index] == 'knob_4_down':
+            self.use_knob(-5, 3)
+
+        elif self.key_mappings[index] == 'stop':
+            self.change_sustain(True)
 
     def key_up(self, index):
         if index < 24:
             self.release_note(index)
 
-    def use_knob(self, index, knob_num):
+        elif self.key_mappings[index] == 'stop':
+            self.change_sustain(False)
+
+    def use_knob(self, change, knob_num):
         if knob_num == 0:
-            pass
+            self.increment_volume(change)
+        elif knob_num == 1:
+            self.increment_modulation(change)
+        elif knob_num == 2:
+            self.increment_pitch(change)
+        elif knob_num == 3:
+            self.increment_pan(change)
