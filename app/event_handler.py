@@ -46,7 +46,7 @@ class EventHandler(object):
         for e in events:
             if e.type == pg.KEYDOWN:
                 try:
-                    value = self.keyboard.get_key_index(e.key)
+                    value = self.keyboard.get_key_name(e.key)
                 except KeyError:
                     pass
                 else:
@@ -54,7 +54,7 @@ class EventHandler(object):
                     print(end[0] - start)
             elif e.type == pg.KEYUP:
                 try:
-                    value = self.keyboard.get_key_index(e.key)
+                    value = self.keyboard.get_key_name(e.key)
                 except KeyError:
                     pass
                 else:

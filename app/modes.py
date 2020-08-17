@@ -29,17 +29,17 @@ class Mode(object):
     # Will start recording or playing when note is played if record or play is held
     def play_note(self, index):
         # Normal press
-        if not self.player.recording and not self.player.playing:
+        if not self.keyboard.record and not self.keyboard.play:
             self.channel.key_down(index)
-        # If play button is held
-        elif self.player.recording:
+        # If record button is held
+        elif self.keyboard.record:
             if self.keyboard.shift:
                 self.record_and_play(overwrite=False)
             else:
                 self.record_and_play(overwrite=True)
             self.channel.key_down(index)
-        # If record button is held
-        elif self.player.playing:
+        # If the play button is held
+        elif self.keyboard.play:
             self.play()
             self.channel.key_down(index)
 
@@ -106,9 +106,6 @@ class SoundSelect(Mode):
     def __init__(self, event_handler):
         super().__init__('soundselect', event_handler)
 
-        # map each key to a function dictionary
-        self.key_mappings = self.map_index2function()
-
         # Get list of all instrument addresses avaliable
         self.instr_key_list = list(self.channel.instr_dict.keys())
 
@@ -133,112 +130,72 @@ class SoundSelect(Mode):
         self.channel.change_synth(bank, program)
         self.curr_instr = self.instr_key_list.index(tuple(self.channel.instr))
 
-    @staticmethod
-    def map_index2function():
-        key_list = [
-            "noteC1",  # C1
-            "noteC#1",  # C#1
-            "noteD1",  # D1
-            "noteD#1",  # D#1
-            "noteE1",  # E1
-            "noteF1",  # F1
-            "noteF#1",  # F#1
-            "noteG1",  # G1
-            "noteG#1",  # G#1
-            "noteA1",  # A1
-            "noteA#1",  # A#1
-            "noteB1",  # B1
-            "noteC2",  # C2
-            "noteC#2",  # C#2
-            "noteD2",  # D2
-            "noteD#2",  # D#2
-            "noteE2",  # E2
-            "noteF2",  # F2
-            "noteF#2",  # F#2
-            "noteG2",  # G2
-            "noteG#2",  # G#2
-            "noteA2",  # A2
-            "noteA#2",  # A#2
-            "noteB2",  # B2
-            "shift",  # LShift
-            "octave_down",  # left arrow
-            "octave_up",  # right arrow
-            "record",  # RShift
-            "stop",  # Delete
-            "play",  # Enter
-            "channel_up",  # Up arrow
-            "channel_down",  # Down arrow
-            "select"  # Space bar
-        ]
-
-        return key_list
-
-    def key_down(self, index):
+    def key_down(self, key):
         # if shift is pressed
         if self.keyboard.shift:
 
             # if playing piano keys
-            if index < 24:
-                self.play_note(index)
+            if type(key) is int:
+                self.play_note(key)
 
             # Switch modes
-            elif self.key_mappings[index] == 'octave_up':
+            elif key == 'right_arrow':
                 self.switch_mode('test')
 
             # Switch modes
-            elif self.key_mappings[index] == 'octave_down':
+            elif key == 'left_arrow':
                 self.switch_mode('freeplay')
 
             # Switch up an instrument
-            elif self.key_mappings[index] == 'channel_up':
+            elif key == 'knob_1_up':
                 self.increment_instr(1)
 
             # Switch down an instrument
-            elif self.key_mappings[index] == 'channel_down':
+            elif key == 'knob_1_down':
                 self.increment_instr(-1)
 
         # if playing piano keys
-        elif index < 24:
+        elif type(key) is int:
             # if the record button or play button is held
-            self.play_note(index)
+            self.play_note(key)
 
-        elif self.key_mappings[index] == 'octave_up':
+        elif key == 'right_arrow':
             self.octave_shift(1)
 
-        elif self.key_mappings[index] == 'octave_down':
+        elif key == 'left_arrow':
             self.octave_shift(-1)
 
         # Switch up a channel
-        elif self.key_mappings[index] == 'channel_up':
+        elif key == 'knob_1_up':
             self.switch_channel(self.current_channel_index[0] + 1)
 
         # Switch down a channel
-        elif self.key_mappings[index] == 'channel_down':
+        elif key == 'knob_1_down':
             self.switch_channel(self.current_channel_index[0] - 1)
 
-    def key_up(self, index):
+    def key_up(self, key):
         # if shift is pressed
         if self.keyboard.shift:
             # if playing piano keys
-            if index < 24:
-                self.release_note(index)
+            if type(key) is int:
+                self.release_note(key)
 
             # Recording without overwriting channel
-            # elif self.key_mappings[index] == 'record':
+            # elif self.key_mappings[key] == 'record':
             #     self.record(overwrite=False)
 
-        elif index < 24:
-            self.release_note(index)
+        elif type(key) is int:
+            self.release_note(key)
 
         # Recording with overwriting channel
-        elif self.key_mappings[index] == 'record':
+        elif key == 'record':
             self.record_and_play(overwrite=True)
             self.switch_mode('freeplay')
 
-        elif self.key_mappings[index] == 'play':
+        elif key == 'play':
             self.play()
 
-        elif self.key_mappings[index] == 'stop':
+        elif key == 'stop':
             self.stop()
 
     def use_knob(self, index, knob_num):
@@ -248,9 +205,6 @@ class SoundSelect(Mode):
 class Freeplay(Mode):
     def __init__(self, event_handler):
         super().__init__('freeplay', event_handler)
-
-        # map each key to a function dictionary
-        self.key_mappings = self.map_index2function()
 
     @staticmethod
     def map_index2function():
@@ -292,57 +246,57 @@ class Freeplay(Mode):
 
         return key_list
 
-    def key_down(self, index):
+    def key_down(self, key):
         # if shift is pressed
         if self.keyboard.shift:
 
             # if playing piano keys
-            if index < 24:
-                self.play_note(index)
+            if type(key) is int:
+                self.play_note(key)
 
             # Switch modes
-            elif self.key_mappings[index] == 'octave_up':
+            elif key == 'right_arrow':
                 self.switch_mode('soundselect')
 
         # if playing piano keys
-        elif index < 24:
-            self.play_note(index)
+        elif type(key) is int:
+            self.play_note(key)
 
-        elif self.key_mappings[index] == 'octave_up':
+        elif key == 'right_arrow':
             self.octave_shift(1)
 
-        elif self.key_mappings[index] == 'octave_down':
+        elif key == 'left_arrow':
             self.octave_shift(-1)
 
         # Switch up a channel
-        elif self.key_mappings[index] == 'channel_up':
+        elif key == 'knob_1_up':
             self.switch_channel(self.current_channel_index[0] + 1)
 
         # Switch down a channel
-        elif self.key_mappings[index] == 'channel_down':
+        elif key == 'knob_1_down':
             self.switch_channel(self.current_channel_index[0] - 1)
 
-    def key_up(self, index):
+    def key_up(self, key):
         # if shift is pressed
         if self.keyboard.shift:
             # if playing piano keys
-            if index < 24:
-                self.release_note(index)
+            if type(key) is int:
+                self.release_note(key)
 
-            elif self.key_mappings[index] == 'record':
+            elif key == 'record':
                 self.record_and_play(overwrite=False)
 
-        elif index < 24:
-            self.release_note(index)
+        elif type(key) is int:
+            self.release_note(key)
 
         # record function
-        elif self.key_mappings[index] == 'record':
+        elif key == 'record':
             self.record_and_play(overwrite=True)
 
-        elif self.key_mappings[index] == 'play':
+        elif key == 'play':
             self.play()
 
-        elif self.key_mappings[index] == 'stop':
+        elif key == 'stop':
             self.stop()
 
     def use_knob(self, index, knob_num):
@@ -353,9 +307,6 @@ class Freeplay(Mode):
 class Test(Mode):
     def __init__(self, event_handler):
         super().__init__('test', event_handler)
-
-        # map each key to a function dictionary
-        self.key_mappings = self.map_index2function()
 
     @staticmethod
     def map_index2function():
@@ -405,54 +356,54 @@ class Test(Mode):
 
         return key_list
 
-    def key_down(self, index):
+    def key_down(self, key):
         if self.keyboard.shift:
-            if self.key_mappings[index] == 'octave_down':
+            if key == 'left_arrow':
                 self.switch_mode('soundselect')
 
         # if playing piano keys
-        elif index < 24:
-            self.play_note(index)
+        elif type(key) is int:
+            self.play_note(key)
 
-        elif self.key_mappings[index] == 'octave_up':
+        elif key == 'right_arrow':
             self.octave_shift(1)
 
-        elif self.key_mappings[index] == 'octave_down':
+        elif key == 'left_arrow':
             self.octave_shift(-1)
 
         # TODO: Trying knob up and knob down functions delete when actual knobs are connected
-        elif self.key_mappings[index] == 'knob_1_up':
+        elif key == 'knob_1_up':
             self.use_knob(5, 0)
 
-        elif self.key_mappings[index] == 'knob_1_down':
+        elif key == 'knob_1_down':
             self.use_knob(-5, 0)
 
-        elif self.key_mappings[index] == 'knob_2_up':
+        elif key == 'knob_2_up':
             self.use_knob(5, 1)
 
-        elif self.key_mappings[index] == 'knob_2_down':
+        elif key == 'knob_2_down':
             self.use_knob(-5, 1)
 
-        elif self.key_mappings[index] == 'knob_3_up':
+        elif key == 'knob_3_up':
             self.use_knob(200, 2)
 
-        elif self.key_mappings[index] == 'knob_3_down':
+        elif key == 'knob_3_down':
             self.use_knob(-200, 2)
 
-        elif self.key_mappings[index] == 'knob_4_up':
+        elif key == 'knob_4_up':
             self.use_knob(5, 3)
 
-        elif self.key_mappings[index] == 'knob_4_down':
+        elif key == 'knob_4_down':
             self.use_knob(-5, 3)
 
-        elif self.key_mappings[index] == 'stop':
+        elif key == 'stop':
             self.change_sustain(True)
 
-    def key_up(self, index):
-        if index < 24:
-            self.release_note(index)
+    def key_up(self, key):
+        if type(key) is int:
+            self.release_note(key)
 
-        elif self.key_mappings[index] == 'stop':
+        elif key == 'stop':
             self.change_sustain(False)
 
     def use_knob(self, change, knob_num):
