@@ -206,46 +206,6 @@ class Freeplay(Mode):
     def __init__(self, event_handler):
         super().__init__('freeplay', event_handler)
 
-    @staticmethod
-    def map_index2function():
-        key_list = [
-            "noteC1",  # C1
-            "noteC#1",  # C#1
-            "noteD1",  # D1
-            "noteD#1",  # D#1
-            "noteE1",  # E1
-            "noteF1",  # F1
-            "noteF#1",  # F#1
-            "noteG1",  # G1
-            "noteG#1",  # G#1
-            "noteA1",  # A1
-            "noteA#1",  # A#1
-            "noteB1",  # B1
-            "noteC2",  # C2
-            "noteC#2",  # C#2
-            "noteD2",  # D2
-            "noteD#2",  # D#2
-            "noteE2",  # E2
-            "noteF2",  # F2
-            "noteF#2",  # F#2
-            "noteG2",  # G2
-            "noteG#2",  # G#2
-            "noteA2",  # A2
-            "noteA#2",  # A#2
-            "noteB2",  # B2
-            "shift",  # LShift
-            "octave_down",  # left arrow
-            "octave_up",  # right arrow
-            "record",  # RShift
-            "stop",  # Delete
-            "play",  # Enter
-            "channel_up",  # Up arrow
-            "channel_down",  # Down arrow
-            "select"  # spacebar
-        ]
-
-        return key_list
-
     def key_down(self, key):
         # if shift is pressed
         if self.keyboard.shift:
@@ -307,54 +267,6 @@ class Freeplay(Mode):
 class Test(Mode):
     def __init__(self, event_handler):
         super().__init__('test', event_handler)
-
-    @staticmethod
-    def map_index2function():
-        key_list = [
-            "noteC1",  # C1
-            "noteC#1",  # C#1
-            "noteD1",  # D1
-            "noteD#1",  # D#1
-            "noteE1",  # E1
-            "noteF1",  # F1
-            "noteF#1",  # F#1
-            "noteG1",  # G1
-            "noteG#1",  # G#1
-            "noteA1",  # A1
-            "noteA#1",  # A#1
-            "noteB1",  # B1
-            "noteC2",  # C2
-            "noteC#2",  # C#2
-            "noteD2",  # D2
-            "noteD#2",  # D#2
-            "noteE2",  # E2
-            "noteF2",  # F2
-            "noteF#2",  # F#2
-            "noteG2",  # G2
-            "noteG#2",  # G#2
-            "noteA2",  # A2
-            "noteA#2",  # A#2
-            "noteB2",  # B2
-            "shift",  # LShift
-            "left",  # left arrow
-            "right",  # right arrow
-            "record",  # RShift
-            "stop",  # Delete
-            "play",  # Enter
-            "up",  # Up arrow
-            "down",  # Down arrow
-            "spacebar",  # Spacebar
-            "knob_1_up",  # KP 7
-            "knob_1_down",  # KP 4
-            "knob_2_up",  # KP 8
-            "knob_2_down",  # KP 5
-            "knob_3_up",  # KP 9
-            "knob_3_down",  # KP 6
-            "knob_4_up",  # KP -
-            "knob_4_down",  # KP +
-        ]
-
-        return key_list
 
     def key_down(self, key):
         if self.keyboard.shift:
