@@ -43,7 +43,19 @@ class Synth(object):
             msg = mido.Message('control_change', control=123, channel=channel)
             port.send(msg)
 
-    def __init__(self, event_handler, instr=None, volume=64, modulation=0, pitch=0, balance=64, pan=64, sustain=False):
+    def __init__(self,
+                 event_handler,
+                 instr=None,
+                 volume=64,
+                 modulation=0,
+                 pitch=0,
+                 balance=64,
+                 pan=64,
+                 sustain=False,
+                 sustenuto=False,
+                 reverb=0,
+                 chorus=0,
+                 velocity=64):
         # initialize variable from event handler
         if instr is None:
             instr = [0, 0]
@@ -68,6 +80,10 @@ class Synth(object):
         self.balance = None
         self.pan = None
         self.sustain = None
+        self.sustenuto = None
+        self.reverb = None
+        self.chorus = None
+        self.velocity = None
 
         # Set default settings
         # Change the instrument to default
@@ -84,11 +100,18 @@ class Synth(object):
         self.change_pan(pan)
         # Change sustain
         self.change_sustain(sustain)
-    
+        # Change portamento
+        self.change_sustenuto(sustenuto)
+        # Change reverb
+        self.change_reverb(reverb)
+        # Change chorus
+        self.change_chorus(chorus)
+        # Change velocity
+        self.change_velocity(velocity)
 
     # Plays note
     def midi_note_on(self, note):
-        msg = mido.Message('note_on', note=note, channel=self.channel_ind)
+        msg = mido.Message('note_on', note=note, velocity=self.velocity, channel=self.channel_ind)
         end[0] = time.time()
         print(msg)
         self.port.send(msg)
@@ -166,26 +189,70 @@ class Synth(object):
     def midi_change_sustain(self, sustain):
         msg = mido.Message('control_change', control=64, value=sustain, channel=self.channel_ind)
         # send message
-        print(msg)
         self.port.send(msg)
 
         # Send time stamp and message to recorder
         self.recorder.record_event(msg=msg.bytes(), time=time.time())
 
+    def midi_change_sustenuto(self, sustenuto):
+        msg = mido.Message('control_change', control=66, value=sustenuto, channel=self.channel_ind)
+
+        # send message
+        self.port.send(msg)
+
+        # Send time stamp and message to recorder
+        self.recorder.record_event(msg=msg.bytes(), time=time.time()) 
+
+    def midi_change_reverb(self, reverb):
+        msg = mido.Message('control_change', control=91, value=reverb, channel=self.channel_ind)
+
+        # send message
+        self.port.send(msg)
+
+        # Send time stamp and message to recorder
+        self.recorder.record_event(msg=msg.bytes(), time=time.time())
+
+    def midi_change_chorus(self, chorus):
+        msg = mido.Message('control_change', control=93, value=chorus, channel=self.channel_ind)
+
+        # send message
+        self.port.send(msg)
+
+        # Sent time stamp and message to recorder
+        self.recorder.record_event(msg=msg.bytes(), time=time.time())
+    
+    
     # sends a midi message
     def midi_send_msg(self, msg):
         self.port.send(msg)
+        print(msg)
 
         # check for all the correspinding set values and change them
-        if msg.type == 'control_change':
+        if msg.type == 'note_on':
+            self.velocity = msg.velocity
+        elif msg.type == 'control_change':
             if msg.control == 0:
                 self.instr[0] = msg.value
-            if msg.control == 7:
+            elif msg.control == 7:
                 self.volume = msg.value
-            if msg.control == 2:
+            elif msg.control == 1:
                 self.modulation = msg.value
+            elif msg.control == 8:
+                self.balance = msg.value
+            elif msg.control == 10:
+                self.pan = msg.value
+            elif msg.control == 64:
+                self.sustain = msg.value
+            elif msg.control == 66:
+                self.sustenuto = msg.value
+            elif msg.control == 91:
+                self.reverb = msg.value
+            elif msg.control == 93:
+                self.chorus = msg.value
         elif msg.type == 'program_change':
             self.instr[1] = msg.program
+        elif msg.type == 'pitchwheel':
+            self.pitch = msg.pitch
         # TODO: add other possible controls
 
     # Records the initial information on instruments volume etc
@@ -197,7 +264,10 @@ class Synth(object):
                 mido.Message('pitchwheel', pitch=self.pitch, channel=self.channel_ind),
                 mido.Message('control_change', control=8, value=self.balance, channel=self.channel_ind),
                 mido.Message('control_change', control=10, value=self.pan, channel=self.channel_ind),
-                mido.Message('control_change', control=64, value=self.sustain, channel=self.channel_ind)
+                mido.Message('control_change', control=64, value=self.sustain, channel=self.channel_ind),
+                mido.Message('control_change', control=66, value=self.sustenuto, channel=self.channel_ind),
+                mido.Message('control_change', control=91, value=self.reverb, channel=self.channel_ind),
+                mido.Message('control_change', control=93, value=self.chorus, channel=self.channel_ind)
                 ]
 
         # Sends the message with the time set as the original start time of the recording
@@ -231,12 +301,8 @@ class Synth(object):
 
     def increment_volume(self, increment):
         volume_buff = self.volume + increment
-        if 128 > volume_buff >= 0:
-            # Change self parameter
-            self.volume = volume_buff
-            print('volume: %s' % self.volume)
-            # send message
-            self.midi_change_volume(self.volume)
+        self.change_volume(volume_buff)
+        print('volume: %s' % self.volume)
 
     def change_modulation(self, mod):
         if 128 > mod >= 0:
@@ -245,12 +311,8 @@ class Synth(object):
 
     def increment_modulation(self, increment):
         mod_buff = self.modulation + increment
-        if 128 > mod_buff >= 0:
-            # Change self parameter
-            self.modulation = mod_buff
-            print('modulation: %s' % self.modulation)
-            # send message
-            self.midi_change_modulation(self.modulation)
+        self.change_modulation(mod_buff)
+        print('modulation: %s' % self.modulation)
 
     def change_pitch(self, pitch):
         if 8191 >= pitch >= -8192:
@@ -259,12 +321,8 @@ class Synth(object):
 
     def increment_pitch(self, increment):
         pitch_buff = self.pitch + increment
-        if 8191 > pitch_buff >= -8192:
-            # Change self parameter
-            self.pitch = pitch_buff
-            print('pitch: %s' % self.pitch)
-            # send message
-            self.midi_change_pitch(self.pitch)
+        self.change_pitch(pitch_buff)
+        print('pitch: %s' % self.pitch)
 
     def change_balance(self, balance):
         if 128 > balance >= 0:
@@ -273,12 +331,8 @@ class Synth(object):
 
     def increment_balance(self, increment):
         bal_buff = self.balance + increment
-        if 128 > bal_buff >= 0:
-            # Change self parameter
-            self.balance = bal_buff
-            print('balance: %s' % self.balance)
-            # send message
-            self.midi_change_balance(self.balance)
+        self.change_balance(bal_buff)
+        print('balance: %s' % self.balance)
 
     def change_pan(self, pan):
         if 128 > pan >= 0:
@@ -287,12 +341,8 @@ class Synth(object):
             
     def increment_pan(self, increment):
         pan_buff = self.pan + increment
-        if 128 > pan_buff >= 0:
-            # Change self parameter
-            self.pan = pan_buff
-            print('pan: %s' % self.pan)
-            # send message
-            self.midi_change_pan(self.pan)
+        self.change_pan(pan_buff)
+        print('pan: %s' % self.pan)
 
     # True or False
     def change_sustain(self, sustain):
@@ -302,6 +352,60 @@ class Synth(object):
         else:
             self.sustain = 63
             self.midi_change_sustain(63)
+    
+    def toggle_sustain(self):
+        if self.sustain == 63:
+            self.sustain = 64
+            self.midi_change_sustain(64)
+        else:
+            self.sustain = 63
+            self.midi_change_sustain(63)
+
+    # True or False
+    def change_sustenuto(self, sustenuto):
+        if sustenuto:
+            self.sustenuto = 64
+            self.midi_change_sustenuto(64)
+        else:
+            self.sustenuto = 63
+            self.midi_change_sustenuto(63)
+
+    def toggle_sustenuto(self):
+        if self.sustenuto == 63:
+            self.sustenuto = 64
+            self.midi_change_sustenuto(64)
+        else:
+            self.sustenuto = 63
+            self.midi_change_sustenuto(63)
+
+    def change_reverb(self, reverb):
+        if 128 > reverb >= 0:
+            self.reverb = reverb
+            self.midi_change_reverb(reverb)
+
+    def increment_reverb(self, increment):
+        rev_buff = self.reverb + increment
+        self.change_reverb(rev_buff)
+        print('reverb: %s' % self.reverb)
+
+    def change_chorus(self, chorus):
+        if 128 > chorus >= 0:
+            self.chorus = chorus
+            self.midi_change_chorus(chorus)
+    
+    def increment_chorus(self, increment):
+        cho_buff = self.chorus + increment
+        self.change_chorus(cho_buff)
+        print('chorus: %s' % self.chorus)
+
+    def change_velocity(self, velocity):
+        if 128 > velocity >= 0:
+            self.velocity = velocity
+
+    def increment_velocity(self, increment):
+        vel_buff = self.velocity + increment
+        self.change_velocity(vel_buff)
+        print('velocity: %s' % self.velocity)
 
     def octave_shift(self, shift):
         self.octave += shift * 12

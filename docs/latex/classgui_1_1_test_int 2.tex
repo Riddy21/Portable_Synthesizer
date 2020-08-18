@@ -1,0 +1,92 @@
+\hypertarget{classgui_1_1_test_int}{}\doxysection{gui.\+Test\+Int Class Reference}
+\label{classgui_1_1_test_int}\index{gui.TestInt@{gui.TestInt}}
+
+
+Inheritance diagram for gui.\+Test\+Int\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classgui_1_1_test_int__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gui.\+Test\+Int\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classgui_1_1_test_int__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classgui_1_1_test_int_ad41313b44f3f751f28155fab6718fcd2}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classgui_1_1_gui_interface_a6167c919a095bf3528000db85e8ac788}{gui}})
+\item 
+def \mbox{\hyperlink{classgui_1_1_test_int_aeec7d05af8f7e273cd5113373edf38f1}{draw\+\_\+interface}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 88 of file gui.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgui_1_1_test_int_ad41313b44f3f751f28155fab6718fcd2}\label{classgui_1_1_test_int_ad41313b44f3f751f28155fab6718fcd2}} 
+\index{gui.TestInt@{gui.TestInt}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!gui.TestInt@{gui.TestInt}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def gui.\+Test\+Int.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{gui }\end{DoxyParamCaption})}
+
+
+
+Definition at line 89 of file gui.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{89     \textcolor{keyword}{def }\_\_init\_\_(self, gui):}
+\DoxyCodeLine{90         super().\_\_init\_\_(\textcolor{stringliteral}{'test'}, gui)}
+\DoxyCodeLine{91 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgui_1_1_test_int_aeec7d05af8f7e273cd5113373edf38f1}\label{classgui_1_1_test_int_aeec7d05af8f7e273cd5113373edf38f1}} 
+\index{gui.TestInt@{gui.TestInt}!draw\_interface@{draw\_interface}}
+\index{draw\_interface@{draw\_interface}!gui.TestInt@{gui.TestInt}}
+\doxysubsubsection{\texorpdfstring{draw\_interface()}{draw\_interface()}}
+{\footnotesize\ttfamily def gui.\+Test\+Int.\+draw\+\_\+interface (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classgui_1_1_gui_interface_ab439fc5d3f8733af1779772857960115}{gui.\+Gui\+Interface}}.
+
+
+
+Definition at line 93 of file gui.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{93     \textcolor{keyword}{def }draw\_interface(self):}
+\DoxyCodeLine{94         self.gui.screen.fill((0, 0, 255))}
+\DoxyCodeLine{95         self.draw\_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)}
+\DoxyCodeLine{96         \textcolor{keywordflow}{if} self.events.player.recording:}
+\DoxyCodeLine{97             self.draw\_text(\textcolor{stringliteral}{'recording'}, self.gui.font, (255, 255, 255), self.gui.screen, 20, 40)}
+\DoxyCodeLine{98         \textcolor{keywordflow}{if} self.events.player.playing:}
+\DoxyCodeLine{99             self.draw\_text(\textcolor{stringliteral}{'playing'}, self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 }
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gui_8py}{gui.\+py}}\end{DoxyCompactItemize}

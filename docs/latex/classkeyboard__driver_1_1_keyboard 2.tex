@@ -1,0 +1,396 @@
+\hypertarget{classkeyboard__driver_1_1_keyboard}{}\doxysection{keyboard\+\_\+driver.\+Keyboard Class Reference}
+\label{classkeyboard__driver_1_1_keyboard}\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+
+
+Inheritance diagram for keyboard\+\_\+driver.\+Keyboard\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{classkeyboard__driver_1_1_keyboard__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for keyboard\+\_\+driver.\+Keyboard\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{classkeyboard__driver_1_1_keyboard__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a11fc90bb4350d90b2793b747adcf9dcb}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a1c60c0cc060eb63c5fb7a26ab05cc096}{event\+\_\+handler}})
+\item 
+def \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_aca3d777697f65fccf7e08e53543ff849}{start\+\_\+encoder\+\_\+listener}} (self)
+\item 
+def \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_afffd7bfe59563ee5bb77597d93928558}{key\+\_\+down}} (self, key\+\_\+index)
+\item 
+def \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_ab47be0bd43fc8fb3226afc480100f829}{key\+\_\+up}} (self, key\+\_\+index)
+\item 
+def \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a4386990c3b236dec6653f7bf565d743e}{get\+\_\+knob}} (self, knob\+\_\+num)
+\item 
+def \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a93fdbeeb67a42fd7f5499a59bf9c0124}{get\+\_\+knobs}} (self)
+\item 
+def \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a1fb0379af85c49cff6061227dd4db4ca}{use\+\_\+knob}} (self, knob\+\_\+num)
+\item 
+def \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a3f12065c1978c5dd478f9e4165d6a710}{get\+\_\+key\+\_\+index}} (self, key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a2a08ac06a494b275d8ac497ce507b739}{make\+\_\+key\+\_\+mapping}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a1c60c0cc060eb63c5fb7a26ab05cc096}{event\+\_\+handler}}
+\item 
+\mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a746c46467622db2ef782198d22b3a14e}{key\+\_\+dict}}
+\item 
+\mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a0bc951b07cff14bf76f7465e39e32c4c}{on\+\_\+keys}}
+\item 
+\mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_a07027f13c419778d90b10dbca048bfd6}{encoder\+\_\+counter}}
+\item 
+\mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_ad9a212aab11b08548bcd7c7621d59b87}{encoder\+\_\+buffer}}
+\item 
+\mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_aa4a88b968cd573b129da46d067903caa}{encoder\+\_\+driver}}
+\item 
+\mbox{\hyperlink{classkeyboard__driver_1_1_keyboard_acc46c709c5056a1c72fd5ab8688abbc5}{shift}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file keyboard\+\_\+driver.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a11fc90bb4350d90b2793b747adcf9dcb}\label{classkeyboard__driver_1_1_keyboard_a11fc90bb4350d90b2793b747adcf9dcb}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def keyboard\+\_\+driver.\+Keyboard.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event\+\_\+handler }\end{DoxyParamCaption})}
+
+
+
+Definition at line 9 of file keyboard\+\_\+driver.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9     \textcolor{keyword}{def }\_\_init\_\_(self, event\_handler):}
+\DoxyCodeLine{10         \textcolor{comment}{\# initialize with handler}}
+\DoxyCodeLine{11         self.event\_handler = event\_handler}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13         \textcolor{comment}{\# init key values}}
+\DoxyCodeLine{14         self.key\_dict = self.make\_key\_mapping()}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16         self.on\_keys = set()}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{comment}{\# init digital knobs}}
+\DoxyCodeLine{19         \textcolor{comment}{\# change to arrow keys on mac}}
+\DoxyCodeLine{20         self.encoder\_counter = [0] * 4}
+\DoxyCodeLine{21         self.encoder\_buffer = [0] * 4}
+\DoxyCodeLine{22         self.encoder\_driver = Driver(self.encoder\_buffer, scalar=\textcolor{keyword}{True}, factor=1)}
+\DoxyCodeLine{23         self.start\_encoder\_listener()}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         \textcolor{comment}{\# For tracking if shift is on faster}}
+\DoxyCodeLine{26         self.shift = \textcolor{keyword}{False}}
+\DoxyCodeLine{27 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a3f12065c1978c5dd478f9e4165d6a710}\label{classkeyboard__driver_1_1_keyboard_a3f12065c1978c5dd478f9e4165d6a710}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!get\_key\_index@{get\_key\_index}}
+\index{get\_key\_index@{get\_key\_index}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{get\_key\_index()}{get\_key\_index()}}
+{\footnotesize\ttfamily def keyboard\+\_\+driver.\+Keyboard.\+get\+\_\+key\+\_\+index (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key }\end{DoxyParamCaption})}
+
+
+
+Definition at line 133 of file keyboard\+\_\+driver.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{133     \textcolor{keyword}{def }get\_key\_index(self, key):}
+\DoxyCodeLine{134         \textcolor{keywordflow}{return} self.key\_dict[key]}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a4386990c3b236dec6653f7bf565d743e}\label{classkeyboard__driver_1_1_keyboard_a4386990c3b236dec6653f7bf565d743e}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!get\_knob@{get\_knob}}
+\index{get\_knob@{get\_knob}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{get\_knob()}{get\_knob()}}
+{\footnotesize\ttfamily def keyboard\+\_\+driver.\+Keyboard.\+get\+\_\+knob (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{knob\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Definition at line 105 of file keyboard\+\_\+driver.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{105     \textcolor{keyword}{def }get\_knob(self, knob\_num):}
+\DoxyCodeLine{106         \textcolor{comment}{\# if the digital\_buffer changes}}
+\DoxyCodeLine{107         \textcolor{keywordflow}{if} self.encoder\_buffer[knob\_num] != self.encoder\_counter[knob\_num]:}
+\DoxyCodeLine{108             \textcolor{comment}{\# send the new value and update}}
+\DoxyCodeLine{109             self.encoder\_counter[knob\_num] = self.encoder\_buffer[knob\_num]}
+\DoxyCodeLine{110             \textcolor{keywordflow}{return} self.encoder\_counter[knob\_num]}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112         \textcolor{comment}{\# if the digital\_buffer is still the same return false}}
+\DoxyCodeLine{113         \textcolor{keywordflow}{return} \textcolor{keyword}{False}}
+\DoxyCodeLine{114 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a93fdbeeb67a42fd7f5499a59bf9c0124}\label{classkeyboard__driver_1_1_keyboard_a93fdbeeb67a42fd7f5499a59bf9c0124}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!get\_knobs@{get\_knobs}}
+\index{get\_knobs@{get\_knobs}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{get\_knobs()}{get\_knobs()}}
+{\footnotesize\ttfamily def keyboard\+\_\+driver.\+Keyboard.\+get\+\_\+knobs (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 116 of file keyboard\+\_\+driver.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{116     \textcolor{keyword}{def }get\_knobs(self):}
+\DoxyCodeLine{117         knobs = [\textcolor{keyword}{False}] * 4}
+\DoxyCodeLine{118         \textcolor{comment}{\# Update all 4 knobs}}
+\DoxyCodeLine{119         \textcolor{keywordflow}{for} knob\_num \textcolor{keywordflow}{in} range(4):}
+\DoxyCodeLine{120             \textcolor{comment}{\# if the digital\_buffer changes}}
+\DoxyCodeLine{121             \textcolor{keywordflow}{if} self.encoder\_buffer[knob\_num] != self.encoder\_counter[knob\_num]:}
+\DoxyCodeLine{122                 \textcolor{comment}{\# send the new value and update}}
+\DoxyCodeLine{123                 self.encoder\_counter[knob\_num] = self.encoder\_buffer[knob\_num]}
+\DoxyCodeLine{124                 knobs[knob\_num] = self.encoder\_counter[knob\_num]}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126         \textcolor{keywordflow}{return} knobs}
+\DoxyCodeLine{127 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_afffd7bfe59563ee5bb77597d93928558}\label{classkeyboard__driver_1_1_keyboard_afffd7bfe59563ee5bb77597d93928558}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!key\_down@{key\_down}}
+\index{key\_down@{key\_down}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{key\_down()}{key\_down()}}
+{\footnotesize\ttfamily def keyboard\+\_\+driver.\+Keyboard.\+key\+\_\+down (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 79 of file keyboard\+\_\+driver.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{79     \textcolor{keyword}{def }key\_down(self, key\_index):}
+\DoxyCodeLine{80         \textcolor{comment}{\# If shift is off}}
+\DoxyCodeLine{81         \textcolor{keywordflow}{if} key\_index == 24 \textcolor{keywordflow}{and} \textcolor{keywordflow}{not} self.shift:}
+\DoxyCodeLine{82             self.shift = \textcolor{keyword}{True}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \textcolor{comment}{\# Checks the if the key is on and adds key to on keys if not on}}
+\DoxyCodeLine{85         \textcolor{keywordflow}{elif} key\_index \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} self.on\_keys:}
+\DoxyCodeLine{86             \textcolor{comment}{\# add key to on\_notes}}
+\DoxyCodeLine{87             self.on\_keys.add(key\_index)}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89             \textcolor{comment}{\# play note}}
+\DoxyCodeLine{90             self.event\_handler.key\_down(key\_index)}
+\DoxyCodeLine{91 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_ab47be0bd43fc8fb3226afc480100f829}\label{classkeyboard__driver_1_1_keyboard_ab47be0bd43fc8fb3226afc480100f829}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!key\_up@{key\_up}}
+\index{key\_up@{key\_up}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{key\_up()}{key\_up()}}
+{\footnotesize\ttfamily def keyboard\+\_\+driver.\+Keyboard.\+key\+\_\+up (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 93 of file keyboard\+\_\+driver.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{93     \textcolor{keyword}{def }key\_up(self, key\_index):}
+\DoxyCodeLine{94         \textcolor{keywordflow}{if} key\_index == 24 \textcolor{keywordflow}{and} self.shift:}
+\DoxyCodeLine{95             self.shift = \textcolor{keyword}{False}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \textcolor{keywordflow}{elif} key\_index \textcolor{keywordflow}{in} self.on\_keys:}
+\DoxyCodeLine{98             \textcolor{comment}{\# remove key from on\_notes}}
+\DoxyCodeLine{99             self.on\_keys.remove(key\_index)}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101             \textcolor{comment}{\# play note}}
+\DoxyCodeLine{102             self.event\_handler.key\_up(key\_index)}
+\DoxyCodeLine{103 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a2a08ac06a494b275d8ac497ce507b739}\label{classkeyboard__driver_1_1_keyboard_a2a08ac06a494b275d8ac497ce507b739}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!make\_key\_mapping@{make\_key\_mapping}}
+\index{make\_key\_mapping@{make\_key\_mapping}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{make\_key\_mapping()}{make\_key\_mapping()}}
+{\footnotesize\ttfamily def keyboard\+\_\+driver.\+Keyboard.\+make\+\_\+key\+\_\+mapping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 30 of file keyboard\+\_\+driver.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{30     \textcolor{keyword}{def }make\_key\_mapping():}
+\DoxyCodeLine{31         key\_list = [}
+\DoxyCodeLine{32             pg.K\_z,  \textcolor{comment}{\# C1}}
+\DoxyCodeLine{33             pg.K\_s,  \textcolor{comment}{\# C\#1}}
+\DoxyCodeLine{34             pg.K\_x,  \textcolor{comment}{\# D1}}
+\DoxyCodeLine{35             pg.K\_d,  \textcolor{comment}{\# D\#1}}
+\DoxyCodeLine{36             pg.K\_c,  \textcolor{comment}{\# E1}}
+\DoxyCodeLine{37             pg.K\_v,  \textcolor{comment}{\# F1}}
+\DoxyCodeLine{38             pg.K\_g,  \textcolor{comment}{\# F\#1}}
+\DoxyCodeLine{39             pg.K\_b,  \textcolor{comment}{\# G1}}
+\DoxyCodeLine{40             pg.K\_h,  \textcolor{comment}{\# G\#1}}
+\DoxyCodeLine{41             pg.K\_n,  \textcolor{comment}{\# A1}}
+\DoxyCodeLine{42             pg.K\_j,  \textcolor{comment}{\# A\#1}}
+\DoxyCodeLine{43             pg.K\_m,  \textcolor{comment}{\# B1}}
+\DoxyCodeLine{44             pg.K\_q,  \textcolor{comment}{\# C2}}
+\DoxyCodeLine{45             pg.K\_2,  \textcolor{comment}{\# C\#2}}
+\DoxyCodeLine{46             pg.K\_w,  \textcolor{comment}{\# D2}}
+\DoxyCodeLine{47             pg.K\_3,  \textcolor{comment}{\# D\#2}}
+\DoxyCodeLine{48             pg.K\_e,  \textcolor{comment}{\# E2}}
+\DoxyCodeLine{49             pg.K\_r,  \textcolor{comment}{\# F2}}
+\DoxyCodeLine{50             pg.K\_5,  \textcolor{comment}{\# F\#2}}
+\DoxyCodeLine{51             pg.K\_t,  \textcolor{comment}{\# G2}}
+\DoxyCodeLine{52             pg.K\_6,  \textcolor{comment}{\# G\#2}}
+\DoxyCodeLine{53             pg.K\_y,  \textcolor{comment}{\# A2}}
+\DoxyCodeLine{54             pg.K\_7,  \textcolor{comment}{\# A\#2}}
+\DoxyCodeLine{55             pg.K\_u,  \textcolor{comment}{\# B2}}
+\DoxyCodeLine{56             pg.K\_LSHIFT,}
+\DoxyCodeLine{57             pg.K\_LEFT,  \textcolor{comment}{\# left arrow}}
+\DoxyCodeLine{58             pg.K\_RIGHT,  \textcolor{comment}{\# right arrow}}
+\DoxyCodeLine{59             pg.K\_RSHIFT,}
+\DoxyCodeLine{60             pg.K\_BACKSPACE,}
+\DoxyCodeLine{61             pg.K\_RETURN,}
+\DoxyCodeLine{62             pg.K\_UP,}
+\DoxyCodeLine{63             pg.K\_DOWN}
+\DoxyCodeLine{64         ]}
+\DoxyCodeLine{65         mapping = \{\}}
+\DoxyCodeLine{66         \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(len(key\_list)):}
+\DoxyCodeLine{67             mapping[key\_list[i]] = (i)}
+\DoxyCodeLine{68         \textcolor{keywordflow}{return} mapping}
+\DoxyCodeLine{69 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_aca3d777697f65fccf7e08e53543ff849}\label{classkeyboard__driver_1_1_keyboard_aca3d777697f65fccf7e08e53543ff849}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!start\_encoder\_listener@{start\_encoder\_listener}}
+\index{start\_encoder\_listener@{start\_encoder\_listener}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{start\_encoder\_listener()}{start\_encoder\_listener()}}
+{\footnotesize\ttfamily def keyboard\+\_\+driver.\+Keyboard.\+start\+\_\+encoder\+\_\+listener (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 72 of file keyboard\+\_\+driver.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{72     \textcolor{keyword}{def }start\_encoder\_listener(self):}
+\DoxyCodeLine{73         \textcolor{keywordflow}{if} platform.system() == \textcolor{stringliteral}{'Darwin'}:}
+\DoxyCodeLine{74             self.encoder\_driver.start\_mac\_tester()}
+\DoxyCodeLine{75         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{76             self.encoder\_driver.start\_driver()}
+\DoxyCodeLine{77 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a1fb0379af85c49cff6061227dd4db4ca}\label{classkeyboard__driver_1_1_keyboard_a1fb0379af85c49cff6061227dd4db4ca}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!use\_knob@{use\_knob}}
+\index{use\_knob@{use\_knob}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{use\_knob()}{use\_knob()}}
+{\footnotesize\ttfamily def keyboard\+\_\+driver.\+Keyboard.\+use\+\_\+knob (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{knob\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Definition at line 129 of file keyboard\+\_\+driver.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{129     \textcolor{keyword}{def }use\_knob(self, knob\_num):}
+\DoxyCodeLine{130         self.event\_handler.use\_knob(knob\_num=knob\_num, index=self.encoder\_counter[knob\_num])}
+\DoxyCodeLine{131 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_ad9a212aab11b08548bcd7c7621d59b87}\label{classkeyboard__driver_1_1_keyboard_ad9a212aab11b08548bcd7c7621d59b87}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!encoder\_buffer@{encoder\_buffer}}
+\index{encoder\_buffer@{encoder\_buffer}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{encoder\_buffer}{encoder\_buffer}}
+{\footnotesize\ttfamily keyboard\+\_\+driver.\+Keyboard.\+encoder\+\_\+buffer}
+
+
+
+Definition at line 21 of file keyboard\+\_\+driver.\+py.
+
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a07027f13c419778d90b10dbca048bfd6}\label{classkeyboard__driver_1_1_keyboard_a07027f13c419778d90b10dbca048bfd6}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!encoder\_counter@{encoder\_counter}}
+\index{encoder\_counter@{encoder\_counter}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{encoder\_counter}{encoder\_counter}}
+{\footnotesize\ttfamily keyboard\+\_\+driver.\+Keyboard.\+encoder\+\_\+counter}
+
+
+
+Definition at line 20 of file keyboard\+\_\+driver.\+py.
+
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_aa4a88b968cd573b129da46d067903caa}\label{classkeyboard__driver_1_1_keyboard_aa4a88b968cd573b129da46d067903caa}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!encoder\_driver@{encoder\_driver}}
+\index{encoder\_driver@{encoder\_driver}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{encoder\_driver}{encoder\_driver}}
+{\footnotesize\ttfamily keyboard\+\_\+driver.\+Keyboard.\+encoder\+\_\+driver}
+
+
+
+Definition at line 22 of file keyboard\+\_\+driver.\+py.
+
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a1c60c0cc060eb63c5fb7a26ab05cc096}\label{classkeyboard__driver_1_1_keyboard_a1c60c0cc060eb63c5fb7a26ab05cc096}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!event\_handler@{event\_handler}}
+\index{event\_handler@{event\_handler}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{event\_handler}{event\_handler}}
+{\footnotesize\ttfamily keyboard\+\_\+driver.\+Keyboard.\+event\+\_\+handler}
+
+
+
+Definition at line 11 of file keyboard\+\_\+driver.\+py.
+
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a746c46467622db2ef782198d22b3a14e}\label{classkeyboard__driver_1_1_keyboard_a746c46467622db2ef782198d22b3a14e}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!key\_dict@{key\_dict}}
+\index{key\_dict@{key\_dict}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{key\_dict}{key\_dict}}
+{\footnotesize\ttfamily keyboard\+\_\+driver.\+Keyboard.\+key\+\_\+dict}
+
+
+
+Definition at line 14 of file keyboard\+\_\+driver.\+py.
+
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_a0bc951b07cff14bf76f7465e39e32c4c}\label{classkeyboard__driver_1_1_keyboard_a0bc951b07cff14bf76f7465e39e32c4c}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!on\_keys@{on\_keys}}
+\index{on\_keys@{on\_keys}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{on\_keys}{on\_keys}}
+{\footnotesize\ttfamily keyboard\+\_\+driver.\+Keyboard.\+on\+\_\+keys}
+
+
+
+Definition at line 16 of file keyboard\+\_\+driver.\+py.
+
+\mbox{\Hypertarget{classkeyboard__driver_1_1_keyboard_acc46c709c5056a1c72fd5ab8688abbc5}\label{classkeyboard__driver_1_1_keyboard_acc46c709c5056a1c72fd5ab8688abbc5}} 
+\index{keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}!shift@{shift}}
+\index{shift@{shift}!keyboard\_driver.Keyboard@{keyboard\_driver.Keyboard}}
+\doxysubsubsection{\texorpdfstring{shift}{shift}}
+{\footnotesize\ttfamily keyboard\+\_\+driver.\+Keyboard.\+shift}
+
+
+
+Definition at line 26 of file keyboard\+\_\+driver.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{keyboard__driver_8py}{keyboard\+\_\+driver.\+py}}\end{DoxyCompactItemize}

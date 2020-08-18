@@ -1,0 +1,52 @@
+\hypertarget{namespacestart}{}\doxysection{start Namespace Reference}
+\label{namespacestart}\index{start@{start}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacestart_a3e961ada4c3346d11f92b3e4dbb68b11}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacestart_a3e961ada4c3346d11f92b3e4dbb68b11}\label{namespacestart_a3e961ada4c3346d11f92b3e4dbb68b11}} 
+\index{start@{start}!main@{main}}
+\index{main@{main}!start@{start}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def start.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 8 of file start.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{8 \textcolor{keyword}{def }\mbox{\hyperlink{namespacestart_a3e961ada4c3346d11f92b3e4dbb68b11}{main}}():}
+\DoxyCodeLine{9     \textcolor{comment}{\# Start the Fluidsynth server}}
+\DoxyCodeLine{10     port = \mbox{\hyperlink{namespacestart__server}{start\_server}}(buffer\_count=3, buffer\_size=1024, sr=80000)}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     \textcolor{comment}{\# start pygame stuff}}
+\DoxyCodeLine{13     pg.init()}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{comment}{\# Start Clock}}
+\DoxyCodeLine{16     mainClock = pg.time.Clock()}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18     \textcolor{comment}{\# Start playback controller and pass in the keyboard and the port}}
+\DoxyCodeLine{19     event\_handler = EventHandler(port=port)}
+\DoxyCodeLine{20     event\_handler.add\_channel(mode=\textcolor{stringliteral}{'freeplay'})}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{comment}{\# Start GUI and pass event\_handler to look at events}}
+\DoxyCodeLine{23     gui = Gui(event\_handler)}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keywordflow}{while} \textcolor{keyword}{True}:}
+\DoxyCodeLine{26         \textcolor{comment}{\# Update GUI}}
+\DoxyCodeLine{27         gui.draw\_interface()}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         \textcolor{comment}{\# Handle events}}
+\DoxyCodeLine{30         event\_handler.handle\_events()}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \textcolor{comment}{\# set framerate}}
+\DoxyCodeLine{33         mainClock.tick(240)}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 }
+
+\end{DoxyCode}

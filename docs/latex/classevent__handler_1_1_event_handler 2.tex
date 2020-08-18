@@ -1,0 +1,337 @@
+\hypertarget{classevent__handler_1_1_event_handler}{}\doxysection{event\+\_\+handler.\+Event\+Handler Class Reference}
+\label{classevent__handler_1_1_event_handler}\index{event\_handler.EventHandler@{event\_handler.EventHandler}}
+
+
+Inheritance diagram for event\+\_\+handler.\+Event\+Handler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{classevent__handler_1_1_event_handler__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for event\+\_\+handler.\+Event\+Handler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{classevent__handler_1_1_event_handler__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classevent__handler_1_1_event_handler_a78db699de560082f80eaa55ce7ed32eb}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classevent__handler_1_1_event_handler_af8c59f99de472b1c5e35574b85a1ee9b}{port}})
+\item 
+def \mbox{\hyperlink{classevent__handler_1_1_event_handler_a99ac647a1e259f32a045f766e02fd05f}{handle\+\_\+events}} (self)
+\item 
+def \mbox{\hyperlink{classevent__handler_1_1_event_handler_ac7eaf0eb5d1316b91789efdd2061758d}{add\+\_\+channel}} (self, mode, instr=0, reverb=0.\+3, gain=270)
+\item 
+def \mbox{\hyperlink{classevent__handler_1_1_event_handler_adab89d121738bc1d505bfc56b0c614df}{switch\+\_\+mode}} (self, mode)
+\item 
+def \mbox{\hyperlink{classevent__handler_1_1_event_handler_a0ddac47c8570adb20a623264cb09df28}{switch\+\_\+channel}} (self, channel\+\_\+ind)
+\item 
+def \mbox{\hyperlink{classevent__handler_1_1_event_handler_a55bd7286f4a30aa093fadb538d45ff63}{key\+\_\+down}} (self, index)
+\item 
+def \mbox{\hyperlink{classevent__handler_1_1_event_handler_af1c2933889c53dd6cc3350246ed83f1b}{key\+\_\+up}} (self, index)
+\item 
+def \mbox{\hyperlink{classevent__handler_1_1_event_handler_ae6205c43fc2a172d64c0238f3ef5b559}{use\+\_\+knob}} (self, index, knob\+\_\+num)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classevent__handler_1_1_event_handler_a3ef66739f87be3f954c57ab3ba035789}{channels}}
+\item 
+\mbox{\hyperlink{classevent__handler_1_1_event_handler_a414a8fb1feb559f6a834dcf2edaf59ef}{current\+\_\+mode}}
+\item 
+\mbox{\hyperlink{classevent__handler_1_1_event_handler_a6c9bad21c58cfe09bb9916720b1e72d6}{current\+\_\+channel\+\_\+index}}
+\item 
+\mbox{\hyperlink{classevent__handler_1_1_event_handler_af8c59f99de472b1c5e35574b85a1ee9b}{port}}
+\item 
+\mbox{\hyperlink{classevent__handler_1_1_event_handler_a8e93c0b68c07989348611b98ad0bab7e}{keyboard}}
+\item 
+\mbox{\hyperlink{classevent__handler_1_1_event_handler_aee24722466bc10341c6f047aaba1737a}{player}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 10 of file event\+\_\+handler.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_a78db699de560082f80eaa55ce7ed32eb}\label{classevent__handler_1_1_event_handler_a78db699de560082f80eaa55ce7ed32eb}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def event\+\_\+handler.\+Event\+Handler.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{port }\end{DoxyParamCaption})}
+
+
+
+Definition at line 11 of file event\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{11     \textcolor{keyword}{def }\_\_init\_\_(self, port):}
+\DoxyCodeLine{12         \textcolor{comment}{\# initialize channels and the keyboard}}
+\DoxyCodeLine{13         self.channels = []}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15         \textcolor{comment}{\# Set the current mode to none}}
+\DoxyCodeLine{16         self.current\_mode = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{17         self.current\_channel\_index = [0]}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19         \textcolor{comment}{\# port for connecting to fluidsynth}}
+\DoxyCodeLine{20         self.port = port}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{comment}{\# Start keyboard driver}}
+\DoxyCodeLine{23         self.keyboard = Keyboard(self)}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         \textcolor{comment}{\# set the player/recorder and pass channels}}
+\DoxyCodeLine{26         self.player = Player(self)}
+\DoxyCodeLine{27 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_ac7eaf0eb5d1316b91789efdd2061758d}\label{classevent__handler_1_1_event_handler_ac7eaf0eb5d1316b91789efdd2061758d}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!add\_channel@{add\_channel}}
+\index{add\_channel@{add\_channel}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{add\_channel()}{add\_channel()}}
+{\footnotesize\ttfamily def event\+\_\+handler.\+Event\+Handler.\+add\+\_\+channel (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{mode,  }\item[{}]{instr = {\ttfamily 0},  }\item[{}]{reverb = {\ttfamily 0.3},  }\item[{}]{gain = {\ttfamily 270} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 59 of file event\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{59     \textcolor{keyword}{def }add\_channel(self, mode, instr=0, reverb=0.3, gain=270):}
+\DoxyCodeLine{60         \textcolor{comment}{\# Find the channel number}}
+\DoxyCodeLine{61         channel\_length = len(self.channels)}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         self.current\_channel\_index[0] = channel\_length}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \textcolor{comment}{\# Make the synth and add it to channels}}
+\DoxyCodeLine{66         synth = Synth(mode=mode, event\_handler=self, instr=instr, reverb=reverb,}
+\DoxyCodeLine{67                       gain=gain)}
+\DoxyCodeLine{68         self.channels.append(synth)}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70         \textcolor{comment}{\# set the current playing mode and send the synth to it}}
+\DoxyCodeLine{71         self.switch\_mode(\textcolor{stringliteral}{'freeplay'})}
+\DoxyCodeLine{72 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_a99ac647a1e259f32a045f766e02fd05f}\label{classevent__handler_1_1_event_handler_a99ac647a1e259f32a045f766e02fd05f}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!handle\_events@{handle\_events}}
+\index{handle\_events@{handle\_events}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{handle\_events()}{handle\_events()}}
+{\footnotesize\ttfamily def event\+\_\+handler.\+Event\+Handler.\+handle\+\_\+events (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 33 of file event\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{33     \textcolor{keyword}{def }handle\_events(self):}
+\DoxyCodeLine{34         start = time.time()}
+\DoxyCodeLine{35         events = pg.event.get()}
+\DoxyCodeLine{36         \textcolor{keywordflow}{for} e \textcolor{keywordflow}{in} events:}
+\DoxyCodeLine{37             \textcolor{keywordflow}{if} e.type == pg.KEYDOWN:}
+\DoxyCodeLine{38                 \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{39                     note = self.keyboard.get\_key\_index(e.key)}
+\DoxyCodeLine{40                 \textcolor{keywordflow}{except} KeyError:}
+\DoxyCodeLine{41                     \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{42                 \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{43                     self.keyboard.key\_down(note)}
+\DoxyCodeLine{44                     end = time.time()}
+\DoxyCodeLine{45                     print(end -\/ start)}
+\DoxyCodeLine{46             \textcolor{keywordflow}{elif} e.type == pg.KEYUP:}
+\DoxyCodeLine{47                 \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{48                     note = self.keyboard.get\_key\_index(e.key)}
+\DoxyCodeLine{49                 \textcolor{keywordflow}{except} KeyError:}
+\DoxyCodeLine{50                     \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{51                 \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{52                     self.keyboard.key\_up(note)}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         knobs = self.keyboard.get\_knobs()}
+\DoxyCodeLine{55         \textcolor{keywordflow}{if} knobs[0]:}
+\DoxyCodeLine{56             self.keyboard.use\_knob(0)}
+\DoxyCodeLine{57 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_a55bd7286f4a30aa093fadb538d45ff63}\label{classevent__handler_1_1_event_handler_a55bd7286f4a30aa093fadb538d45ff63}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!key\_down@{key\_down}}
+\index{key\_down@{key\_down}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{key\_down()}{key\_down()}}
+{\footnotesize\ttfamily def event\+\_\+handler.\+Event\+Handler.\+key\+\_\+down (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 99 of file event\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{99     \textcolor{keyword}{def }key\_down(self, index):}
+\DoxyCodeLine{100         self.current\_mode.key\_down(index)}
+\DoxyCodeLine{101 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_af1c2933889c53dd6cc3350246ed83f1b}\label{classevent__handler_1_1_event_handler_af1c2933889c53dd6cc3350246ed83f1b}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!key\_up@{key\_up}}
+\index{key\_up@{key\_up}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{key\_up()}{key\_up()}}
+{\footnotesize\ttfamily def event\+\_\+handler.\+Event\+Handler.\+key\+\_\+up (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 102 of file event\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{102     \textcolor{keyword}{def }key\_up(self, index):}
+\DoxyCodeLine{103         self.current\_mode.key\_up(index)}
+\DoxyCodeLine{104 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_a0ddac47c8570adb20a623264cb09df28}\label{classevent__handler_1_1_event_handler_a0ddac47c8570adb20a623264cb09df28}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!switch\_channel@{switch\_channel}}
+\index{switch\_channel@{switch\_channel}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{switch\_channel()}{switch\_channel()}}
+{\footnotesize\ttfamily def event\+\_\+handler.\+Event\+Handler.\+switch\+\_\+channel (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{channel\+\_\+ind }\end{DoxyParamCaption})}
+
+
+
+Definition at line 82 of file event\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{82     \textcolor{keyword}{def }switch\_channel(self, channel\_ind):}
+\DoxyCodeLine{83         \textcolor{keywordflow}{if} channel\_ind < 0:}
+\DoxyCodeLine{84             \textcolor{keywordflow}{return}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \textcolor{comment}{\# change the channel}}
+\DoxyCodeLine{87         self.current\_channel\_index[0] = channel\_ind}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89         \textcolor{comment}{\# if the channel doesn't exist, make new channel}}
+\DoxyCodeLine{90         \textcolor{keywordflow}{if} channel\_ind >= len(self.channels):}
+\DoxyCodeLine{91             self.add\_channel(\textcolor{stringliteral}{'freeplay'})}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93         \textcolor{comment}{\# change the mode}}
+\DoxyCodeLine{94         self.switch\_mode(self.channels[channel\_ind].mode)}
+\DoxyCodeLine{95 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_adab89d121738bc1d505bfc56b0c614df}\label{classevent__handler_1_1_event_handler_adab89d121738bc1d505bfc56b0c614df}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!switch\_mode@{switch\_mode}}
+\index{switch\_mode@{switch\_mode}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{switch\_mode()}{switch\_mode()}}
+{\footnotesize\ttfamily def event\+\_\+handler.\+Event\+Handler.\+switch\+\_\+mode (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{mode }\end{DoxyParamCaption})}
+
+
+
+Definition at line 74 of file event\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{74     \textcolor{keyword}{def }switch\_mode(self, mode):}
+\DoxyCodeLine{75         synth = self.channels[self.current\_channel\_index[0]]}
+\DoxyCodeLine{76         \textcolor{keywordflow}{if} mode == \textcolor{stringliteral}{'freeplay'}:}
+\DoxyCodeLine{77             self.current\_mode = Freeplay(synth, keyboard=self.keyboard, playback\_handler=self)}
+\DoxyCodeLine{78         \textcolor{keywordflow}{elif} mode == \textcolor{stringliteral}{'test'}:}
+\DoxyCodeLine{79             self.current\_mode = Test(synth, keyboard=self.keyboard, playback\_handler=self)}
+\DoxyCodeLine{80 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_ae6205c43fc2a172d64c0238f3ef5b559}\label{classevent__handler_1_1_event_handler_ae6205c43fc2a172d64c0238f3ef5b559}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!use\_knob@{use\_knob}}
+\index{use\_knob@{use\_knob}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{use\_knob()}{use\_knob()}}
+{\footnotesize\ttfamily def event\+\_\+handler.\+Event\+Handler.\+use\+\_\+knob (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index,  }\item[{}]{knob\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Definition at line 105 of file event\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{105     \textcolor{keyword}{def }use\_knob(self, index, knob\_num):}
+\DoxyCodeLine{106         \textcolor{keywordflow}{if} knob\_num == 0:}
+\DoxyCodeLine{107             self.current\_mode.use\_knob(index, knob\_num)}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_a3ef66739f87be3f954c57ab3ba035789}\label{classevent__handler_1_1_event_handler_a3ef66739f87be3f954c57ab3ba035789}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!channels@{channels}}
+\index{channels@{channels}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{channels}{channels}}
+{\footnotesize\ttfamily event\+\_\+handler.\+Event\+Handler.\+channels}
+
+
+
+Definition at line 13 of file event\+\_\+handler.\+py.
+
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_a6c9bad21c58cfe09bb9916720b1e72d6}\label{classevent__handler_1_1_event_handler_a6c9bad21c58cfe09bb9916720b1e72d6}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!current\_channel\_index@{current\_channel\_index}}
+\index{current\_channel\_index@{current\_channel\_index}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{current\_channel\_index}{current\_channel\_index}}
+{\footnotesize\ttfamily event\+\_\+handler.\+Event\+Handler.\+current\+\_\+channel\+\_\+index}
+
+
+
+Definition at line 17 of file event\+\_\+handler.\+py.
+
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_a414a8fb1feb559f6a834dcf2edaf59ef}\label{classevent__handler_1_1_event_handler_a414a8fb1feb559f6a834dcf2edaf59ef}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!current\_mode@{current\_mode}}
+\index{current\_mode@{current\_mode}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{current\_mode}{current\_mode}}
+{\footnotesize\ttfamily event\+\_\+handler.\+Event\+Handler.\+current\+\_\+mode}
+
+
+
+Definition at line 16 of file event\+\_\+handler.\+py.
+
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_a8e93c0b68c07989348611b98ad0bab7e}\label{classevent__handler_1_1_event_handler_a8e93c0b68c07989348611b98ad0bab7e}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!keyboard@{keyboard}}
+\index{keyboard@{keyboard}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{keyboard}{keyboard}}
+{\footnotesize\ttfamily event\+\_\+handler.\+Event\+Handler.\+keyboard}
+
+
+
+Definition at line 23 of file event\+\_\+handler.\+py.
+
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_aee24722466bc10341c6f047aaba1737a}\label{classevent__handler_1_1_event_handler_aee24722466bc10341c6f047aaba1737a}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!player@{player}}
+\index{player@{player}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily event\+\_\+handler.\+Event\+Handler.\+player}
+
+
+
+Definition at line 26 of file event\+\_\+handler.\+py.
+
+\mbox{\Hypertarget{classevent__handler_1_1_event_handler_af8c59f99de472b1c5e35574b85a1ee9b}\label{classevent__handler_1_1_event_handler_af8c59f99de472b1c5e35574b85a1ee9b}} 
+\index{event\_handler.EventHandler@{event\_handler.EventHandler}!port@{port}}
+\index{port@{port}!event\_handler.EventHandler@{event\_handler.EventHandler}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily event\+\_\+handler.\+Event\+Handler.\+port}
+
+
+
+Definition at line 20 of file event\+\_\+handler.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{event__handler_8py}{event\+\_\+handler.\+py}}\end{DoxyCompactItemize}

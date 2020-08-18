@@ -1,0 +1,31 @@
+\hypertarget{namespacethreading__decorator}{}\doxysection{threading\+\_\+decorator Namespace Reference}
+\label{namespacethreading__decorator}\index{threading\_decorator@{threading\_decorator}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacethreading__decorator_a77d85501983c225390efff07f720b1c5}{run\+\_\+in\+\_\+thread}} (fn)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacethreading__decorator_a77d85501983c225390efff07f720b1c5}\label{namespacethreading__decorator_a77d85501983c225390efff07f720b1c5}} 
+\index{threading\_decorator@{threading\_decorator}!run\_in\_thread@{run\_in\_thread}}
+\index{run\_in\_thread@{run\_in\_thread}!threading\_decorator@{threading\_decorator}}
+\doxysubsubsection{\texorpdfstring{run\_in\_thread()}{run\_in\_thread()}}
+{\footnotesize\ttfamily def threading\+\_\+decorator.\+run\+\_\+in\+\_\+thread (\begin{DoxyParamCaption}\item[{}]{fn }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file threading\+\_\+decorator.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{3 \textcolor{keyword}{def }\mbox{\hyperlink{namespacethreading__decorator_a77d85501983c225390efff07f720b1c5}{run\_in\_thread}}(fn):}
+\DoxyCodeLine{4     \textcolor{keyword}{def }run(*k, **kw):}
+\DoxyCodeLine{5         t = threading.Thread(target=fn, args=k, kwargs=kw)}
+\DoxyCodeLine{6         t.start()}
+\DoxyCodeLine{7         \textcolor{keywordflow}{return} t  \textcolor{comment}{\# <-\/-\/ this is new!}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9     \textcolor{keywordflow}{return} run}
+
+\end{DoxyCode}

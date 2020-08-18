@@ -1,0 +1,394 @@
+\hypertarget{classsynth_1_1_synth}{}\doxysection{synth.\+Synth Class Reference}
+\label{classsynth_1_1_synth}\index{synth.Synth@{synth.Synth}}
+
+
+Inheritance diagram for synth.\+Synth\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classsynth_1_1_synth__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for synth.\+Synth\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classsynth_1_1_synth__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_a74f5f24206b03878c5637f368e93d1f5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, event\+\_\+handler, \mbox{\hyperlink{classsynth_1_1_synth_ac12a29d6eeec11afb10fa8de345b417e}{mode}}=\textquotesingle{}freeplay\textquotesingle{}, \mbox{\hyperlink{classsynth_1_1_synth_a2d560e8d7ce15085a441511821c9ba0d}{instr}}=0, \mbox{\hyperlink{classsynth_1_1_synth_ae77fb6f1cb6931834470faebd5bd5203}{reverb}}=0.\+3, gain=270)
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_a1ee22b3eebc9c721fdbfcde5de920927}{midi\+\_\+note\+\_\+on}} (self, note, background\+\_\+mode=False)
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_a37f2ceba341ab160d413c12dc9122a6c}{midi\+\_\+note\+\_\+off}} (self, note, background\+\_\+mode=False)
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_ae345020055be9a33fda25792f06ebcf3}{midi\+\_\+change\+\_\+synth}} (self, index, background\+\_\+mode=False)
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_ab244fbcb817fa872d949f0ac848efce2}{key\+\_\+down}} (self, key\+\_\+index)
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_ac6c726f0be50b9c62c831d1557f3c93b}{key\+\_\+up}} (self, key\+\_\+index)
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_a13299e16c958c194041153ee52a0c135}{change\+\_\+synth}} (self, index)
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_a1806b9151ec0ee1df081b5ee5c79c275}{octave\+\_\+shift}} (self, shift)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_a86ca2a8dc3aad8cfc229374327f95f84}{get\+\_\+instruments}} ()
+\item 
+def \mbox{\hyperlink{classsynth_1_1_synth_a14a4c742f7b69a32a885394cda2d0d79}{midi\+\_\+stop}} (\mbox{\hyperlink{classsynth_1_1_synth_a83f4690b79319afdd4015af516b41d07}{port}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsynth_1_1_synth_a01987658117d00af460f0df504135f45}{channel\+\_\+ind}}
+\item 
+\mbox{\hyperlink{classsynth_1_1_synth_a83f4690b79319afdd4015af516b41d07}{port}}
+\item 
+\mbox{\hyperlink{classsynth_1_1_synth_adb8529b394178c695b7d84b8c77f6c56}{recorder}}
+\item 
+\mbox{\hyperlink{classsynth_1_1_synth_ac12a29d6eeec11afb10fa8de345b417e}{mode}}
+\item 
+\mbox{\hyperlink{classsynth_1_1_synth_a2d560e8d7ce15085a441511821c9ba0d}{instr}}
+\item 
+\mbox{\hyperlink{classsynth_1_1_synth_a6538d88a96ef6a811c9edf99fcd49495}{instr\+\_\+list}}
+\item 
+\mbox{\hyperlink{classsynth_1_1_synth_ae77fb6f1cb6931834470faebd5bd5203}{reverb}}
+\item 
+\mbox{\hyperlink{classsynth_1_1_synth_a0f696073b221a37e969287a9410c8d41}{octave}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 5 of file synth.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsynth_1_1_synth_a74f5f24206b03878c5637f368e93d1f5}\label{classsynth_1_1_synth_a74f5f24206b03878c5637f368e93d1f5}} 
+\index{synth.Synth@{synth.Synth}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event\+\_\+handler,  }\item[{}]{mode = {\ttfamily \textquotesingle{}freeplay\textquotesingle{}},  }\item[{}]{instr = {\ttfamily 0},  }\item[{}]{reverb = {\ttfamily 0.3},  }\item[{}]{gain = {\ttfamily 270} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{12     \textcolor{keyword}{def }\_\_init\_\_(self, event\_handler, mode='freeplay', instr=0, reverb=0.3, gain=270):}
+\DoxyCodeLine{13         \textcolor{comment}{\# initialize variable from event handler}}
+\DoxyCodeLine{14         self.channel\_ind = event\_handler.current\_channel\_index[0]}
+\DoxyCodeLine{15         self.port = event\_handler.port}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17         \textcolor{comment}{\# Recorder to keep track of notes}}
+\DoxyCodeLine{18         self.recorder = event\_handler.player}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{comment}{\# mode the synth is in}}
+\DoxyCodeLine{21         self.mode = mode}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23         \textcolor{comment}{\# instrument index}}
+\DoxyCodeLine{24         self.instr = instr}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         self.instr\_list = self.get\_instruments()}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \textcolor{comment}{\# Effects}}
+\DoxyCodeLine{29         self.reverb = reverb}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31         \textcolor{comment}{\# Octave shift}}
+\DoxyCodeLine{32         self.octave = 0}
+\DoxyCodeLine{33 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsynth_1_1_synth_a13299e16c958c194041153ee52a0c135}\label{classsynth_1_1_synth_a13299e16c958c194041153ee52a0c135}} 
+\index{synth.Synth@{synth.Synth}!change\_synth@{change\_synth}}
+\index{change\_synth@{change\_synth}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{change\_synth()}{change\_synth()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+change\+\_\+synth (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 85 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{85     \textcolor{keyword}{def }change\_synth(self, index):}
+\DoxyCodeLine{86         self.midi\_change\_synth(index)}
+\DoxyCodeLine{87 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classsynth_1_1_synth_a86ca2a8dc3aad8cfc229374327f95f84}\label{classsynth_1_1_synth_a86ca2a8dc3aad8cfc229374327f95f84}} 
+\index{synth.Synth@{synth.Synth}!get\_instruments@{get\_instruments}}
+\index{get\_instruments@{get\_instruments}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{get\_instruments()}{get\_instruments()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+get\+\_\+instruments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 7 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{7     \textcolor{keyword}{def }get\_instruments():}
+\DoxyCodeLine{8         \textcolor{keyword}{with} open(\textcolor{stringliteral}{'/Users/ridvansong/Documents/OP-\/1 Project/app/Assets/Default.sf2'}, \textcolor{stringliteral}{'rb'}) \textcolor{keyword}{as} sf2\_file:}
+\DoxyCodeLine{9             sf2 = Sf2File(sf2\_file)}
+\DoxyCodeLine{10         \textcolor{keywordflow}{return} sf2.instruments}
+\DoxyCodeLine{11 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classsynth_1_1_synth_ab244fbcb817fa872d949f0ac848efce2}\label{classsynth_1_1_synth_ab244fbcb817fa872d949f0ac848efce2}} 
+\index{synth.Synth@{synth.Synth}!key\_down@{key\_down}}
+\index{key\_down@{key\_down}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{key\_down()}{key\_down()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+key\+\_\+down (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 77 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{77     \textcolor{keyword}{def }key\_down(self, key\_index):}
+\DoxyCodeLine{78         note = key\_index + self.octave + 60}
+\DoxyCodeLine{79         self.midi\_note\_on(note)}
+\DoxyCodeLine{80 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classsynth_1_1_synth_ac6c726f0be50b9c62c831d1557f3c93b}\label{classsynth_1_1_synth_ac6c726f0be50b9c62c831d1557f3c93b}} 
+\index{synth.Synth@{synth.Synth}!key\_up@{key\_up}}
+\index{key\_up@{key\_up}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{key\_up()}{key\_up()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+key\+\_\+up (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 81 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{81     \textcolor{keyword}{def }key\_up(self, key\_index):}
+\DoxyCodeLine{82         note = key\_index + self.octave + 60}
+\DoxyCodeLine{83         self.midi\_note\_off(note)}
+\DoxyCodeLine{84 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classsynth_1_1_synth_ae345020055be9a33fda25792f06ebcf3}\label{classsynth_1_1_synth_ae345020055be9a33fda25792f06ebcf3}} 
+\index{synth.Synth@{synth.Synth}!midi\_change\_synth@{midi\_change\_synth}}
+\index{midi\_change\_synth@{midi\_change\_synth}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{midi\_change\_synth()}{midi\_change\_synth()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+midi\+\_\+change\+\_\+synth (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index,  }\item[{}]{background\+\_\+mode = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 51 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{51     \textcolor{keyword}{def }midi\_change\_synth(self, index, background\_mode=False):}
+\DoxyCodeLine{52         \textcolor{comment}{\# TODO: Check for drums channel and figure out how to access other sounds}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         \textcolor{keywordflow}{if} index < 0 \textcolor{keywordflow}{or} index >127:}
+\DoxyCodeLine{55             \textcolor{keywordflow}{return}}
+\DoxyCodeLine{56         \textcolor{comment}{\# send message}}
+\DoxyCodeLine{57         self.port.send(mido.Message(\textcolor{stringliteral}{'program\_change'}, program=index, channel=self.channel\_ind))}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         \textcolor{comment}{\# Change the self parameter}}
+\DoxyCodeLine{60         self.instr = index}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} background\_mode:}
+\DoxyCodeLine{63             \textcolor{comment}{\# Send time stamp and note to recorder}}
+\DoxyCodeLine{64             self.recorder.record\_event(time=time.time(), channel=self.channel\_ind, event=[\textcolor{stringliteral}{'program\_change'}, index])}
+\DoxyCodeLine{65 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classsynth_1_1_synth_a37f2ceba341ab160d413c12dc9122a6c}\label{classsynth_1_1_synth_a37f2ceba341ab160d413c12dc9122a6c}} 
+\index{synth.Synth@{synth.Synth}!midi\_note\_off@{midi\_note\_off}}
+\index{midi\_note\_off@{midi\_note\_off}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{midi\_note\_off()}{midi\_note\_off()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+midi\+\_\+note\+\_\+off (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{note,  }\item[{}]{background\+\_\+mode = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 43 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{43     \textcolor{keyword}{def }midi\_note\_off(self, note, background\_mode=False):}
+\DoxyCodeLine{44         self.port.send(mido.Message(\textcolor{stringliteral}{'note\_off'}, note=note, channel=self.channel\_ind))}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} background\_mode:}
+\DoxyCodeLine{47             \textcolor{comment}{\# Send time stamp and note to recorder}}
+\DoxyCodeLine{48             self.recorder.record\_event(time=time.time(), channel=self.channel\_ind, event=[\textcolor{stringliteral}{'note\_off'}, note])}
+\DoxyCodeLine{49 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classsynth_1_1_synth_a1ee22b3eebc9c721fdbfcde5de920927}\label{classsynth_1_1_synth_a1ee22b3eebc9c721fdbfcde5de920927}} 
+\index{synth.Synth@{synth.Synth}!midi\_note\_on@{midi\_note\_on}}
+\index{midi\_note\_on@{midi\_note\_on}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{midi\_note\_on()}{midi\_note\_on()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+midi\+\_\+note\+\_\+on (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{note,  }\item[{}]{background\+\_\+mode = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 35 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{35     \textcolor{keyword}{def }midi\_note\_on(self, note, background\_mode=False):}
+\DoxyCodeLine{36         self.port.send(mido.Message(\textcolor{stringliteral}{'note\_on'}, note=note, channel=self.channel\_ind))}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} background\_mode:}
+\DoxyCodeLine{39             \textcolor{comment}{\# Send time stamp and note to recorder}}
+\DoxyCodeLine{40             self.recorder.record\_event(time=time.time(), channel=self.channel\_ind, event=[\textcolor{stringliteral}{'note\_on'}, note])}
+\DoxyCodeLine{41 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classsynth_1_1_synth_a14a4c742f7b69a32a885394cda2d0d79}\label{classsynth_1_1_synth_a14a4c742f7b69a32a885394cda2d0d79}} 
+\index{synth.Synth@{synth.Synth}!midi\_stop@{midi\_stop}}
+\index{midi\_stop@{midi\_stop}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{midi\_stop()}{midi\_stop()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+midi\+\_\+stop (\begin{DoxyParamCaption}\item[{}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 67 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{67     \textcolor{keyword}{def }midi\_stop(port):}
+\DoxyCodeLine{68         start = time.time()}
+\DoxyCodeLine{69         \textcolor{keywordflow}{for} note \textcolor{keywordflow}{in} range(128):}
+\DoxyCodeLine{70             \textcolor{keywordflow}{for} channel \textcolor{keywordflow}{in} range(16):}
+\DoxyCodeLine{71                 port.send(mido.Message(\textcolor{stringliteral}{'note\_off'}, note=note, channel=channel))}
+\DoxyCodeLine{72         end = time.time()}
+\DoxyCodeLine{73         print(end-\/start)}
+\DoxyCodeLine{74 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classsynth_1_1_synth_a1806b9151ec0ee1df081b5ee5c79c275}\label{classsynth_1_1_synth_a1806b9151ec0ee1df081b5ee5c79c275}} 
+\index{synth.Synth@{synth.Synth}!octave\_shift@{octave\_shift}}
+\index{octave\_shift@{octave\_shift}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{octave\_shift()}{octave\_shift()}}
+{\footnotesize\ttfamily def synth.\+Synth.\+octave\+\_\+shift (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{shift }\end{DoxyParamCaption})}
+
+
+
+Definition at line 88 of file synth.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{88     \textcolor{keyword}{def }octave\_shift(self, shift):}
+\DoxyCodeLine{89         self.octave += shift * 12}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91         \textcolor{comment}{\# Return false if failed}}
+\DoxyCodeLine{92         \textcolor{keywordflow}{if} self.octave < -\/60:}
+\DoxyCodeLine{93             self.octave = -\/60}
+\DoxyCodeLine{94             \textcolor{keywordflow}{return} \textcolor{keyword}{False}}
+\DoxyCodeLine{95         \textcolor{keywordflow}{elif} self.octave > 36:}
+\DoxyCodeLine{96             self.octave = 36}
+\DoxyCodeLine{97             \textcolor{keywordflow}{return} \textcolor{keyword}{False}}
+\DoxyCodeLine{98         \textcolor{keywordflow}{return} \textcolor{keyword}{True}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsynth_1_1_synth_a01987658117d00af460f0df504135f45}\label{classsynth_1_1_synth_a01987658117d00af460f0df504135f45}} 
+\index{synth.Synth@{synth.Synth}!channel\_ind@{channel\_ind}}
+\index{channel\_ind@{channel\_ind}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{channel\_ind}{channel\_ind}}
+{\footnotesize\ttfamily synth.\+Synth.\+channel\+\_\+ind}
+
+
+
+Definition at line 14 of file synth.\+py.
+
+\mbox{\Hypertarget{classsynth_1_1_synth_a2d560e8d7ce15085a441511821c9ba0d}\label{classsynth_1_1_synth_a2d560e8d7ce15085a441511821c9ba0d}} 
+\index{synth.Synth@{synth.Synth}!instr@{instr}}
+\index{instr@{instr}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{instr}{instr}}
+{\footnotesize\ttfamily synth.\+Synth.\+instr}
+
+
+
+Definition at line 24 of file synth.\+py.
+
+\mbox{\Hypertarget{classsynth_1_1_synth_a6538d88a96ef6a811c9edf99fcd49495}\label{classsynth_1_1_synth_a6538d88a96ef6a811c9edf99fcd49495}} 
+\index{synth.Synth@{synth.Synth}!instr\_list@{instr\_list}}
+\index{instr\_list@{instr\_list}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{instr\_list}{instr\_list}}
+{\footnotesize\ttfamily synth.\+Synth.\+instr\+\_\+list}
+
+
+
+Definition at line 26 of file synth.\+py.
+
+\mbox{\Hypertarget{classsynth_1_1_synth_ac12a29d6eeec11afb10fa8de345b417e}\label{classsynth_1_1_synth_ac12a29d6eeec11afb10fa8de345b417e}} 
+\index{synth.Synth@{synth.Synth}!mode@{mode}}
+\index{mode@{mode}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily synth.\+Synth.\+mode}
+
+
+
+Definition at line 21 of file synth.\+py.
+
+\mbox{\Hypertarget{classsynth_1_1_synth_a0f696073b221a37e969287a9410c8d41}\label{classsynth_1_1_synth_a0f696073b221a37e969287a9410c8d41}} 
+\index{synth.Synth@{synth.Synth}!octave@{octave}}
+\index{octave@{octave}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{octave}{octave}}
+{\footnotesize\ttfamily synth.\+Synth.\+octave}
+
+
+
+Definition at line 32 of file synth.\+py.
+
+\mbox{\Hypertarget{classsynth_1_1_synth_a83f4690b79319afdd4015af516b41d07}\label{classsynth_1_1_synth_a83f4690b79319afdd4015af516b41d07}} 
+\index{synth.Synth@{synth.Synth}!port@{port}}
+\index{port@{port}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily synth.\+Synth.\+port}
+
+
+
+Definition at line 15 of file synth.\+py.
+
+\mbox{\Hypertarget{classsynth_1_1_synth_adb8529b394178c695b7d84b8c77f6c56}\label{classsynth_1_1_synth_adb8529b394178c695b7d84b8c77f6c56}} 
+\index{synth.Synth@{synth.Synth}!recorder@{recorder}}
+\index{recorder@{recorder}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{recorder}{recorder}}
+{\footnotesize\ttfamily synth.\+Synth.\+recorder}
+
+
+
+Definition at line 18 of file synth.\+py.
+
+\mbox{\Hypertarget{classsynth_1_1_synth_ae77fb6f1cb6931834470faebd5bd5203}\label{classsynth_1_1_synth_ae77fb6f1cb6931834470faebd5bd5203}} 
+\index{synth.Synth@{synth.Synth}!reverb@{reverb}}
+\index{reverb@{reverb}!synth.Synth@{synth.Synth}}
+\doxysubsubsection{\texorpdfstring{reverb}{reverb}}
+{\footnotesize\ttfamily synth.\+Synth.\+reverb}
+
+
+
+Definition at line 29 of file synth.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{synth_8py}{synth.\+py}}\end{DoxyCompactItemize}

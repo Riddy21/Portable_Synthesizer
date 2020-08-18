@@ -1,0 +1,356 @@
+\hypertarget{classplayer_1_1_player}{}\doxysection{player.\+Player Class Reference}
+\label{classplayer_1_1_player}\index{player.Player@{player.Player}}
+
+
+Inheritance diagram for player.\+Player\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{classplayer_1_1_player__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for player.\+Player\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{classplayer_1_1_player__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classplayer_1_1_player_a9412ed8dc5a3968d23e6fa72f9d2c022}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, event\+\_\+handler)
+\item 
+def \mbox{\hyperlink{classplayer_1_1_player_aed62baabf5f7762b9168ae9eadf8d4c9}{record\+\_\+event}} (self, time, channel, event)
+\item 
+def \mbox{\hyperlink{classplayer_1_1_player_a53c94329f860fb7059725de27bfbe11a}{play\+\_\+all}} (self)
+\item 
+def \mbox{\hyperlink{classplayer_1_1_player_aaac57bbf22ca19ed2790be551a15c057}{record}} (self)
+\item 
+def \mbox{\hyperlink{classplayer_1_1_player_a3fe2044a7c8ba7789212f5806fe41dda}{stop\+\_\+all}} (self)
+\item 
+def \mbox{\hyperlink{classplayer_1_1_player_aeb35323345eb1bdceef823d278b0948a}{pause}} (self, channel\+\_\+ind)
+\item 
+def \mbox{\hyperlink{classplayer_1_1_player_ab255adbc96e6381d31a69f67232f015c}{clean\+\_\+up\+\_\+playlist}} (self)
+\item 
+def \mbox{\hyperlink{classplayer_1_1_player_a044485e3367d5f4cd0e16729c660b5a7}{delete\+\_\+channel}} (self, channel\+\_\+ind)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classplayer_1_1_player_a536dee12ad9267d240c99bf7b27850c9}{channels}}
+\item 
+\mbox{\hyperlink{classplayer_1_1_player_a035ceede4ec4e0c1ca99b4360d1d2f0d}{port}}
+\item 
+\mbox{\hyperlink{classplayer_1_1_player_aabc2974f36ce2439720178fc387b9b6c}{current\+\_\+channel\+\_\+index}}
+\item 
+\mbox{\hyperlink{classplayer_1_1_player_af7033ee634a73a1c0d32291c6db04d51}{recording}}
+\item 
+\mbox{\hyperlink{classplayer_1_1_player_a24985e601e2244a1632735ca41b9c031}{playing}}
+\item 
+\mbox{\hyperlink{classplayer_1_1_player_a2447f4b69427375968debe52b23a078b}{recordlist}}
+\item 
+\mbox{\hyperlink{classplayer_1_1_player_a328d6fd7cb8e4d3a247d86d584598d8a}{playlist}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file player.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classplayer_1_1_player_a9412ed8dc5a3968d23e6fa72f9d2c022}\label{classplayer_1_1_player_a9412ed8dc5a3968d23e6fa72f9d2c022}} 
+\index{player.Player@{player.Player}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def player.\+Player.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event\+\_\+handler }\end{DoxyParamCaption})}
+
+
+
+Definition at line 9 of file player.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9     \textcolor{keyword}{def }\_\_init\_\_(self, event\_handler):}
+\DoxyCodeLine{10         \textcolor{comment}{\# Variables from event handler}}
+\DoxyCodeLine{11         self.channels = event\_handler.channels}
+\DoxyCodeLine{12         self.port = event\_handler.port}
+\DoxyCodeLine{13         self.current\_channel\_index = event\_handler.current\_channel\_index  \textcolor{comment}{\# Is a primitive so references as address}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15         self.recording = \textcolor{keyword}{False}}
+\DoxyCodeLine{16         self.playing = \textcolor{keyword}{False}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         self.recordlist = []}
+\DoxyCodeLine{19         self.playlist = []}
+\DoxyCodeLine{20 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classplayer_1_1_player_ab255adbc96e6381d31a69f67232f015c}\label{classplayer_1_1_player_ab255adbc96e6381d31a69f67232f015c}} 
+\index{player.Player@{player.Player}!clean\_up\_playlist@{clean\_up\_playlist}}
+\index{clean\_up\_playlist@{clean\_up\_playlist}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_playlist()}{clean\_up\_playlist()}}
+{\footnotesize\ttfamily def player.\+Player.\+clean\+\_\+up\+\_\+playlist (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 93 of file player.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{93     \textcolor{keyword}{def }clean\_up\_playlist(self):}
+\DoxyCodeLine{94         \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{95 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classplayer_1_1_player_a044485e3367d5f4cd0e16729c660b5a7}\label{classplayer_1_1_player_a044485e3367d5f4cd0e16729c660b5a7}} 
+\index{player.Player@{player.Player}!delete\_channel@{delete\_channel}}
+\index{delete\_channel@{delete\_channel}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{delete\_channel()}{delete\_channel()}}
+{\footnotesize\ttfamily def player.\+Player.\+delete\+\_\+channel (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{channel\+\_\+ind }\end{DoxyParamCaption})}
+
+
+
+Definition at line 97 of file player.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{97     \textcolor{keyword}{def }delete\_channel(self, channel\_ind):}
+\DoxyCodeLine{98         start = time.time()}
+\DoxyCodeLine{99         remove\_list = []}
+\DoxyCodeLine{100         \textcolor{comment}{\# find}}
+\DoxyCodeLine{101         \textcolor{keywordflow}{for} event \textcolor{keywordflow}{in} self.playlist:}
+\DoxyCodeLine{102             \textcolor{keywordflow}{if} event[1] == channel\_ind:}
+\DoxyCodeLine{103                 remove\_list.append(event)}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{comment}{\# Remove}}
+\DoxyCodeLine{106         \textcolor{keywordflow}{for} event \textcolor{keywordflow}{in} remove\_list:}
+\DoxyCodeLine{107             self.playlist.remove(event)}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109         end = time.time()}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classplayer_1_1_player_aeb35323345eb1bdceef823d278b0948a}\label{classplayer_1_1_player_aeb35323345eb1bdceef823d278b0948a}} 
+\index{player.Player@{player.Player}!pause@{pause}}
+\index{pause@{pause}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily def player.\+Player.\+pause (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{channel\+\_\+ind }\end{DoxyParamCaption})}
+
+
+
+Definition at line 89 of file player.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{89     \textcolor{keyword}{def }pause(self, channel\_ind):}
+\DoxyCodeLine{90         \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{91 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classplayer_1_1_player_a53c94329f860fb7059725de27bfbe11a}\label{classplayer_1_1_player_a53c94329f860fb7059725de27bfbe11a}} 
+\index{player.Player@{player.Player}!play\_all@{play\_all}}
+\index{play\_all@{play\_all}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{play\_all()}{play\_all()}}
+{\footnotesize\ttfamily def player.\+Player.\+play\+\_\+all (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 29 of file player.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{29     \textcolor{keyword}{def }play\_all(self):}
+\DoxyCodeLine{30         self.playing = \textcolor{keyword}{True}}
+\DoxyCodeLine{31         \textcolor{comment}{\# sort the list by time}}
+\DoxyCodeLine{32         self.playlist = sorted(self.playlist, key=\textcolor{keyword}{lambda} l: l[0])}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \textcolor{comment}{\# Tracks starting time}}
+\DoxyCodeLine{35         start\_time = time.time()}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \textcolor{keywordflow}{for} event \textcolor{keywordflow}{in} self.playlist:}
+\DoxyCodeLine{38             \textcolor{comment}{\# Get the proper channel to play}}
+\DoxyCodeLine{39             channel = self.channels[event[1]]}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41             \textcolor{comment}{\# If was stopped}}
+\DoxyCodeLine{42             \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} self.playing:}
+\DoxyCodeLine{43                 \textcolor{comment}{\# turn off all notes}}
+\DoxyCodeLine{44                 Synth.midi\_stop(channel.port)}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46                 \textcolor{keywordflow}{break}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48             note\_time = event[0]}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50             \textcolor{comment}{\# wait until time to play note}}
+\DoxyCodeLine{51             \textcolor{keywordflow}{while} time.time() -\/ start\_time <= note\_time:}
+\DoxyCodeLine{52                 pygame.time.delay(1)}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54             \textcolor{comment}{\# play the event directly to avoid keyboard interface}}
+\DoxyCodeLine{55             \textcolor{keywordflow}{if} event[2][0] == \textcolor{stringliteral}{'note\_on'}:}
+\DoxyCodeLine{56                 channel.midi\_note\_on(event[2][1], background\_mode=\textcolor{keyword}{True})}
+\DoxyCodeLine{57             \textcolor{keywordflow}{elif} event[2][0] == \textcolor{stringliteral}{'note\_off'}:}
+\DoxyCodeLine{58                 channel.midi\_note\_off(event[2][1], background\_mode=\textcolor{keyword}{True})}
+\DoxyCodeLine{59             \textcolor{keywordflow}{if} event[2][0] == \textcolor{stringliteral}{'program\_change'}:}
+\DoxyCodeLine{60                 channel.midi\_change\_synth(event[2][1], background\_mode=\textcolor{keyword}{True})}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         self.playing = \textcolor{keyword}{False}}
+\DoxyCodeLine{63 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classplayer_1_1_player_aaac57bbf22ca19ed2790be551a15c057}\label{classplayer_1_1_player_aaac57bbf22ca19ed2790be551a15c057}} 
+\index{player.Player@{player.Player}!record@{record}}
+\index{record@{record}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{record()}{record()}}
+{\footnotesize\ttfamily def player.\+Player.\+record (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 65 of file player.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{65     \textcolor{keyword}{def }record(self):}
+\DoxyCodeLine{66         \textcolor{comment}{\# Stop all channels}}
+\DoxyCodeLine{67         Synth.midi\_stop(self.channels[0].port)}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \textcolor{comment}{\# Add the initial information such as channel synth, gain, reverb, volume to the}}
+\DoxyCodeLine{70         \textcolor{comment}{\# beginning of the record list of the channel you are on right now of only the channel youre on right now}}
+\DoxyCodeLine{71         current\_channel = self.channels[self.current\_channel\_index[0]]}
+\DoxyCodeLine{72         self.recordlist.append([0, self.current\_channel\_index[0], [\textcolor{stringliteral}{'program\_change'}, current\_channel.instr]])}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         self.delete\_channel(self.current\_channel\_index[0])}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76         self.recording = time.time()}
+\DoxyCodeLine{77 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classplayer_1_1_player_aed62baabf5f7762b9168ae9eadf8d4c9}\label{classplayer_1_1_player_aed62baabf5f7762b9168ae9eadf8d4c9}} 
+\index{player.Player@{player.Player}!record\_event@{record\_event}}
+\index{record\_event@{record\_event}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{record\_event()}{record\_event()}}
+{\footnotesize\ttfamily def player.\+Player.\+record\+\_\+event (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{time,  }\item[{}]{channel,  }\item[{}]{event }\end{DoxyParamCaption})}
+
+
+
+Definition at line 21 of file player.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{21     \textcolor{keyword}{def }record\_event(self, time, channel, event):}
+\DoxyCodeLine{22         \textcolor{comment}{\# if is recording}}
+\DoxyCodeLine{23         \textcolor{keywordflow}{if} self.recording:}
+\DoxyCodeLine{24             \textcolor{comment}{\# add event to playlist}}
+\DoxyCodeLine{25             self.recordlist.append([time -\/ self.recording, channel, event])}
+\DoxyCodeLine{26 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classplayer_1_1_player_a3fe2044a7c8ba7789212f5806fe41dda}\label{classplayer_1_1_player_a3fe2044a7c8ba7789212f5806fe41dda}} 
+\index{player.Player@{player.Player}!stop\_all@{stop\_all}}
+\index{stop\_all@{stop\_all}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{stop\_all()}{stop\_all()}}
+{\footnotesize\ttfamily def player.\+Player.\+stop\+\_\+all (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 79 of file player.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{79     \textcolor{keyword}{def }stop\_all(self):}
+\DoxyCodeLine{80         \textcolor{comment}{\# turn off all notes}}
+\DoxyCodeLine{81         Synth.midi\_stop(self.channels[0].port)}
+\DoxyCodeLine{82         \textcolor{comment}{\# move record list to play list and clear record list}}
+\DoxyCodeLine{83         \textcolor{keywordflow}{if} self.recording:}
+\DoxyCodeLine{84             self.playlist += self.recordlist}
+\DoxyCodeLine{85             self.recordlist = []}
+\DoxyCodeLine{86         self.recording = \textcolor{keyword}{False}}
+\DoxyCodeLine{87         self.playing = \textcolor{keyword}{False}}
+\DoxyCodeLine{88 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classplayer_1_1_player_a536dee12ad9267d240c99bf7b27850c9}\label{classplayer_1_1_player_a536dee12ad9267d240c99bf7b27850c9}} 
+\index{player.Player@{player.Player}!channels@{channels}}
+\index{channels@{channels}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{channels}{channels}}
+{\footnotesize\ttfamily player.\+Player.\+channels}
+
+
+
+Definition at line 11 of file player.\+py.
+
+\mbox{\Hypertarget{classplayer_1_1_player_aabc2974f36ce2439720178fc387b9b6c}\label{classplayer_1_1_player_aabc2974f36ce2439720178fc387b9b6c}} 
+\index{player.Player@{player.Player}!current\_channel\_index@{current\_channel\_index}}
+\index{current\_channel\_index@{current\_channel\_index}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{current\_channel\_index}{current\_channel\_index}}
+{\footnotesize\ttfamily player.\+Player.\+current\+\_\+channel\+\_\+index}
+
+
+
+Definition at line 13 of file player.\+py.
+
+\mbox{\Hypertarget{classplayer_1_1_player_a24985e601e2244a1632735ca41b9c031}\label{classplayer_1_1_player_a24985e601e2244a1632735ca41b9c031}} 
+\index{player.Player@{player.Player}!playing@{playing}}
+\index{playing@{playing}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{playing}{playing}}
+{\footnotesize\ttfamily player.\+Player.\+playing}
+
+
+
+Definition at line 16 of file player.\+py.
+
+\mbox{\Hypertarget{classplayer_1_1_player_a328d6fd7cb8e4d3a247d86d584598d8a}\label{classplayer_1_1_player_a328d6fd7cb8e4d3a247d86d584598d8a}} 
+\index{player.Player@{player.Player}!playlist@{playlist}}
+\index{playlist@{playlist}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{playlist}{playlist}}
+{\footnotesize\ttfamily player.\+Player.\+playlist}
+
+
+
+Definition at line 19 of file player.\+py.
+
+\mbox{\Hypertarget{classplayer_1_1_player_a035ceede4ec4e0c1ca99b4360d1d2f0d}\label{classplayer_1_1_player_a035ceede4ec4e0c1ca99b4360d1d2f0d}} 
+\index{player.Player@{player.Player}!port@{port}}
+\index{port@{port}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily player.\+Player.\+port}
+
+
+
+Definition at line 12 of file player.\+py.
+
+\mbox{\Hypertarget{classplayer_1_1_player_af7033ee634a73a1c0d32291c6db04d51}\label{classplayer_1_1_player_af7033ee634a73a1c0d32291c6db04d51}} 
+\index{player.Player@{player.Player}!recording@{recording}}
+\index{recording@{recording}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{recording}{recording}}
+{\footnotesize\ttfamily player.\+Player.\+recording}
+
+
+
+Definition at line 15 of file player.\+py.
+
+\mbox{\Hypertarget{classplayer_1_1_player_a2447f4b69427375968debe52b23a078b}\label{classplayer_1_1_player_a2447f4b69427375968debe52b23a078b}} 
+\index{player.Player@{player.Player}!recordlist@{recordlist}}
+\index{recordlist@{recordlist}!player.Player@{player.Player}}
+\doxysubsubsection{\texorpdfstring{recordlist}{recordlist}}
+{\footnotesize\ttfamily player.\+Player.\+recordlist}
+
+
+
+Definition at line 18 of file player.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{player_8py}{player.\+py}}\end{DoxyCompactItemize}

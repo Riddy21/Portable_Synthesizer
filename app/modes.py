@@ -96,6 +96,24 @@ class Mode(object):
 
     def change_sustain(self, sustain):
         self.channel.change_sustain(sustain)
+    
+    def toggle_sustain(self):
+        self.channel.toggle_sustain()
+
+    def change_sustenuto(self, sustenuto):
+        self.channel.change_sustenuto(sustenuto)
+    
+    def toggle_sustenuto(self):
+        self.channel.toggle_sustenuto()
+
+    def increment_reverb(self, change):
+        self.channel.increment_reverb(change)
+
+    def increment_chorus(self, change):
+        self.channel.increment_chorus(change)
+
+    def increment_velocity(self, change):
+        self.channel.increment_velocity(change)
 
     def switch_channel(self, channel_num):
         self.event_handler.switch_channel(channel_num)
@@ -297,10 +315,10 @@ class Test(Mode):
             self.use_knob(-5, 1)
 
         elif key == 'knob_3_up':
-            self.use_knob(200, 2)
+            self.use_knob(5, 2)
 
         elif key == 'knob_3_down':
-            self.use_knob(-200, 2)
+            self.use_knob(-5, 2)
 
         elif key == 'knob_4_up':
             self.use_knob(5, 3)
@@ -309,21 +327,20 @@ class Test(Mode):
             self.use_knob(-5, 3)
 
         elif key == 'stop':
-            self.change_sustain(True)
+            self.change_sustenuto(True)
 
     def key_up(self, key):
         if type(key) is int:
             self.release_note(key)
-
         elif key == 'stop':
-            self.change_sustain(False)
+            self.change_sustenuto(False)
 
     def use_knob(self, change, knob_num):
         if knob_num == 0:
-            self.increment_volume(change)
-        elif knob_num == 1:
-            self.increment_modulation(change)
-        elif knob_num == 2:
-            self.increment_pitch(change)
-        elif knob_num == 3:
             self.increment_pan(change)
+        elif knob_num == 1:
+            self.increment_volume(change)
+        elif knob_num == 2:
+            self.increment_reverb(change)
+        elif knob_num == 3:
+            self.increment_chorus(change)

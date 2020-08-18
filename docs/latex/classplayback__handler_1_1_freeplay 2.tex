@@ -1,0 +1,273 @@
+\hypertarget{classplayback__handler_1_1_freeplay}{}\doxysection{playback\+\_\+handler.\+Freeplay Class Reference}
+\label{classplayback__handler_1_1_freeplay}\index{playback\_handler.Freeplay@{playback\_handler.Freeplay}}
+
+
+Inheritance diagram for playback\+\_\+handler.\+Freeplay\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classplayback__handler_1_1_freeplay__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for playback\+\_\+handler.\+Freeplay\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classplayback__handler_1_1_freeplay__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classplayback__handler_1_1_freeplay_ae62a0713b92ab2de54cfe14b212df97e}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, synth, \mbox{\hyperlink{classplayback__handler_1_1_mode_a72a57ad77a393b721b096d5f5501e097}{keyboard}}, \mbox{\hyperlink{classplayback__handler_1_1_mode_ac2990e6bb04fca888bdc6872c74597c5}{playback\+\_\+handler}})
+\item 
+def \mbox{\hyperlink{classplayback__handler_1_1_freeplay_ad777a6e08998f8ac869d00b70bae1ca5}{key\+\_\+down}} (self, index)
+\item 
+def \mbox{\hyperlink{classplayback__handler_1_1_freeplay_a82768c86ac6d6f291db13d93b851c3bd}{key\+\_\+up}} (self, index)
+\item 
+def \mbox{\hyperlink{classplayback__handler_1_1_freeplay_adcbe69b3d43b62d5846b720beb2484b1}{use\+\_\+knob}} (self, index, knob\+\_\+num)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classplayback__handler_1_1_freeplay_ac7c543f195532fdfde89878767932bc1}{map\+\_\+index2function}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classplayback__handler_1_1_freeplay_add1524e01a50ec5d813d9a777478701f}{key\+\_\+mappings}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 99 of file playback\+\_\+handler.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classplayback__handler_1_1_freeplay_ae62a0713b92ab2de54cfe14b212df97e}\label{classplayback__handler_1_1_freeplay_ae62a0713b92ab2de54cfe14b212df97e}} 
+\index{playback\_handler.Freeplay@{playback\_handler.Freeplay}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!playback\_handler.Freeplay@{playback\_handler.Freeplay}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def playback\+\_\+handler.\+Freeplay.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{synth,  }\item[{}]{keyboard,  }\item[{}]{playback\+\_\+handler }\end{DoxyParamCaption})}
+
+
+
+Definition at line 100 of file playback\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{100     \textcolor{keyword}{def }\_\_init\_\_(self, synth, keyboard, playback\_handler):}
+\DoxyCodeLine{101         super().\_\_init\_\_(\textcolor{stringliteral}{'freeplay'}, synth, keyboard, playback\_handler)}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103         \textcolor{comment}{\# map each key to a function dictionary}}
+\DoxyCodeLine{104         self.key\_mappings = self.map\_index2function()}
+\DoxyCodeLine{105 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classplayback__handler_1_1_freeplay_ad777a6e08998f8ac869d00b70bae1ca5}\label{classplayback__handler_1_1_freeplay_ad777a6e08998f8ac869d00b70bae1ca5}} 
+\index{playback\_handler.Freeplay@{playback\_handler.Freeplay}!key\_down@{key\_down}}
+\index{key\_down@{key\_down}!playback\_handler.Freeplay@{playback\_handler.Freeplay}}
+\doxysubsubsection{\texorpdfstring{key\_down()}{key\_down()}}
+{\footnotesize\ttfamily def playback\+\_\+handler.\+Freeplay.\+key\+\_\+down (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 145 of file playback\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{145     \textcolor{keyword}{def }key\_down(self, index):}
+\DoxyCodeLine{146         \textcolor{comment}{\# if shift is pressed}}
+\DoxyCodeLine{147         \textcolor{keywordflow}{if} self.keyboard.shift:}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149             \textcolor{comment}{\# if playing piano keys}}
+\DoxyCodeLine{150             \textcolor{keywordflow}{if} index < 24:}
+\DoxyCodeLine{151                 \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153             \textcolor{comment}{\# Switch modes}}
+\DoxyCodeLine{154             \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'octave\_up'}:}
+\DoxyCodeLine{155                 self.playback\_handler.switch\_mode(\textcolor{stringliteral}{'test'})}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157             \textcolor{comment}{\# Switch Synth}}
+\DoxyCodeLine{158             \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'channel\_up'}:}
+\DoxyCodeLine{159                 self.channel.change\_synth(self.channel.instr + 1)}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161             \textcolor{comment}{\# Switch Synth}}
+\DoxyCodeLine{162             \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'channel\_down'}:}
+\DoxyCodeLine{163                 self.channel.change\_synth(self.channel.instr -\/ 1)}
+\DoxyCodeLine{164         \textcolor{comment}{\# if playing piano keys}}
+\DoxyCodeLine{165         \textcolor{keywordflow}{elif} index < 24:}
+\DoxyCodeLine{166             \textcolor{comment}{\# if the record button is held}}
+\DoxyCodeLine{167             \textcolor{keywordflow}{if} 27 \textcolor{keywordflow}{in} self.keyboard.on\_keys:}
+\DoxyCodeLine{168                 self.key\_up(27)}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170             self.channel.key\_down(index)}
+\DoxyCodeLine{171         \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'octave\_up'}:}
+\DoxyCodeLine{172             \textcolor{comment}{\# shift octave if possible}}
+\DoxyCodeLine{173             \textcolor{keywordflow}{if} self.channel.octave\_shift(1):}
+\DoxyCodeLine{174                 \textcolor{comment}{\# Check if there are any on notes}}
+\DoxyCodeLine{175                 \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(24):}
+\DoxyCodeLine{176                     \textcolor{keywordflow}{if} i \textcolor{keywordflow}{in} self.keyboard.on\_keys:}
+\DoxyCodeLine{177                         \textcolor{comment}{\# Release the key}}
+\DoxyCodeLine{178                         self.channel.key\_up(i -\/ 12)}
+\DoxyCodeLine{179                         self.channel.key\_down(i)}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181         \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'octave\_down'}:}
+\DoxyCodeLine{182             \textcolor{comment}{\# shift octave if possible}}
+\DoxyCodeLine{183             \textcolor{keywordflow}{if} self.channel.octave\_shift(-\/1):}
+\DoxyCodeLine{184                 \textcolor{comment}{\# Check if there are any on notes}}
+\DoxyCodeLine{185                 \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(24):}
+\DoxyCodeLine{186                     \textcolor{keywordflow}{if} i \textcolor{keywordflow}{in} self.keyboard.on\_keys:}
+\DoxyCodeLine{187                         \textcolor{comment}{\# Release the key}}
+\DoxyCodeLine{188                         self.channel.key\_up(i + 12)}
+\DoxyCodeLine{189                         self.channel.key\_down(i)}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \textcolor{comment}{\# Play the recording list}}
+\DoxyCodeLine{192         \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'play'}:}
+\DoxyCodeLine{193             \textcolor{comment}{\# if any channels are not recording or player play}}
+\DoxyCodeLine{194             \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} self.player.recording \textcolor{keywordflow}{and} \textcolor{keywordflow}{not} self.player.playing:}
+\DoxyCodeLine{195                 self.player.play\_all()}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197         \textcolor{comment}{\# Switch up a channel}}
+\DoxyCodeLine{198         \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'channel\_up'}:}
+\DoxyCodeLine{199             self.playback\_handler.switch\_channel(self.playback\_handler.current\_channel\_index + 1)}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201         \textcolor{comment}{\# Switch down a channel}}
+\DoxyCodeLine{202         \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'channel\_down'}:}
+\DoxyCodeLine{203             self.playback\_handler.switch\_channel(self.playback\_handler.current\_channel\_index -\/ 1)}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classplayback__handler_1_1_freeplay_a82768c86ac6d6f291db13d93b851c3bd}\label{classplayback__handler_1_1_freeplay_a82768c86ac6d6f291db13d93b851c3bd}} 
+\index{playback\_handler.Freeplay@{playback\_handler.Freeplay}!key\_up@{key\_up}}
+\index{key\_up@{key\_up}!playback\_handler.Freeplay@{playback\_handler.Freeplay}}
+\doxysubsubsection{\texorpdfstring{key\_up()}{key\_up()}}
+{\footnotesize\ttfamily def playback\+\_\+handler.\+Freeplay.\+key\+\_\+up (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index }\end{DoxyParamCaption})}
+
+
+
+Definition at line 206 of file playback\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{206     \textcolor{keyword}{def }key\_up(self, index):}
+\DoxyCodeLine{207         \textcolor{comment}{\# if shift is pressed}}
+\DoxyCodeLine{208         \textcolor{keywordflow}{if} self.keyboard.shift:}
+\DoxyCodeLine{209             \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211         \textcolor{keywordflow}{elif} index < 24:}
+\DoxyCodeLine{212             self.channel.key\_up(index)}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214         \textcolor{comment}{\# record function}}
+\DoxyCodeLine{215         \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'record'}:}
+\DoxyCodeLine{216             \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} self.player.recording \textcolor{keywordflow}{and} \textcolor{keywordflow}{not} self.player.playing:}
+\DoxyCodeLine{217                 self.player.record()}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219                 \textcolor{comment}{\# plays all channels}}
+\DoxyCodeLine{220                 self.player.play\_all()}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222         \textcolor{keywordflow}{elif} self.key\_mappings[index] == \textcolor{stringliteral}{'stop'}:}
+\DoxyCodeLine{223             self.player.stop\_all()}
+\DoxyCodeLine{224 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classplayback__handler_1_1_freeplay_ac7c543f195532fdfde89878767932bc1}\label{classplayback__handler_1_1_freeplay_ac7c543f195532fdfde89878767932bc1}} 
+\index{playback\_handler.Freeplay@{playback\_handler.Freeplay}!map\_index2function@{map\_index2function}}
+\index{map\_index2function@{map\_index2function}!playback\_handler.Freeplay@{playback\_handler.Freeplay}}
+\doxysubsubsection{\texorpdfstring{map\_index2function()}{map\_index2function()}}
+{\footnotesize\ttfamily def playback\+\_\+handler.\+Freeplay.\+map\+\_\+index2function (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 107 of file playback\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{107     \textcolor{keyword}{def }map\_index2function():}
+\DoxyCodeLine{108         key\_list = [}
+\DoxyCodeLine{109             \textcolor{stringliteral}{"noteC1"},  \textcolor{comment}{\# C1}}
+\DoxyCodeLine{110             \textcolor{stringliteral}{"noteC\#1"},  \textcolor{comment}{\# C\#1}}
+\DoxyCodeLine{111             \textcolor{stringliteral}{"noteD1"},  \textcolor{comment}{\# D1}}
+\DoxyCodeLine{112             \textcolor{stringliteral}{"noteD\#1"},  \textcolor{comment}{\# D\#1}}
+\DoxyCodeLine{113             \textcolor{stringliteral}{"noteE1"},  \textcolor{comment}{\# E1}}
+\DoxyCodeLine{114             \textcolor{stringliteral}{"noteF1"},  \textcolor{comment}{\# F1}}
+\DoxyCodeLine{115             \textcolor{stringliteral}{"noteF\#1"},  \textcolor{comment}{\# F\#1}}
+\DoxyCodeLine{116             \textcolor{stringliteral}{"noteG1"},  \textcolor{comment}{\# G1}}
+\DoxyCodeLine{117             \textcolor{stringliteral}{"noteG\#1"},  \textcolor{comment}{\# G\#1}}
+\DoxyCodeLine{118             \textcolor{stringliteral}{"noteA1"},  \textcolor{comment}{\# A1}}
+\DoxyCodeLine{119             \textcolor{stringliteral}{"noteA\#1"},  \textcolor{comment}{\# A\#1}}
+\DoxyCodeLine{120             \textcolor{stringliteral}{"noteB1"},  \textcolor{comment}{\# B1}}
+\DoxyCodeLine{121             \textcolor{stringliteral}{"noteC2"},  \textcolor{comment}{\# C2}}
+\DoxyCodeLine{122             \textcolor{stringliteral}{"noteC\#2"},  \textcolor{comment}{\# C\#2}}
+\DoxyCodeLine{123             \textcolor{stringliteral}{"noteD2"},  \textcolor{comment}{\# D2}}
+\DoxyCodeLine{124             \textcolor{stringliteral}{"noteD\#2"},  \textcolor{comment}{\# D\#2}}
+\DoxyCodeLine{125             \textcolor{stringliteral}{"noteE2"},  \textcolor{comment}{\# E2}}
+\DoxyCodeLine{126             \textcolor{stringliteral}{"noteF2"},  \textcolor{comment}{\# F2}}
+\DoxyCodeLine{127             \textcolor{stringliteral}{"noteF\#2"},  \textcolor{comment}{\# F\#2}}
+\DoxyCodeLine{128             \textcolor{stringliteral}{"noteG2"},  \textcolor{comment}{\# G2}}
+\DoxyCodeLine{129             \textcolor{stringliteral}{"noteG\#2"},  \textcolor{comment}{\# G\#2}}
+\DoxyCodeLine{130             \textcolor{stringliteral}{"noteA2"},  \textcolor{comment}{\# A2}}
+\DoxyCodeLine{131             \textcolor{stringliteral}{"noteA\#2"},  \textcolor{comment}{\# A\#2}}
+\DoxyCodeLine{132             \textcolor{stringliteral}{"noteB2"},  \textcolor{comment}{\# B2}}
+\DoxyCodeLine{133             \textcolor{stringliteral}{"shift"},  \textcolor{comment}{\# LShift}}
+\DoxyCodeLine{134             \textcolor{stringliteral}{"octave\_down"},  \textcolor{comment}{\# left arrow}}
+\DoxyCodeLine{135             \textcolor{stringliteral}{"octave\_up"},  \textcolor{comment}{\# right arrow}}
+\DoxyCodeLine{136             \textcolor{stringliteral}{"record"},  \textcolor{comment}{\# RShift}}
+\DoxyCodeLine{137             \textcolor{stringliteral}{"stop"},  \textcolor{comment}{\# Delete}}
+\DoxyCodeLine{138             \textcolor{stringliteral}{"play"},  \textcolor{comment}{\# Enter}}
+\DoxyCodeLine{139             \textcolor{stringliteral}{"channel\_up"},  \textcolor{comment}{\# Up arrow}}
+\DoxyCodeLine{140             \textcolor{stringliteral}{"channel\_down"},  \textcolor{comment}{\# Down arrow}}
+\DoxyCodeLine{141         ]}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143         \textcolor{keywordflow}{return} key\_list}
+\DoxyCodeLine{144 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classplayback__handler_1_1_freeplay_adcbe69b3d43b62d5846b720beb2484b1}\label{classplayback__handler_1_1_freeplay_adcbe69b3d43b62d5846b720beb2484b1}} 
+\index{playback\_handler.Freeplay@{playback\_handler.Freeplay}!use\_knob@{use\_knob}}
+\index{use\_knob@{use\_knob}!playback\_handler.Freeplay@{playback\_handler.Freeplay}}
+\doxysubsubsection{\texorpdfstring{use\_knob()}{use\_knob()}}
+{\footnotesize\ttfamily def playback\+\_\+handler.\+Freeplay.\+use\+\_\+knob (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index,  }\item[{}]{knob\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Definition at line 225 of file playback\+\_\+handler.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{225     \textcolor{keyword}{def }use\_knob(self, index, knob\_num):}
+\DoxyCodeLine{226         \textcolor{keywordflow}{if} knob\_num == 0:}
+\DoxyCodeLine{227             self.channel.change\_synth(index)}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classplayback__handler_1_1_freeplay_add1524e01a50ec5d813d9a777478701f}\label{classplayback__handler_1_1_freeplay_add1524e01a50ec5d813d9a777478701f}} 
+\index{playback\_handler.Freeplay@{playback\_handler.Freeplay}!key\_mappings@{key\_mappings}}
+\index{key\_mappings@{key\_mappings}!playback\_handler.Freeplay@{playback\_handler.Freeplay}}
+\doxysubsubsection{\texorpdfstring{key\_mappings}{key\_mappings}}
+{\footnotesize\ttfamily playback\+\_\+handler.\+Freeplay.\+key\+\_\+mappings}
+
+
+
+Definition at line 104 of file playback\+\_\+handler.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{playback__handler_8py}{playback\+\_\+handler.\+py}}\end{DoxyCompactItemize}

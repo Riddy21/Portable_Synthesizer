@@ -1,0 +1,68 @@
+\hypertarget{namespacestart__server}{}\doxysection{start\+\_\+server Namespace Reference}
+\label{namespacestart__server}\index{start\_server@{start\_server}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacestart__server_adfee54f322003c202da2e323e06186cf}{start\+\_\+server}} (buffer\+\_\+count, buffer\+\_\+size, sr)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacestart__server_adfee54f322003c202da2e323e06186cf}\label{namespacestart__server_adfee54f322003c202da2e323e06186cf}} 
+\index{start\_server@{start\_server}!start\_server@{start\_server}}
+\index{start\_server@{start\_server}!start\_server@{start\_server}}
+\doxysubsubsection{\texorpdfstring{start\_server()}{start\_server()}}
+{\footnotesize\ttfamily def start\+\_\+server.\+start\+\_\+server (\begin{DoxyParamCaption}\item[{}]{buffer\+\_\+count,  }\item[{}]{buffer\+\_\+size,  }\item[{}]{sr }\end{DoxyParamCaption})}
+
+
+
+Definition at line 9 of file start\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9 \textcolor{keyword}{def }\mbox{\hyperlink{namespacestart__server_adfee54f322003c202da2e323e06186cf}{start\_server}}(buffer\_count, buffer\_size, sr):}
+\DoxyCodeLine{10     print(\textcolor{stringliteral}{'INFO: Opening stream'})}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     \textcolor{comment}{\# get assets directory}}
+\DoxyCodeLine{13     home\_path = os.getcwd()}
+\DoxyCodeLine{14     assets\_path = os.path.join(home\_path, \textcolor{stringliteral}{'Assets'}, \textcolor{stringliteral}{'Default.sf2'})}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{comment}{\# Change audio channel}}
+\DoxyCodeLine{17     \textcolor{keywordflow}{if} platform.system() == \textcolor{stringliteral}{'Darwin'} \textcolor{keywordflow}{or} platform.system() == \textcolor{stringliteral}{'Windows'}:}
+\DoxyCodeLine{18         audio = \textcolor{stringliteral}{'portaudio'}}
+\DoxyCodeLine{19     \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{20         audio = \textcolor{stringliteral}{'alsa'}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     subprocess.Popen(}
+\DoxyCodeLine{23         [\textcolor{stringliteral}{'fluidsynth'}, \textcolor{stringliteral}{'-\/a'}, audio, \textcolor{stringliteral}{'-\/c'}, str(buffer\_count), \textcolor{stringliteral}{'-\/z'}, str(buffer\_size), \textcolor{stringliteral}{'-\/r'}, str(sr), \textcolor{stringliteral}{'-\/g'}, \textcolor{stringliteral}{'5'},}
+\DoxyCodeLine{24          assets\_path])}
+\DoxyCodeLine{25     \textcolor{comment}{\#}}
+\DoxyCodeLine{26     \textcolor{comment}{\# subprocess.Popen(}}
+\DoxyCodeLine{27     \textcolor{comment}{\#     ['fluidsynth', '-\/a', audio, '-\/g', '5',}}
+\DoxyCodeLine{28     \textcolor{comment}{\#      assets\_path])}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     time.sleep(1)}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     mido\_streams = mido.get\_output\_names()}
+\DoxyCodeLine{33     print(\textcolor{stringliteral}{'INFO: Streams: \%s'} \% mido\_streams)}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{comment}{\# Setup stream output}}
+\DoxyCodeLine{36     \textcolor{keywordflow}{if} platform.system() == \textcolor{stringliteral}{'Darwin'} \textcolor{keywordflow}{or} platform.system() == \textcolor{stringliteral}{'Windows'}:}
+\DoxyCodeLine{37         port = mido.open\_output()}
+\DoxyCodeLine{38     \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{39         port = \textcolor{keyword}{False}}
+\DoxyCodeLine{40         \textcolor{comment}{\# Find port number}}
+\DoxyCodeLine{41         \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} mido\_streams:}
+\DoxyCodeLine{42             \textcolor{keywordflow}{if} \textcolor{stringliteral}{'Synth'} \textcolor{keywordflow}{in} i:}
+\DoxyCodeLine{43                 port\_num = i.split(\textcolor{stringliteral}{'('})[1].split(\textcolor{stringliteral}{')'})[0]}
+\DoxyCodeLine{44                 port = mido.open\_output(\textcolor{stringliteral}{'Synth input port (\%s:0)'} \% port\_num)}
+\DoxyCodeLine{45                 \textcolor{keywordflow}{break}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{keywordflow}{if} port:}
+\DoxyCodeLine{48         print(\textcolor{stringliteral}{'INFO: Established Fluidsynth connection on port \%s'} \% port)}
+\DoxyCodeLine{49     \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{50         print(\textcolor{stringliteral}{'ERROR: Cannot connect to port'})}
+\DoxyCodeLine{51         sys.exit(2)}
+\DoxyCodeLine{52     \textcolor{keywordflow}{return} port}
+
+\end{DoxyCode}
