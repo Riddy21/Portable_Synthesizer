@@ -45,7 +45,8 @@ class Synth(object):
 
     def __init__(self,
                  event_handler,
-                 instr=None,
+                 channel_ind,
+                 instr=(0,0),
                  volume=64,
                  modulation=0,
                  pitch=0,
@@ -56,11 +57,8 @@ class Synth(object):
                  reverb=0,
                  chorus=0,
                  velocity=64):
-        # initialize variable from event handler
-        if instr is None:
-            instr = [0, 0]
 
-        self.channel_ind = event_handler.current_channel_index[0]
+        self.channel_ind = channel_ind
         self.port = event_handler.port
 
         # Recorder to keep track of notes

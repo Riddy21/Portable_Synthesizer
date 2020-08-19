@@ -181,6 +181,9 @@ class Keyboard(object):
         # if the digital_buffer is still the same return false
         return False
 
+    def use_knob(self, knob_num, change):
+        self.event_handler.use_knob(knob_num, change)
+
     # gets the scroll of the digital knob
     def append_to_queue(self, queue):
         # Update all 4 knobs

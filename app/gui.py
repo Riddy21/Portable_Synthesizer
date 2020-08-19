@@ -19,22 +19,28 @@ class Gui(object):
         # Get the playback handler to get all the events
         self.events = event_handler
 
-        self.interface_dict = self._initialize_interfaces()
+        # dict of loaded interfaces
+        self.interface_dict = dict()
 
-        # Make startup interface
-        self.interface = self.interface_dict['freeplay']
+        # TODO: Make startup interface
+        self.set_interface('freeplay')
 
-    def _initialize_interfaces(self):
-        interfaces = dict()
-        interfaces['freeplay'] = FreeplayInt(self)
-        interfaces['soundselect'] = SoundSelectInt(self)
-        interfaces['test'] = TestInt(self)
-        interfaces['recorder'] = RecorderInt(self)
-        return interfaces
+    def add_interface(self, mode):
+        if mode == 'freeplay':
+            self.interface_dict[mode] = FreeplayInt(self)
+        elif mode == 'soundselect':
+            self.interface_dict[mode] = SoundSelectInt(self)
+        elif mode == 'test':
+            self.interface_dict[mode] = TestInt(self)
+
+        self.interface = self.interface_dict[mode]
 
     # sets the interface of the OP1 and passes in the pointer to the player
     def set_interface(self, mode):
-        self.interface = self.interface_dict[mode]
+        try:
+            self.interface = self.interface_dict[mode]
+        except KeyError:
+            self.add_interface(mode)
 
     # Draws whatever interface is currently on and updates
     def draw_interface(self):
@@ -146,16 +152,3 @@ class TestInt(GuiInterface):
             self.draw_text('playing', self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)
 
 
-class StartupInt(GuiInterface):
-    def __init__(self, events, gui):
-        self.name = 'startup'
-        self.events = events
-        self.gui = gui
-
-    # draws the interface on the screen
-    def draw_interface(self):
-        self.gui.screen.fill((0, 0, 255))
-        self.draw_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)
-
-        test_button = pg.Rect(50, 100, 200, 50)
-        pg.draw.rect(self.gui.screen, (255, 0, 0), test_button)
