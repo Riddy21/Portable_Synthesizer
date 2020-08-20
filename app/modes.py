@@ -56,6 +56,9 @@ class Mode(object):
     def update(self):
         self.channel = self.event_handler.channels[self.current_channel_index[0]]
 
+    def increment_time(self, change):
+        self.player.increment_start_time(change)
+
     def record_and_play(self, overwrite=True):
         if not self.player.recording and not self.player.playing:
             # Record
@@ -122,14 +125,60 @@ class Mode(object):
     def increment_velocity(self, change):
         self.channel.increment_velocity(change)
 
+
+    # ----- Interface Methods ------
+    def key_down(self, key):
+        pass
+
+    def key_up(self, key):
+        pass
+
+    def use_knob(self, change, knob_num):
+        pass
+
+class Record(Mode):
+    def __init__(self, event_handler):
+        super().__init__('record', event_handler)
+
+    def key_down(self, key):
+        # if playing piano keys
+        if type(key) is int:
+            self.play_note(key)
+
+        # TODO: Knobs that will be replaced with knob functions
+        elif key == 'knob_1_up':
+            self.use_knob(1, 0)
+        elif key == 'knob_1_down':
+            self.use_knob(-1, 0)
+
+    def key_up(self, key):
+        # if playing piano keys
+        if type(key) is int:
+            self.release_note(key)
+
+        # Recording with overwriting channel
+        elif key == 'record':
+            self.record_and_play(overwrite=True)
+
+        elif key == 'play':
+            self.play()
+
+        elif key == 'stop':
+            self.stop()
+
+    def use_knob(self, change, knob_num):
+        if knob_num == 0:
+            self.increment_time(change)
+
+
 class Test(Mode):
     def __init__(self, event_handler):
         super().__init__('test', event_handler)
 
     def key_down(self, key):
         if self.keyboard.shift:
-            if key == 'left_arrow':
-                self.switch_mode('soundselect')
+            if key == 'right_arrow':
+                self.switch_mode('record')
 
         # if playing piano keys
         elif type(key) is int:

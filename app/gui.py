@@ -1,7 +1,7 @@
 import pygame as pg
 from pygame.locals import *
 import platform
-from pygame_functions import makeSprite, showSprite, moveSprite
+from pygame_functions import makeSprite, addSpriteImage
 
 
 class Gui(object):
@@ -23,13 +23,15 @@ class Gui(object):
         self.interface_dict = dict()
 
         # TODO: Make startup interface
-        self.set_interface('freeplay')
+        self.set_interface('test')
 
     def add_interface(self, mode):
-        if mode == 'freeplay':
-            self.interface_dict[mode] = FreeplayInt(self)
-        elif mode == 'soundselect':
-            self.interface_dict[mode] = SoundSelectInt(self)
+        if mode == 'record':
+            self.interface_dict[mode] = RecordInt(self)
+        # if mode == 'freeplay':
+        #     self.interface_dict[mode] = FreeplayInt(self)
+        # elif mode == 'soundselect':
+        #     self.interface_dict[mode] = SoundSelectInt(self)
         elif mode == 'test':
             self.interface_dict[mode] = TestInt(self)
 
@@ -53,8 +55,6 @@ class Gui(object):
         self.interface.draw_interface()
         pg.display.update()
 
-    # Get event_handler
-
 
 # -----------------------------
 # Interface Modes
@@ -64,6 +64,10 @@ class GuiInterface(object):
     def __init__(self, name, gui):
         self.name = name
         self.events = gui.events
+        self.player = gui.events.player
+        self.mode = gui.events.get_current_mode()
+        self.channel = gui.events.get_current_channel()
+        self.keyboard = gui.events.keyboard
         self.gui = gui
         self.channel_index = self.events.current_channel_index
 
@@ -79,21 +83,68 @@ class GuiInterface(object):
     def draw_interface(self):
         pass
 
-class RecorderInt(GuiInterface):
+class RecordInt(GuiInterface):
     def __init__(self, gui):
-        self.casset = makeSprite('Assets/Sprites/Recording_Background_Sprite.png', 5).images
+
+        # Background sprite
+        self.casset_sprite = makeSprite('Assets/Sprites/Record/Recording_Background_Sprite.png', 5).images
         self.casset_count = 0
-        super().__init__('recorder', gui)
+
+        # Button sprites
+        self.play_button = makeSprite('Assets/Sprites/Record/Casset_Play_Button_Off.png',1)
+        addSpriteImage(self.play_button, 'Assets/Sprites/Record/Casset_Play_Button_On.png')
+        self.play_button = self.play_button.images
+        self.play_button_state = 0
+
+        self.record_button = makeSprite('Assets/Sprites/Record/Casset_Record_Button_Off.png', 1)
+        addSpriteImage(self.record_button, 'Assets/Sprites/Record/Casset_Record_Button_On.png')
+        self.record_button = self.record_button.images
+        self.record_button_state = 0
+
+        self.stop_button = makeSprite('Assets/Sprites/Record/Casset_Stop_Button_Off.png', 1)
+        addSpriteImage(self.stop_button, 'Assets/Sprites/Record/Casset_Stop_Button_On.png')
+        self.stop_button = self.stop_button.images
+        self.stop_button_state = 0
+
+        super().__init__('record', gui)
+
+    def casset_roll_forward(self):
+
+        self.casset_count = (self.casset_count - 0.2) % 5
+
+    def casset_roll_backward(self):
+        self.casset_count = (self.casset_count + 0.2) % 5
 
     def draw_interface(self):
         self.gui.screen.fill((0, 0, 0))
-        self.gui.screen.blit(self.casset[int(self.casset_count)], (0,0))
-        self.casset_count = (self.casset_count - 0.1) % 5
+
+        self.gui.screen.blit(self.casset_sprite[int(self.casset_count)], (0, 0))
+        self.gui.screen.blit(self.play_button[self.play_button_state], (194, 20))
+        self.gui.screen.blit(self.stop_button[self.stop_button_state], (286, 20))
+        self.gui.screen.blit(self.record_button[self.record_button_state], (96, 20))
+
+        if self.keyboard.is_on('stop'):
+            self.stop_button_state = 1
+        else:
+            self.stop_button_state = 0
+
+        if self.player.recording:
+            self.record_button_state = 1
+            self.casset_roll_forward()
+        elif self.player.playing:
+            self.play_button_state = 1
+            self.casset_roll_forward()
+        else:
+            self.play_button_state = 0
+            self.record_button_state = 0
+
+
+        self.draw_text(str(self.player.current_time), self.gui.font, (255, 255, 255), self.gui.screen, 230, 280)
+
+
 
 class SoundSelectInt(GuiInterface):
     def __init__(self, gui):
-        self.casset = makeSprite('Assets/Sprites/Recording_Background_Sprite.png', 5).images
-        self.casset_count = 0
         super().__init__('soundselect', gui)
 
     # draws the interface on the screen

@@ -1,6 +1,6 @@
 from synth import Synth
 from player import Player
-from modes import Freeplay, Test, SoundSelect
+from modes import *
 from keyboard_driver import Keyboard
 import time
 import pygame as pg
@@ -30,7 +30,7 @@ class EventHandler(object):
         # set the player/recorder and pass channels
         self.player = Player(self)
 
-        self.add_channel('freeplay', 0)
+        self.add_channel('record', 0)
 
         self.switch_channel(0)
 
@@ -86,10 +86,8 @@ class EventHandler(object):
 
     # adds mode object to mode list
     def add_mode(self, mode, channel_ind):
-        if mode == 'freeplay':
-            mode_obj = Freeplay(self)
-        elif mode == 'soundselect':
-            mode_obj = SoundSelect(self)
+        if mode == 'record':
+            mode_obj = Record(self)
         elif mode == 'test':
             mode_obj = Test(self)
 
