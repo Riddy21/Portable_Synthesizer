@@ -93,7 +93,7 @@ class Keyboard(object):
         self.event_handler = event_handler
 
         # init key values
-        self.key_dict = FULL_KEYBOARD
+        self.key_dict = COMPACT_KEYBOARD
 
         self.on_keys = set()
 
