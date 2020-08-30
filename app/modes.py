@@ -53,6 +53,10 @@ class Mode(object):
         self.event_handler.switch_channel(channel_num)
         Synth.midi_stop(self.channel.port)
 
+    def increment_channel(self, change):
+        channel_num = self.current_channel_index[0] + change
+        self.event_handler.switch_channel(channel_num)
+
     def update(self):
         self.channel = self.event_handler.channels[self.current_channel_index[0]]
 
@@ -150,6 +154,12 @@ class Record(Mode):
             self.use_knob(1, 0)
         elif key == 'knob_1_down':
             self.use_knob(-1, 0)
+        elif key == 'knob_4_up':
+            self.use_knob(1, 3)
+            print(1)
+        elif key == 'knob_4_down':
+            self.use_knob(-1, 3)
+            print(2)
 
     def key_up(self, key):
         # if playing piano keys
@@ -169,6 +179,8 @@ class Record(Mode):
     def use_knob(self, change, knob_num):
         if knob_num == 0:
             self.increment_time(change)
+        elif knob_num == 3:
+            self.increment_channel(change)
 
 
 class Test(Mode):

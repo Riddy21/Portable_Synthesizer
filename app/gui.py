@@ -1,7 +1,9 @@
 import pygame as pg
 from pygame.locals import *
 import platform
-from pygame_functions import makeSprite, addSpriteImage
+import time
+import datetime
+from pygame_functions import makeSprite, addSpriteImage, draw_bordered_rounded_rect
 
 
 class Gui(object):
@@ -14,7 +16,7 @@ class Gui(object):
             self.screen = pg.display.set_mode((480, 320), FULLSCREEN | DOUBLEBUF, 32)
 
         # Fonts
-        self.font = pg.font.SysFont('robotomonolightforpowerlinettf', 15)
+        self.font = pg.font.SysFont('SG02ttf', 25)
 
         # Get the playback handler to get all the events
         self.events = event_handler
@@ -53,6 +55,7 @@ class Gui(object):
 
         # draw the interface and update
         self.interface.draw_interface()
+        self.interface.draw_overlay()
         pg.display.update()
 
 
@@ -78,6 +81,25 @@ class GuiInterface(object):
         textrect = textobj.get_rect()
         textrect.topleft = (x, y)
         surface.blit(textobj, textrect)
+
+    def draw_overlay(self):
+        time_rect = pg.rect.Rect(380, 280, 130, 80)
+        draw_bordered_rounded_rect(self.gui.screen, time_rect, (0,0,0),(255,255,255), 8, 1)
+        channel_rect = pg.rect.Rect(-10, 280, 60, 80)
+        draw_bordered_rounded_rect(self.gui.screen, channel_rect, (0,0,0),(255,255,255), 8, 1)
+        self.draw_text(
+                '%s' % time.strftime('%M:%S', time.gmtime(self.player.current_time)),
+                self.gui.font,
+                (255, 255, 255),
+                self.gui.screen, 
+                395, 290)
+        self.draw_text(
+                '%d' % self.channel_index[0],
+                self.gui.font,
+                (89,246,141),
+                self.gui.screen,
+                15, 290)
+
 
     # Draw interface abstract method
     def draw_interface(self):
@@ -116,12 +138,10 @@ class RecordInt(GuiInterface):
         self.casset_count = (self.casset_count + 0.2) % 5
 
     def draw_interface(self):
-        self.gui.screen.fill((0, 0, 0))
-
-        self.gui.screen.blit(self.casset_sprite[int(self.casset_count)], (0, 0))
-        self.gui.screen.blit(self.play_button[self.play_button_state], (194, 20))
-        self.gui.screen.blit(self.stop_button[self.stop_button_state], (286, 20))
-        self.gui.screen.blit(self.record_button[self.record_button_state], (96, 20))
+        self.gui.screen.blit(self.casset_sprite[int(self.casset_count)], (0, 20))
+        self.gui.screen.blit(self.play_button[self.play_button_state], (194, 30))
+        self.gui.screen.blit(self.stop_button[self.stop_button_state], (286, 30))
+        self.gui.screen.blit(self.record_button[self.record_button_state], (96, 30))
 
         if self.keyboard.is_on('stop'):
             self.stop_button_state = 1
@@ -131,17 +151,14 @@ class RecordInt(GuiInterface):
         if self.player.recording:
             self.record_button_state = 1
             self.casset_roll_forward()
-        elif self.player.playing:
+        else:
+            self.record_button_state = 0
+
+        if self.player.playing:
             self.play_button_state = 1
             self.casset_roll_forward()
         else:
             self.play_button_state = 0
-            self.record_button_state = 0
-
-
-        self.draw_text(str(self.player.current_time), self.gui.font, (255, 255, 255), self.gui.screen, 230, 280)
-
-
 
 class SoundSelectInt(GuiInterface):
     def __init__(self, gui):

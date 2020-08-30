@@ -85,6 +85,32 @@ COMPACT_KEYBOARD = {
     pg.K_RIGHTBRACKET: 'knob_4_down',  # Knob 4 down
 }
 
+ONBOARD_KEYBOARD = {
+    pg.K_z: 0,  # C1
+    pg.K_RETURN: 1,  # C#1
+    pg.K_x: 2,  # D1
+    pg.K_PERIOD: 3,  # D#1
+    pg.K_c: 4,  # E1
+    pg.K_v: 5,  # F1
+    pg.K_RIGHTBRACKET: 6,  # F#1
+    pg.K_KP_1: 7,  # G1
+    pg.K_RCTRL: 8,  # G#1
+    pg.K_n: 9,  # A1
+    pg.K_KP_5: 10,  # A#1
+    pg.K_KP_0: 11,  # B1
+    pg.K_KP_9: 12,  # C2
+    pg.K_LEFTBRACKET: 13,  # C#2
+    pg.K_END: 14,  # D2
+    pg.K_LEFT: 15,  # D#2
+    pg.K_DELETE: 16,  # E2
+    pg.K_HOME: 17,  # F2
+    pg.K_PAGEDOWN: 18,  # F#2
+    pg.K_DOWN: 19,  # G2
+    pg.K_6: 20,  # G#2
+    pg.K_QUOTE: 21,  # A2
+    pg.K_7: 22,  # A#2
+    pg.K_BACKSPACE: 23,  # B2
+    }
 
 # Interfacing with the Keyboard API
 class Keyboard(object):
@@ -93,7 +119,7 @@ class Keyboard(object):
         self.event_handler = event_handler
 
         # init key values
-        self.key_dict = COMPACT_KEYBOARD
+        self.key_dict = ONBOARD_KEYBOARD
 
         self.on_keys = set()
 
@@ -134,6 +160,7 @@ class Keyboard(object):
 
     # controls the keyboard to hit a key
     def key_down(self, key_name):
+        print(key_name)
         # Checks the if the key is on and adds key to on keys if not on
         if key_name not in self.on_keys:
             # add key to on_notes

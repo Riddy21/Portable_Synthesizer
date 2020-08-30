@@ -129,7 +129,7 @@ class EventHandler(object):
 
         # if the channel doesn't exist, make new channel
         if not self.channels[channel_ind]:
-            self.add_channel(mode='freeplay', channel_ind=channel_ind)
+            self.add_channel(mode='record', channel_ind=channel_ind)
 
 
         else:
