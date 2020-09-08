@@ -52,10 +52,12 @@ class Mode(object):
     def switch_channel(self, channel_num):
         self.event_handler.switch_channel(channel_num)
         Synth.midi_stop(self.channel.port)
+        self.change_sustain(False)
+        self.change_sustenuto(False)
 
     def increment_channel(self, change):
         channel_num = self.current_channel_index[0] + change
-        self.event_handler.switch_channel(channel_num)
+        self.switch_channel(channel_num)
 
     def update(self):
         self.channel = self.event_handler.channels[self.current_channel_index[0]]
@@ -110,13 +112,13 @@ class Mode(object):
 
     def change_sustain(self, sustain):
         self.channel.change_sustain(sustain)
-    
+
     def toggle_sustain(self):
         self.channel.toggle_sustain()
 
     def change_sustenuto(self, sustenuto):
         self.channel.change_sustenuto(sustenuto)
-    
+
     def toggle_sustenuto(self):
         self.channel.toggle_sustenuto()
 
@@ -132,11 +134,44 @@ class Mode(object):
 
     # ----- Interface Methods ------
     def key_down(self, key):
-        pass
+        # if playing piano keys
+        if type(key) is int:
+            self.play_note(key)
+
+        # Octave change
+        if key == 'left_arrow':
+            self.octave_shift(-1)
+        elif key == 'right_arrow':
+            self.octave_shift(1)
+
+        # Sustenuto
+        elif key == 'sustenuto':
+            if self.keyboard.shift:
+                self.toggle_sustenuto()
+            else:
+                self.change_sustenuto(True)
+
+        # Sustain
+        elif key == 'sustain':
+            if self.keyboard.shift:
+                self.toggle_sustain()
+            else:
+                self.change_sustain(True)
 
     def key_up(self, key):
-        pass
+        # if playing piano keys
+        if type(key) is int:
+            self.release_note(key)
 
+        # Sustenuto
+        elif key == 'sustenuto':
+            if not self.keyboard.shift:
+                self.change_sustenuto(False)
+
+        # Sustain
+        elif key == 'sustain':
+            if not self.keyboard.shift:
+                self.change_sustain(False)
     def use_knob(self, change, knob_num):
         pass
 
@@ -145,29 +180,22 @@ class Record(Mode):
         super().__init__('record', event_handler)
 
     def key_down(self, key):
-        # if playing piano keys
-        if type(key) is int:
-            self.play_note(key)
-
+        super().key_down(key)
         # TODO: Knobs that will be replaced with knob functions
-        elif key == 'knob_1_up':
+        if key == 'knob_1_up':
             self.use_knob(1, 0)
         elif key == 'knob_1_down':
             self.use_knob(-1, 0)
         elif key == 'knob_4_up':
             self.use_knob(1, 3)
-            print(1)
         elif key == 'knob_4_down':
             self.use_knob(-1, 3)
-            print(2)
 
     def key_up(self, key):
-        # if playing piano keys
-        if type(key) is int:
-            self.release_note(key)
+        super().key_up(key)
 
         # Recording with overwriting channel
-        elif key == 'record':
+        if key == 'record':
             self.record_and_play(overwrite=True)
 
         elif key == 'play':

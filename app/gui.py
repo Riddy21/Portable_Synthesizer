@@ -87,6 +87,12 @@ class GuiInterface(object):
         draw_bordered_rounded_rect(self.gui.screen, time_rect, (0,0,0),(255,255,255), 8, 1)
         channel_rect = pg.rect.Rect(-10, 280, 60, 80)
         draw_bordered_rounded_rect(self.gui.screen, channel_rect, (0,0,0),(255,255,255), 8, 1)
+        # TODO: Make pedal icon
+        if self.channel.sustenuto == 64:
+            self.draw_text('S', self.gui.font, (176,135,255), self.gui.screen, 60, 290)
+        # TODO: Make sustanuto icon
+        elif self.channel.sustain == 64:
+            self.draw_text('P', self.gui.font, (255,184,108), self.gui.screen, 70, 290)
         self.draw_text(
                 '%s' % time.strftime('%M:%S', time.gmtime(self.player.current_time)),
                 self.gui.font,

@@ -75,6 +75,8 @@ COMPACT_KEYBOARD = {
     pg.K_RSHIFT: 'record',  # Record
     pg.K_BACKSPACE: 'stop',  # Stop
     pg.K_RETURN: 'play',  # Play
+    pg.K_1: 'sustenuto',  # Sustenuto button
+    pg.K_2: 'sustain',  # Sustain button
     pg.K_9: 'knob_1_up',  # Knob 1 up
     pg.K_o: 'knob_1_down',  # Knob 1 down
     pg.K_0: 'knob_2_up',  # Knob 2 up
@@ -119,7 +121,7 @@ class Keyboard(object):
         self.event_handler = event_handler
 
         # init key values
-        self.key_dict = ONBOARD_KEYBOARD
+        self.key_dict = COMPACT_KEYBOARD
 
         self.on_keys = set()
 
