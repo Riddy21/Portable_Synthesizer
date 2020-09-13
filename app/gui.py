@@ -1,7 +1,9 @@
 import pygame as pg
 from pygame.locals import *
 import platform
-from pygame_functions import makeSprite, showSprite, moveSprite
+import time
+import datetime
+from pygame_functions import makeSprite, addSpriteImage, draw_bordered_rounded_rect
 
 
 class Gui(object):
@@ -14,27 +16,35 @@ class Gui(object):
             self.screen = pg.display.set_mode((480, 320), FULLSCREEN | DOUBLEBUF, 32)
 
         # Fonts
-        self.font = pg.font.SysFont('robotomonolightforpowerlinettf', 15)
+        self.font = pg.font.SysFont('SG02ttf', 25)
 
         # Get the playback handler to get all the events
         self.events = event_handler
 
-        self.interface_dict = self._initialize_interfaces()
+        # dict of loaded interfaces
+        self.interface_dict = dict()
 
-        # Make startup interface
-        self.interface = self.interface_dict['freeplay']
+        # TODO: Make startup interface
+        self.set_interface('test')
 
-    def _initialize_interfaces(self):
-        interfaces = dict()
-        interfaces['freeplay'] = FreeplayInt(self)
-        interfaces['soundselect'] = SoundSelectInt(self)
-        interfaces['test'] = TestInt(self)
-        interfaces['recorder'] = RecorderInt(self)
-        return interfaces
+    def add_interface(self, mode):
+        if mode == 'record':
+            self.interface_dict[mode] = RecordInt(self)
+        # if mode == 'freeplay':
+        #     self.interface_dict[mode] = FreeplayInt(self)
+        # elif mode == 'soundselect':
+        #     self.interface_dict[mode] = SoundSelectInt(self)
+        elif mode == 'test':
+            self.interface_dict[mode] = TestInt(self)
+
+        self.interface = self.interface_dict[mode]
 
     # sets the interface of the OP1 and passes in the pointer to the player
     def set_interface(self, mode):
-        self.interface = self.interface_dict[mode]
+        try:
+            self.interface = self.interface_dict[mode]
+        except KeyError:
+            self.add_interface(mode)
 
     # Draws whatever interface is currently on and updates
     def draw_interface(self):
@@ -45,9 +55,8 @@ class Gui(object):
 
         # draw the interface and update
         self.interface.draw_interface()
+        self.interface.draw_overlay()
         pg.display.update()
-
-    # Get event_handler
 
 
 # -----------------------------
@@ -58,6 +67,10 @@ class GuiInterface(object):
     def __init__(self, name, gui):
         self.name = name
         self.events = gui.events
+        self.player = gui.events.player
+        self.mode = gui.events.get_current_mode()
+        self.channel = gui.events.get_current_channel()
+        self.keyboard = gui.events.keyboard
         self.gui = gui
         self.channel_index = self.events.current_channel_index
 
@@ -69,25 +82,97 @@ class GuiInterface(object):
         textrect.topleft = (x, y)
         surface.blit(textobj, textrect)
 
+    def draw_overlay(self):
+        time_rect = pg.rect.Rect(380, 280, 130, 80)
+        draw_bordered_rounded_rect(self.gui.screen, time_rect, (0,0,0),(255,255,255), 8, 1)
+        channel_rect = pg.rect.Rect(-30, 280, 130, 80)
+        draw_bordered_rounded_rect(self.gui.screen, channel_rect, (0,0,0),(255,255,255), 8, 1)
+        self.draw_text(
+                '%s' % time.strftime('%M:%S', time.gmtime(self.player.current_time)),
+                self.gui.font,
+                (255, 255, 255),
+                self.gui.screen, 
+                393, 290)
+        self.draw_text(
+                '%d' % self.channel_index[0],
+                self.gui.font,
+                (89,246,141),
+                self.gui.screen,
+                15, 290)
+
+        # TODO: Make pedal icon
+        if self.channel.sustenuto == 64:
+            self.draw_text('S', self.gui.font, (176,135,255), self.gui.screen, 40, 290)
+        else:
+            self.draw_text('S', self.gui.font, (100,100,100), self.gui.screen, 40, 290)
+        # TODO: Make sustanuto icon
+        if self.channel.sustain == 64:
+            self.draw_text('P', self.gui.font, (255,184,108), self.gui.screen, 65, 290)
+        else:
+            self.draw_text('P', self.gui.font, (100,100,100), self.gui.screen, 65, 290)
+
+
     # Draw interface abstract method
     def draw_interface(self):
         pass
 
-class RecorderInt(GuiInterface):
+class RecordInt(GuiInterface):
     def __init__(self, gui):
-        self.casset = makeSprite('Assets/Sprites/Recording_Background_Sprite.png', 5).images
+
+        # Background sprite
+        self.casset_sprite = makeSprite('Assets/Sprites/Record/Recording_Background_Sprite.png', 5).images
         self.casset_count = 0
-        super().__init__('recorder', gui)
+
+        # Button sprites
+        self.play_button = makeSprite('Assets/Sprites/Record/Casset_Play_Button_Off.png',1)
+        addSpriteImage(self.play_button, 'Assets/Sprites/Record/Casset_Play_Button_On.png')
+        self.play_button = self.play_button.images
+        self.play_button_state = 0
+
+        self.record_button = makeSprite('Assets/Sprites/Record/Casset_Record_Button_Off.png', 1)
+        addSpriteImage(self.record_button, 'Assets/Sprites/Record/Casset_Record_Button_On.png')
+        self.record_button = self.record_button.images
+        self.record_button_state = 0
+
+        self.stop_button = makeSprite('Assets/Sprites/Record/Casset_Stop_Button_Off.png', 1)
+        addSpriteImage(self.stop_button, 'Assets/Sprites/Record/Casset_Stop_Button_On.png')
+        self.stop_button = self.stop_button.images
+        self.stop_button_state = 0
+
+        super().__init__('record', gui)
+
+    def casset_roll_forward(self):
+
+        self.casset_count = (self.casset_count - 0.2) % 5
+
+    def casset_roll_backward(self):
+        self.casset_count = (self.casset_count + 0.2) % 5
 
     def draw_interface(self):
-        self.gui.screen.fill((0, 0, 0))
-        self.gui.screen.blit(self.casset[int(self.casset_count)], (0,0))
-        self.casset_count = (self.casset_count - 0.1) % 5
+        self.gui.screen.blit(self.casset_sprite[int(self.casset_count)], (0, 20))
+        self.gui.screen.blit(self.play_button[self.play_button_state], (194, 30))
+        self.gui.screen.blit(self.stop_button[self.stop_button_state], (286, 30))
+        self.gui.screen.blit(self.record_button[self.record_button_state], (96, 30))
+
+        if self.keyboard.is_on('stop'):
+            self.stop_button_state = 1
+        else:
+            self.stop_button_state = 0
+
+        if self.player.recording:
+            self.record_button_state = 1
+            self.casset_roll_forward()
+        else:
+            self.record_button_state = 0
+
+        if self.player.playing:
+            self.play_button_state = 1
+            self.casset_roll_forward()
+        else:
+            self.play_button_state = 0
 
 class SoundSelectInt(GuiInterface):
     def __init__(self, gui):
-        self.casset = makeSprite('Assets/Sprites/Recording_Background_Sprite.png', 5).images
-        self.casset_count = 0
         super().__init__('soundselect', gui)
 
     # draws the interface on the screen
@@ -146,16 +231,3 @@ class TestInt(GuiInterface):
             self.draw_text('playing', self.gui.font, (255, 255, 255), self.gui.screen, 20, 60)
 
 
-class StartupInt(GuiInterface):
-    def __init__(self, events, gui):
-        self.name = 'startup'
-        self.events = events
-        self.gui = gui
-
-    # draws the interface on the screen
-    def draw_interface(self):
-        self.gui.screen.fill((0, 0, 255))
-        self.draw_text(self.name, self.gui.font, (255, 255, 255), self.gui.screen, 20, 20)
-
-        test_button = pg.Rect(50, 100, 200, 50)
-        pg.draw.rect(self.gui.screen, (255, 0, 0), test_button)

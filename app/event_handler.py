@@ -1,6 +1,6 @@
 from synth import Synth
 from player import Player
-from modes import Freeplay, Test, SoundSelect
+from modes import *
 from keyboard_driver import Keyboard
 import time
 import pygame as pg
@@ -11,11 +11,14 @@ from synth import end
 class EventHandler(object):
     def __init__(self, port):
         # initialize channels and the keyboard
-        self.channels = []
+        self.channels = [None]*16
         # Keep track of channel modes
-        self.channel_modes = []
+        self.channel_modes = [None]*16
 
-        # Set the current mode to none
+        # Dictionary of loaded modes so that the mode objects do not need to be created again
+        self.channel_mode_buffer = dict()
+
+        # Set the current mode to 0 but keep as list to make sure you can pass by pointer
         self.current_channel_index = [0]
 
         # port for connecting to fluidsynth
@@ -27,8 +30,7 @@ class EventHandler(object):
         # set the player/recorder and pass channels
         self.player = Player(self)
 
-        for i in range(16):
-            self.add_channel('freeplay', (0, 0))
+        self.add_channel('record', 0)
 
         self.switch_channel(0)
 
@@ -64,54 +66,79 @@ class EventHandler(object):
         # Do one change from the knob queue
         if self.knob_queue:
             knob_event = self.knob_queue.pop(0)
-            self.use_knob(knob_num=knob_event[0], change=knob_event[1])
+            self.keyboard.use_knob(knob_num=knob_event[0], change=knob_event[1])
 
     # Add a new channel and declare its playing mode
-    def add_channel(self, mode, instr=(0, 0), volume=64, modulation=0, pitch=0):
-        # Find the channel number
-        channel_length = len(self.channels)
-
-        self.current_channel_index[0] = channel_length
+    def add_channel(self, mode, channel_ind, instr=(0, 0)):
 
         # Make the synth and add it to channels
-        if channel_length == 9:  # Set to standard piano if number 9 nine, default is drum
+        if channel_ind == 9:  # Set to standard piano if number 9 nine, default is drum
             instr = (120, 0)
-
         synth = Synth(event_handler=self,
-                      instr=instr)
-        self.channels.append(synth)
-        self.add_mode(mode)
+                      instr=instr,
+                      channel_ind=channel_ind)
+
+        self.channels[channel_ind] = synth
+        self.add_mode(mode, channel_ind)
+        
+        # Update current channel
+        self.current_channel_index[0] = channel_ind
 
     # adds mode object to mode list
-    def add_mode(self, mode):
-        if mode == 'freeplay':
-            self.channel_modes.append(Freeplay(self))
+    def add_mode(self, mode, channel_ind):
+        if mode == 'record':
+            mode_obj = Record(self)
         elif mode == 'test':
-            self.channel_modes.append(Test(self))
-        elif mode == 'soundselect':
-            self.channel_modes.append(SoundSelect(self))
+            mode_obj = Test(self)
+
+        self.channel_modes[channel_ind] = mode_obj
+        self.channel_mode_buffer[mode] = mode_obj
 
     # Switch the mode of the current channel
-    def switch_mode(self, mode):
+    def switch_mode(self, mode, channel_ind):
         if mode == 'freeplay':
-            self.channel_modes[self.current_channel_index[0]] = Freeplay(self)
+            try:
+                # Try accessing using dictionary
+                self.channel_modes[channel_ind] = self.channel_mode_buffer['freeplay']
+                
+            except KeyError:
+                # If not in dictionary add the mode
+                self.add_mode('freeplay', channel_ind)
+            
         elif mode == 'test':
-            self.channel_modes[self.current_channel_index[0]] = Test(self)
+            try:
+                # Try accessing using dictionary
+                self.channel_modes[channel_ind] = self.channel_mode_buffer['test']
+            except KeyError:
+                # If not in dictionary add the mode
+                self.add_mode('test', channel_ind)
         elif mode == 'soundselect':
-            self.channel_modes[self.current_channel_index[0]] = SoundSelect(self)
+            try:
+                # Try accessing using dictionary
+                self.channel_modes[channel_ind] = self.channel_mode_buffer['soundselect']
+            except KeyError:
+                # If not in dictionary add the mode
+                self.add_mode('soundselect', channel_ind)
+        
+        self.channel_modes[channel_ind].update()
 
     # Switch the current channel
     def switch_channel(self, channel_ind):
         if channel_ind < 0 or channel_ind > 15:
             return
 
-        # change the channel
-        self.current_channel_index[0] = channel_ind
-
         # if the channel doesn't exist, make new channel
-        if channel_ind >= len(self.channels):
-            self.add_channel('freeplay')
+        if not self.channels[channel_ind]:
+            self.add_channel(mode='record', channel_ind=channel_ind)
 
+
+        else:
+            # change the channel
+            self.current_channel_index[0] = channel_ind
+
+        # Update so channels are synced in modes
+        self.channel_modes[channel_ind].update()
+    
     # Gets the current mode based on channel index
     def get_current_mode(self):
         return self.channel_modes[self.current_channel_index[0]]

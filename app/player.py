@@ -16,6 +16,8 @@ class Player(object):
 
         # Time at which playing and recording starts at
         self.start_time = 0
+        # for gui tracking what time it currently is
+        self.current_time = 0
 
         self.recording = False
         self.playing = False
@@ -56,11 +58,13 @@ class Player(object):
 
             # wait until time to play note
             while time.time() - start_time <= note_time:
+                self.current_time = time.time() - start_time + self.start_time
                 pygame.time.delay(1)
 
             Synth.send_msg(self.channels, event[1])
 
         self.playing = False
+        self.current_time = self.start_time
 
     # record all the channels at the same time
     def record(self, overwrite):
@@ -87,6 +91,8 @@ class Player(object):
             self.recordlist = []
         self.recording = False
         self.playing = False
+
+        self.current_time = self.start_time
 
     # cleans up and sorts the playlist
     def make_event_list(self):
@@ -135,8 +141,8 @@ class Player(object):
     # Save playlist as a file
     def save_to_file(self):
         timestr = time.strftime("Data/Date: %m_%d_%Y Time:%H_%M_%S")
-        file = open(timestr+'.txt', 'w')
-        
+        file = open(timestr + '.txt', 'w')
+
         string = ""
         for event in self.playlist:
             string += str(event[0])
@@ -146,7 +152,6 @@ class Player(object):
 
         file.write(string)
         file.close()
-
 
     # Gets list of projects you are working on
     def get_projects(self):
@@ -168,11 +173,10 @@ class Player(object):
         # parse into 2D list
         for line_index in range(len(playlist_data)):
             playlist_data[line_index] = playlist_data[line_index].split(' ')
-    
+
         # remove empty elements
         try:
             playlist_data.remove([''])
-            print('removed!')
         except ValueError:
             pass
 
@@ -180,16 +184,23 @@ class Player(object):
         for elem in playlist_data:
             time = float(elem[0])
             tmplist = []
-            for i in range(1,len(elem)):
+            for i in range(1, len(elem)):
                 tmplist.append(int(elem[i]))
             new_playlist.add((time, tuple(tmplist)))
-        
+
         self.playlist = new_playlist
 
     # sets the start time
     def set_start_time(self, start_time):
-        if start_time >= 0:
+        if not self.playing and not self.recording and start_time >= 0:
             self.start_time = start_time
+            self.current_time = self.start_time
+
+    def increment_start_time(self, increment):
+        start_buff = self.start_time + increment
+        if not self.playing and not self.recording and start_buff >= 0:
+            self.start_time = start_buff
+            self.current_time = self.start_time
 
     # Deletes everything in a channel from a time onwards
     def delete_channel(self, channel_ind):
