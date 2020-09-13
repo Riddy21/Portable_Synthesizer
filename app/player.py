@@ -75,8 +75,10 @@ class Player(object):
 
         # Add the initial information such as channel synth, gain, reverb, volume to the
         # beginning of the record list of the channel you are on right now of only the channel youre on right now
-        current_channel = self.channels[self.current_channel_index[0]]
-        current_channel.record_setup()
+        # Record setup for all channels
+        for channel in self.channels:
+            if channel:
+                channel.record_setup()
 
         if overwrite:
             self.delete_channel(self.current_channel_index[0])
@@ -118,6 +120,25 @@ class Player(object):
                 elif msg.type == 'control_change':
                     if msg.control == 0:
                         setup[msg.channel]['bank'] = msg
+                    #TODO: add all other types of changes to setup
+                    elif msg.control == 7:
+                        setup[msg.channel]['volume'] = msg
+                    elif msg.control == 1:
+                        setup[msg.channel]['modulation'] = msg
+                    elif msg.control == 8:
+                        setup[msg.channel]['balance'] = msg
+                    elif msg.control == 10:
+                        setup[msg.channel]['pan'] = msg
+                    elif msg.control == 64:
+                        setup[msg.channel]['sustain'] = msg
+                    elif msg.control == 66:
+                        setup[msg.channel]['sustenuto'] = msg
+                    elif msg.control == 91:
+                        setup[msg.channel]['reverb'] = msg
+                    elif msg.control == 93:
+                        setup[msg.channel]['chorus'] = msg
+                elif msg.type == 'pitchwheel':
+                    setup[msg.channel]['pitch'] = msg
 
                 # Dont add to curated list
             else:
@@ -130,11 +151,11 @@ class Player(object):
             for setting in channel.values():
                 # must change program before changing bank
 
-                # If program change, set the event timestamp as 0.0001
+                # If program change, set the event timestamp as -1 so it happens after control change
                 if setting.type == 'program_change':
-                    event_list.append((0.0001, setting))
+                    event_list.append((-1, setting))
                 else:
-                    event_list.append((0, setting))
+                    event_list.append((-2, setting))
 
         return sorted(event_list, key=lambda l: l[0])
 

@@ -44,6 +44,7 @@ FULL_KEYBOARD = {
     pg.K_KP_PLUS: 'knob_4_down'  # Knob 4 down
 }
 
+# TODO: Add extra buttons
 COMPACT_KEYBOARD = {
     pg.K_z: 0,  # C1
     pg.K_s: 1,  # C#1

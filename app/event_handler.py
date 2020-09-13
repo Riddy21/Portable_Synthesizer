@@ -30,7 +30,8 @@ class EventHandler(object):
         # set the player/recorder and pass channels
         self.player = Player(self)
 
-        self.add_channel('record', 0)
+        for i in range(16):
+            self.add_channel('record', i)
 
         self.switch_channel(0)
 
@@ -53,7 +54,7 @@ class EventHandler(object):
                     pass
                 else:
                     self.keyboard.key_down(value)
-                    print(end[0] - start)
+                    #print(end[0] - start)
             elif e.type == pg.KEYUP:
                 try:
                     value = self.keyboard.get_key_name(e.key)
@@ -130,7 +131,6 @@ class EventHandler(object):
         # if the channel doesn't exist, make new channel
         if not self.channels[channel_ind]:
             self.add_channel(mode='record', channel_ind=channel_ind)
-
 
         else:
             # change the channel

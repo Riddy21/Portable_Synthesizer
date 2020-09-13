@@ -25,6 +25,10 @@ class Mode(object):
         # channel set to the proper synth
         self.channel = self.event_handler.channels[self.current_channel_index[0]]
 
+        # Locks for locking sustain and sustenuto
+        self.sustain_lock = False
+        self.sustenuto_lock = False
+
     # Command to play note in context with record and play,
     # Will start recording or playing when note is played if record or play is held
     def play_note(self, index):
@@ -50,10 +54,12 @@ class Mode(object):
         self.event_handler.switch_mode(mode, self.current_channel_index[0])
 
     def switch_channel(self, channel_num):
-        self.event_handler.switch_channel(channel_num)
         Synth.midi_stop(self.channel.port)
-        self.change_sustain(False)
-        self.change_sustenuto(False)
+        if not self.sustain_lock and self.channel.sustain == 64:
+            self.change_sustain(False)
+        if not self.sustenuto_lock and self.channel.sustenuto == 64:
+            self.change_sustenuto(False, self.channel.channel_ind)
+        self.event_handler.switch_channel(channel_num)
 
     def increment_channel(self, change):
         channel_num = self.current_channel_index[0] + change
@@ -148,6 +154,7 @@ class Mode(object):
         elif key == 'sustenuto':
             if self.keyboard.shift:
                 self.toggle_sustenuto()
+                self.sustenuto_lock = True
             else:
                 self.change_sustenuto(True)
 
@@ -155,6 +162,7 @@ class Mode(object):
         elif key == 'sustain':
             if self.keyboard.shift:
                 self.toggle_sustain()
+                self.sustain_lock = True
             else:
                 self.change_sustain(True)
 
@@ -165,12 +173,12 @@ class Mode(object):
 
         # Sustenuto
         elif key == 'sustenuto':
-            if not self.keyboard.shift:
+            if not self.sustenuto_lock:
                 self.change_sustenuto(False)
 
         # Sustain
         elif key == 'sustain':
-            if not self.keyboard.shift:
+            if not self.sustain_lock:
                 self.change_sustain(False)
     def use_knob(self, change, knob_num):
         pass
@@ -183,9 +191,9 @@ class Record(Mode):
         super().key_down(key)
         # TODO: Knobs that will be replaced with knob functions
         if key == 'knob_1_up':
-            self.use_knob(1, 0)
+            self.use_knob(0.2, 0)
         elif key == 'knob_1_down':
-            self.use_knob(-1, 0)
+            self.use_knob(-0.2, 0)
         elif key == 'knob_4_up':
             self.use_knob(1, 3)
         elif key == 'knob_4_down':
@@ -196,7 +204,10 @@ class Record(Mode):
 
         # Recording with overwriting channel
         if key == 'record':
-            self.record_and_play(overwrite=True)
+            if self.keyboard.shift:
+                self.record_and_play(overwrite=False)
+            else:
+                self.record_and_play(overwrite=True)
 
         elif key == 'play':
             self.play()

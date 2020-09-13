@@ -5,6 +5,17 @@ import time
 import datetime
 from pygame_functions import makeSprite, addSpriteImage, draw_bordered_rounded_rect
 
+# Colours
+BLACK = (0,0,0)
+WHITE = (255,255,255)
+GRAY = (100,100,100)
+RED = (255,109,103)
+ORANGE = (255,184,108)
+GREEN = (89,246,141)
+YELLOW = (243,248,257)
+PURPLE = (201,168,250)
+PINK = (255,246,208)
+CYAN = (153,236,253)
 
 class Gui(object):
 
@@ -54,6 +65,7 @@ class Gui(object):
             self.set_interface(mode_name)
 
         # draw the interface and update
+        self.interface.update_channel()
         self.interface.draw_interface()
         self.interface.draw_overlay()
         pg.display.update()
@@ -82,34 +94,38 @@ class GuiInterface(object):
         textrect.topleft = (x, y)
         surface.blit(textobj, textrect)
 
+    def update_channel(self):
+        # update the channel
+        self.channel = self.events.get_current_channel()
+
     def draw_overlay(self):
         time_rect = pg.rect.Rect(380, 280, 130, 80)
-        draw_bordered_rounded_rect(self.gui.screen, time_rect, (0,0,0),(255,255,255), 8, 1)
+        draw_bordered_rounded_rect(self.gui.screen, time_rect, (0,0,0), WHITE, 8, 1)
         channel_rect = pg.rect.Rect(-30, 280, 130, 80)
-        draw_bordered_rounded_rect(self.gui.screen, channel_rect, (0,0,0),(255,255,255), 8, 1)
+        draw_bordered_rounded_rect(self.gui.screen, channel_rect, (0,0,0), WHITE, 8, 1)
         self.draw_text(
                 '%s' % time.strftime('%M:%S', time.gmtime(self.player.current_time)),
                 self.gui.font,
-                (255, 255, 255),
+                WHITE,
                 self.gui.screen, 
                 393, 290)
         self.draw_text(
                 '%d' % self.channel_index[0],
                 self.gui.font,
-                (89,246,141),
+                GREEN,
                 self.gui.screen,
                 15, 290)
 
         # TODO: Make pedal icon
         if self.channel.sustenuto == 64:
-            self.draw_text('S', self.gui.font, (176,135,255), self.gui.screen, 40, 290)
+            self.draw_text('S', self.gui.font, ORANGE, self.gui.screen, 40, 290)
         else:
-            self.draw_text('S', self.gui.font, (100,100,100), self.gui.screen, 40, 290)
+            self.draw_text('S', self.gui.font, GRAY, self.gui.screen, 40, 290)
         # TODO: Make sustanuto icon
         if self.channel.sustain == 64:
-            self.draw_text('P', self.gui.font, (255,184,108), self.gui.screen, 65, 290)
+            self.draw_text('P', self.gui.font, PURPLE, self.gui.screen, 65, 290)
         else:
-            self.draw_text('P', self.gui.font, (100,100,100), self.gui.screen, 65, 290)
+            self.draw_text('P', self.gui.font, GRAY, self.gui.screen, 65, 290)
 
 
     # Draw interface abstract method

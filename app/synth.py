@@ -111,7 +111,7 @@ class Synth(object):
     def midi_note_on(self, note):
         msg = mido.Message('note_on', note=note, velocity=self.velocity, channel=self.channel_ind)
         end[0] = time.time()
-        print(msg)
+        #print(msg)
         self.port.send(msg)
 
         # Send time stamp and note to recorder
@@ -223,7 +223,7 @@ class Synth(object):
     # sends a midi message
     def midi_send_msg(self, msg):
         self.port.send(msg)
-        print(msg)
+        #print(msg)
 
         # check for all the correspinding set values and change them
         if msg.type == 'note_on':
@@ -269,7 +269,7 @@ class Synth(object):
                 ]
 
         # Sends the message with the time set as the original start time of the recording
-        counter = 0
+        counter = -10
         for msg in msgs:
             self.recorder.record_event(msg=msg.bytes(), time=self.recorder.recording + counter)
             counter += 0.00001
