@@ -85,26 +85,31 @@ class GuiInterface(object):
     def draw_overlay(self):
         time_rect = pg.rect.Rect(380, 280, 130, 80)
         draw_bordered_rounded_rect(self.gui.screen, time_rect, (0,0,0),(255,255,255), 8, 1)
-        channel_rect = pg.rect.Rect(-10, 280, 60, 80)
+        channel_rect = pg.rect.Rect(-30, 280, 130, 80)
         draw_bordered_rounded_rect(self.gui.screen, channel_rect, (0,0,0),(255,255,255), 8, 1)
-        # TODO: Make pedal icon
-        if self.channel.sustenuto == 64:
-            self.draw_text('S', self.gui.font, (176,135,255), self.gui.screen, 60, 290)
-        # TODO: Make sustanuto icon
-        elif self.channel.sustain == 64:
-            self.draw_text('P', self.gui.font, (255,184,108), self.gui.screen, 70, 290)
         self.draw_text(
                 '%s' % time.strftime('%M:%S', time.gmtime(self.player.current_time)),
                 self.gui.font,
                 (255, 255, 255),
                 self.gui.screen, 
-                395, 290)
+                393, 290)
         self.draw_text(
                 '%d' % self.channel_index[0],
                 self.gui.font,
                 (89,246,141),
                 self.gui.screen,
                 15, 290)
+
+        # TODO: Make pedal icon
+        if self.channel.sustenuto == 64:
+            self.draw_text('S', self.gui.font, (176,135,255), self.gui.screen, 40, 290)
+        else:
+            self.draw_text('S', self.gui.font, (100,100,100), self.gui.screen, 40, 290)
+        # TODO: Make sustanuto icon
+        if self.channel.sustain == 64:
+            self.draw_text('P', self.gui.font, (255,184,108), self.gui.screen, 65, 290)
+        else:
+            self.draw_text('P', self.gui.font, (100,100,100), self.gui.screen, 65, 290)
 
 
     # Draw interface abstract method
