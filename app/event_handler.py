@@ -73,7 +73,7 @@ class EventHandler(object):
     def add_channel(self, mode, channel_ind, instr=(0, 0)):
 
         # Make the synth and add it to channels
-        if channel_ind == 9:  # Set to standard piano if number 9 nine, default is drum
+        if channel_ind == 9:  # Index 9 is Drum kits only
             instr = (120, 0)
         synth = Synth(event_handler=self,
                       instr=instr,
@@ -81,7 +81,7 @@ class EventHandler(object):
 
         self.channels[channel_ind] = synth
         self.add_mode(mode, channel_ind)
-        
+
         # Update current channel
         self.current_channel_index[0] = channel_ind
 

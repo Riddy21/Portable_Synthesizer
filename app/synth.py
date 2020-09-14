@@ -127,6 +127,7 @@ class Synth(object):
 
     # Changes sound
     def midi_change_synth(self, bank, program):
+        print(bank, program)
         msg1 = mido.Message('control_change', control=0, value=bank, channel=self.channel_ind)
         msg2 = mido.Message('program_change', program=program, channel=self.channel_ind)
         # send message
