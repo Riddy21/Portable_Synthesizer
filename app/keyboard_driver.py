@@ -70,22 +70,44 @@ COMPACT_KEYBOARD = {
     pg.K_KP_8: 21,  # A2
     pg.K_KP_9: 22,  # A#2
     pg.K_KP_PLUS: 23,  # B2
-    pg.K_LSHIFT: 'shift',  # Shift button
-    pg.K_LEFT: 'left_arrow',  # left arrow
-    pg.K_RIGHT: 'right_arrow',  # right arrow
-    pg.K_RSHIFT: 'record',  # Record
-    pg.K_BACKSPACE: 'stop',  # Stop
-    pg.K_RETURN: 'play',  # Play
-    pg.K_1: 'sustenuto',  # Sustenuto button
-    pg.K_2: 'sustain',  # Sustain button
-    pg.K_9: 'knob_1_up',  # Knob 1 up
-    pg.K_o: 'knob_1_down',  # Knob 1 down
-    pg.K_0: 'knob_2_up',  # Knob 2 up
-    pg.K_p: 'knob_2_down',  # Knob 2 down
-    pg.K_MINUS: 'knob_3_up',  # Knob 3 up
-    pg.K_LEFTBRACKET: 'knob_3_down',  # Knob 3 down
-    pg.K_EQUALS: 'knob_4_up',  # Knob 4 up
-    pg.K_RIGHTBRACKET: 'knob_4_down',  # Knob 4 down
+    pg.K_LSHIFT: 'shift',
+    pg.K_LEFT: 'left_arrow',
+    pg.K_RIGHT: 'right_arrow',
+    pg.K_RSHIFT: 'record',
+    pg.K_BACKSPACE: 'stop',
+    pg.K_RETURN: 'play',
+    pg.K_TAB: 'sequencer',
+    pg.K_q: 'instrument',
+    pg.K_w: 'effects',
+    pg.K_e: 'metronome',
+    pg.K_r: 'save',
+    pg.K_t: 'delete',
+    pg.K_SPACE: 'sustain',
+    pg.K_RALT: 'sustenuto',
+    pg.K_BACKQUOTE: 'ch_0',
+    pg.K_1: 'ch_1',
+    pg.K_2: 'ch_2',
+    pg.K_3: 'ch_3',
+    pg.K_4: 'ch_4',
+    pg.K_5: 'ch_5',
+    pg.K_6: 'ch_6',
+    pg.K_7: 'ch_7',
+    pg.K_8: 'ch_8',
+    pg.K_9: 'ch_9',
+    pg.K_0: 'ch_10',
+    pg.K_MINUS: 'ch_11',
+    pg.K_EQUALS: 'ch_12',
+    pg.K_l: 'ch_13',
+    pg.K_SEMICOLON: 'ch_14',
+    pg.K_QUOTE: 'ch_15',
+    pg.K_u: 'knob_1_up',
+    pg.K_y: 'knob_1_down',
+    pg.K_o: 'knob_2_up',
+    pg.K_i: 'knob_2_down',
+    pg.K_LEFTBRACKET: 'knob_3_up',
+    pg.K_p: 'knob_3_down',
+    pg.K_BACKSLASH: 'knob_4_up',
+    pg.K_RIGHTBRACKET: 'knob_4_down',
 }
 
 ONBOARD_KEYBOARD = {
