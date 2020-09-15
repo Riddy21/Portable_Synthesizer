@@ -152,17 +152,19 @@ class Mode(object):
 
         # Sustenuto
         elif key == 'sustenuto':
-            if self.keyboard.shift:
+            # Cannot lock when playing
+            if self.keyboard.shift and not self.player.playing:
                 self.toggle_sustenuto()
-                self.sustenuto_lock = True
+                self.sustenuto_lock = not self.sustenuto_lock
             else:
                 self.change_sustenuto(True)
 
         # Sustain
         elif key == 'sustain':
-            if self.keyboard.shift:
+            # Cannot lock when playing
+            if self.keyboard.shift and not self.player.playing:
                 self.toggle_sustain()
-                self.sustain_lock = True
+                self.sustain_lock = not self.sustain_lock
             else:
                 self.change_sustain(True)
 
