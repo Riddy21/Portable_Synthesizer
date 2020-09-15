@@ -89,6 +89,8 @@ class Mode(object):
 
     def stop(self):
         self.player.stop_all()
+        self.sustenuto_lock = False
+        self.sustain_lock = False
 
     def octave_shift(self, octaves):
         # shift octave if possible
@@ -152,8 +154,9 @@ class Mode(object):
 
         # Sustenuto
         elif key == 'sustenuto':
-            # Cannot lock when playing
-            if self.keyboard.shift and not self.player.playing:
+            # Can lock when playing
+            # But will sometimes cause bugs when there is already the pedal in the recording
+            if self.keyboard.shift:
                 self.toggle_sustenuto()
                 self.sustenuto_lock = not self.sustenuto_lock
             else:
@@ -161,8 +164,9 @@ class Mode(object):
 
         # Sustain
         elif key == 'sustain':
-            # Cannot lock when playing
-            if self.keyboard.shift and not self.player.playing:
+            # Can lock when playing, 
+            # But will sometimes cause bugs when there is already the pedal int the recording
+            if self.keyboard.shift:
                 self.toggle_sustain()
                 self.sustain_lock = not self.sustain_lock
             else:
