@@ -25,9 +25,9 @@ class Mode(object):
         # channel set to the proper synth
         self.channel = self.event_handler.channels[self.current_channel_index[0]]
 
-        # Locks for locking sustain and sustenuto
-        self.sustain_lock = False
-        self.sustenuto_lock = False
+        # Sustain and sustenuto locks
+        self.sustain_lock = event_handler.sustain_lock
+        self.sustenuto_lock = event_handler.sustenuto_lock
 
     # Command to play note in context with record and play,
     # Will start recording or playing when note is played if record or play is held
@@ -55,10 +55,8 @@ class Mode(object):
 
     def switch_channel(self, channel_num):
         Synth.midi_stop(self.channel.port)
-        if not self.sustain_lock and self.channel.sustain == 64:
-            self.change_sustain(False)
-        if not self.sustenuto_lock and self.channel.sustenuto == 64:
-            self.change_sustenuto(False, self.channel.channel_ind)
+        sustain_lock = self.sustain_lock[self.current_channel_index[0]]
+        sustenuto_lock = self.sustain_lock[self.current_channel_index[0]]
         self.event_handler.switch_channel(channel_num)
 
     def increment_channel(self, change):
@@ -89,8 +87,11 @@ class Mode(object):
 
     def stop(self):
         self.player.stop_all()
-        self.sustenuto_lock = False
-        self.sustain_lock = False
+        # TODO: Stop sequencers
+        self.change_sustain(False)
+        self.change_sustenuto(False)
+        self.sustain_lock[self.current_channel_index[0]] = False
+        self.sustenuto_lock[self.current_channel_index[0]] = False
 
     def octave_shift(self, octaves):
         # shift octave if possible
@@ -158,7 +159,8 @@ class Mode(object):
             # But will sometimes cause bugs when there is already the pedal in the recording
             if self.keyboard.shift:
                 self.toggle_sustenuto()
-                self.sustenuto_lock = not self.sustenuto_lock
+                self.sustenuto_lock[self.current_channel_index[0]] = \
+                        not self.sustenuto_lock[self.current_channel_index[0]]
             else:
                 self.change_sustenuto(True)
 
@@ -168,7 +170,8 @@ class Mode(object):
             # But will sometimes cause bugs when there is already the pedal int the recording
             if self.keyboard.shift:
                 self.toggle_sustain()
-                self.sustain_lock = not self.sustain_lock
+                self.sustain_lock[self.current_channel_index[0]] = \
+                        not self.sustain_lock[self.current_channel_index[0]]
             else:
                 self.change_sustain(True)
 
@@ -179,12 +182,12 @@ class Mode(object):
 
         # Sustenuto
         elif key == 'sustenuto':
-            if not self.sustenuto_lock:
+            if not self.sustenuto_lock[self.current_channel_index[0]]:
                 self.change_sustenuto(False)
 
         # Sustain
         elif key == 'sustain':
-            if not self.sustain_lock:
+            if not self.sustain_lock[self.current_channel_index[0]]:
                 self.change_sustain(False)
     def use_knob(self, change, knob_num):
         pass

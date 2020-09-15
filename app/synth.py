@@ -63,6 +63,8 @@ class Synth(object):
 
         # Recorder to keep track of notes
         self.recorder = event_handler.player
+        self.sustenuto_lock = event_handler.sustenuto_lock
+        self.sustain_lock = event_handler.sustain_lock
 
         self.instr_dict = self.get_instruments()
 
@@ -218,8 +220,7 @@ class Synth(object):
 
         # Sent time stamp and message to recorder
         self.recorder.record_event(msg=msg.bytes(), time=time.time())
-    
-    
+
     # sends a midi message
     def midi_send_msg(self, msg):
         self.port.send(msg)
@@ -241,8 +242,18 @@ class Synth(object):
                 self.pan = msg.value
             elif msg.control == 64:
                 self.sustain = msg.value
+                # For setting the channel locks when sustain gets changed
+                if msg.value == 64:
+                    self.sustain_lock[self.channel_ind] = True
+                else:
+                    self.sustain_lock[self.channel_ind] = False
             elif msg.control == 66:
                 self.sustenuto = msg.value
+                # Same as 6 lines above
+                if msg.value == 64:
+                    self.sustenuto_lock[self.channel_ind] = True
+                else:
+                    self.sustenuto_lock[self.channel_ind] = False
             elif msg.control == 91:
                 self.reverb = msg.value
             elif msg.control == 93:

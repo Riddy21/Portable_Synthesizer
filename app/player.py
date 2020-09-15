@@ -48,16 +48,16 @@ class Player(object):
         start_time = time.time()
 
         for event in event_list:
-            # If was stopped
-            if not self.playing:
-                # turn off all notes
-                Synth.midi_stop(self.port)
-                break
-
             note_time = event[0]
 
             # wait until time to play note
             while time.time() - start_time <= note_time:
+                # If was stopped
+                if not self.playing:
+                    # turn off all notes
+                    Synth.midi_stop(self.port)
+                    self.current_time = self.start_time
+                    return
                 self.current_time = time.time() - start_time + self.start_time
                 pygame.time.delay(1)
 
