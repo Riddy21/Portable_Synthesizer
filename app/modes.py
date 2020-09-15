@@ -217,9 +217,13 @@ class Record(Mode):
                 self.record_and_play(overwrite=False)
             else:
                 self.record_and_play(overwrite=True)
+            self.change_sustenuto(False)
+            self.sustenuto_lock[self.current_channel_index[0]] = False
 
         elif key == 'play':
             self.play()
+            #self.change_sustenuto(False)
+            #self.sustenuto_lock[self.current_channel_index[0]] = False
 
         elif key == 'stop':
             self.stop()
