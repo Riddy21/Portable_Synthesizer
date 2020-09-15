@@ -251,7 +251,6 @@ class Synth(object):
             self.instr[1] = msg.program
         elif msg.type == 'pitchwheel':
             self.pitch = msg.pitch
-        # TODO: add other possible controls
 
     # Records the initial information on instruments volume etc
     def record_setup(self):
