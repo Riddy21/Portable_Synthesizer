@@ -110,7 +110,7 @@ class GuiInterface(object):
                 self.gui.screen, 
                 393, 290)
         self.draw_text(
-                '%d' % self.channel_index[0],
+                '%d' % (self.channel_index[0] + 1),
                 self.gui.font,
                 GREEN,
                 self.gui.screen,
