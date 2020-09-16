@@ -81,7 +81,7 @@ class Player(object):
                 channel.record_setup()
 
         if overwrite:
-            self.delete_channel(self.current_channel_index[0])
+            self.delete_channel(self.current_channel_index[0], self.start_time, 'right')
 
     # Stops all playing and stops recording
     def stop_all(self):
@@ -120,7 +120,6 @@ class Player(object):
                 elif msg.type == 'control_change':
                     if msg.control == 0:
                         setup[msg.channel]['bank'] = msg
-                    #TODO: add all other types of changes to setup
                     elif msg.control == 7:
                         setup[msg.channel]['volume'] = msg
                     elif msg.control == 1:
@@ -224,20 +223,30 @@ class Player(object):
             self.current_time = self.start_time
 
     # Deletes everything in a channel from a time onwards
-    def delete_channel(self, channel_ind):
+    def delete_channel(self, channel_ind, time, direction):
         # start = time.time()
         remove_list = []
         # find
         for event in self.playlist:
             msg = Synth.bytes2msg(event[1])
-            if msg.channel == channel_ind and event[0] >= self.start_time:
-                remove_list.append(event)
+            if direction == 'right':
+                if msg.channel == channel_ind and event[0] >= time:
+                    remove_list.append(event)
+            elif direction == 'left':
+                if msg.channel == channel_ind and event[0] <= time:
+                    remove_list.append(event)
+
 
         # Remove
         for event in remove_list:
             self.playlist.remove(event)
 
         # end = time.time()
+
+    # TODO: Make delete effects function
+    def delete_effects(self, channel_ind, time, direction):
+        pass
+
 
     def get_playlist(self):
         return self.playlist

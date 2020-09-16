@@ -63,8 +63,8 @@ class Synth(object):
 
         # Recorder to keep track of notes
         self.recorder = event_handler.player
-        self.sustenuto_lock = event_handler.sustenuto_lock
-        self.sustain_lock = event_handler.sustain_lock
+        self.sustenuto_lock = [False]
+        self.sustain_lock = [False]
 
         self.instr_dict = self.get_instruments()
 
@@ -244,16 +244,16 @@ class Synth(object):
                 self.sustain = msg.value
                 # For setting the channel locks when sustain gets changed
                 if msg.value == 64:
-                    self.sustain_lock[self.channel_ind] = True
+                    self.sustain_lock[0] = True
                 else:
-                    self.sustain_lock[self.channel_ind] = False
+                    self.sustain_lock[0] = False
             elif msg.control == 66:
                 self.sustenuto = msg.value
                 # Same as 6 lines above
                 if msg.value == 64:
-                    self.sustenuto_lock[self.channel_ind] = True
+                    self.sustenuto_lock[0] = True
                 else:
-                    self.sustenuto_lock[self.channel_ind] = False
+                    self.sustenuto_lock[0] = False
             elif msg.control == 91:
                 self.reverb = msg.value
             elif msg.control == 93:

@@ -10,15 +10,10 @@ from synth import end
 # Class for connecting synths with the keyboard or handling it with other players
 class EventHandler(object):
     def __init__(self, port):
-        # TODO: Put all this into one object called a channel object 
-        # and change the channel object into the synth object
         # initialize channels and the keyboard
         self.channels = [None]*16
         # Keep track of channel modes
         self.channel_modes = [None]*16
-        # Keep track of sustenuto and sustain locking variables
-        self.sustenuto_lock = [False]*16
-        self.sustain_lock = [False]*16
 
         # Dictionary of loaded modes so that the mode objects do not need to be created again
         self.channel_mode_buffer = dict()
