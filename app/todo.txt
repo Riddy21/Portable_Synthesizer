@@ -1,2 +1,3 @@
 2020-09-15 Add delete effects functionality into player.py
 2020-09-16 Make recording track delete program setup when no notes are played, this occurs when recording later in the track then starting from the beginning. Apply this fix by marking setup changes with another array element, then deleting the subsequent setups after where it plays in the make_event_list routine
+2020-09-16 Make a count in!
