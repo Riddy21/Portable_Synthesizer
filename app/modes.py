@@ -224,7 +224,7 @@ class Record(Mode):
             else:
                 self.record_and_play(overwrite=True)
             self.change_sustenuto(False)
-            self.sustenuto_lock[self.current_channel_index[0]] = False
+            self.sustenuto_lock[0] = False
 
         elif key == 'play':
             self.play()
