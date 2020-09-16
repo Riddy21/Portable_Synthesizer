@@ -203,6 +203,7 @@ class Player(object):
         # Make an empty list of 16 dictionaries to store all information about setup and time
         # Initialize time as -1 so it gets overridden
         setup = []
+        remove_list = []
         for channel in range(16):
             setup.append({
                 'program': (None, -1),
@@ -278,6 +279,7 @@ class Player(object):
                 # Dont add to curated list
             else:
                 if len(event) == 3:
+                    remove_list.append(event)
                     continue
                 msg = Synth.bytes2msg(event[1])
                 # shift the timing to align with the start_time
@@ -296,6 +298,9 @@ class Player(object):
                     event_list.append((0.00001, setting[0]))
                 else:
                     event_list.append((0.0, setting[0]))
+
+        for event in remove_list:
+            self.playlist.remove(event)
 
         return sorted(event_list, key=lambda l: l[0])
 
