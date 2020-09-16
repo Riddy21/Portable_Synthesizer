@@ -224,7 +224,6 @@ class Synth(object):
     # sends a midi message
     def midi_send_msg(self, msg):
         self.port.send(msg)
-        #print(msg)
 
         # check for all the correspinding set values and change them
         if msg.type == 'note_on':
@@ -264,7 +263,7 @@ class Synth(object):
             self.pitch = msg.pitch
 
     # Records the initial information on instruments volume etc
-    def record_setup(self):
+    def record_setup(self,setup_time):
         msgs = [mido.Message('control_change', control=0, value=self.instr[0], channel=self.channel_ind),
                 mido.Message('program_change', program=self.instr[1], channel=self.channel_ind),
                 mido.Message('control_change', control=7, value=self.volume, channel=self.channel_ind),
@@ -279,10 +278,13 @@ class Synth(object):
                 ]
 
         # Sends the message with the time set as the original start time of the recording
-        counter = -10
         for msg in msgs:
-            self.recorder.record_event(msg=msg.bytes(), time=self.recorder.recording + counter)
-            counter += 0.00001
+            # Program change must happen after bank
+            if msg.type == 'program_change':
+                self.recorder.record_event(msg=msg.bytes(), time=setup_time+0.00001)
+
+            else:
+                self.recorder.record_event(msg=msg.bytes(), time=setup_time)
 
     # ---------------- Control Interface ---------------------
     # Presses down a key

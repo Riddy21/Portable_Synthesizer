@@ -71,6 +71,11 @@ class Mode(object):
 
     def record_and_play(self, overwrite=True):
         if not self.player.recording and not self.player.playing:
+            # Turn off sustain and sustenuto lock
+            #self.change_sustain(False)
+            #self.change_sustenuto(False)
+            #self.sustain_lock[0] = False
+            #self.sustenuto_lock[0] = False
             # Record
             self.player.record(overwrite=overwrite)
 
@@ -88,6 +93,7 @@ class Mode(object):
     def stop(self):
         self.player.stop_all()
         # TODO: Stop sequencers
+        # Removes sustains
         self.change_sustain(False)
         self.change_sustenuto(False)
         self.sustain_lock[0] = False
