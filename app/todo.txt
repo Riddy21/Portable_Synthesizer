@@ -1,0 +1,2 @@
+2020-09-15 Add delete effects functionality into player.py
+2020-09-15 Move sustenuto_lock and sustain_lock into synth object
