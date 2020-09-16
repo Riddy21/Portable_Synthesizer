@@ -64,7 +64,6 @@ class Player(object):
                 self.current_time = time.time() - start_time + self.start_time
                 pygame.time.delay(1)
             Synth.send_msg(self.channels, event[1])
-            #print(event)
 
         self.playing = False
         self.current_time = self.start_time
