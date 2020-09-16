@@ -33,8 +33,6 @@ class EventHandler(object):
         #for i in range(16):
             #self.add_channel('record', i)
 
-        self.add_channel('record', 0)
-
         self.switch_channel(0)
 
         # Knob queue for holding knob actions
@@ -86,6 +84,11 @@ class EventHandler(object):
 
         # Update current channel
         self.current_channel_index[0] = channel_ind
+
+        # Record setup sets up the channel for first time recording
+        self.player.set_start_time(0)
+        self.player.record(True)
+        self.player.stop_all()
 
     # adds mode object to mode list
     def add_mode(self, mode, channel_ind):
