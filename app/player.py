@@ -75,6 +75,10 @@ class Player(object):
 
         self.recording = time.time()
 
+        # Delete whatever was ther before if overwriting
+        if overwrite:
+            self.delete_channel(self.current_channel_index[0], self.start_time, 'right')
+
         # Add the initial information such as channel synth, gain, reverb, volume to the
         # beginning of the record list of the channel you are on right now of only the channel youre on right now
         # Record setup for all channels
@@ -84,10 +88,6 @@ class Player(object):
                     channel.record_setup(self.recording)
                 else:
                     self.find_record_track_setup(self.start_time)
-
-        # Delete whatever was ther before if overwriting
-        if overwrite:
-            self.delete_channel(self.current_channel_index[0], self.start_time, 'right')
 
     # Stops all playing and stops recording
     def stop_all(self):
@@ -359,7 +359,7 @@ class Player(object):
     def increment_start_time(self, increment):
         start_buff = self.start_time + increment
         if not self.playing and not self.recording and start_buff >= 0:
-            self.start_time = start_buff
+            self.start_time = round(start_buff,4)
             self.current_time = self.start_time
 
     # Deletes everything in a channel from a time onwards
