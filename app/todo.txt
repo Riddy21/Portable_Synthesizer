@@ -1,2 +1,3 @@
 2020-09-15 Add delete effects functionality into player.py
 2020-09-16 Make a count in!
+2020-09-16 Maybe add additional functionality to start in current setup when recording from middle of song in override mode
