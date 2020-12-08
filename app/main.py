@@ -1,3 +1,4 @@
+import sys
 from start_server import start_server
 import pygame as pg
 from event_handler import EventHandler
@@ -11,7 +12,7 @@ def draw_interface_parallel(gui):
         gui.draw_interface()
 
 # Start program
-def main():
+def main(arg):
     # Start the Fluidsynth server
     port = start_server(buffer_count=3, buffer_size=1024, sr=48000)
 
@@ -24,8 +25,9 @@ def main():
     # Start playback controller and pass in the keyboard and the port
     event_handler = EventHandler(port=port)
 
-    # Start GUI and pass event_handler to look at events
-    gui = Gui(event_handler)
+    if arg != 'no-gui':
+        # Start GUI and pass event_handler to look at events
+        gui = Gui(event_handler)
 
     draw_interface_parallel(gui)
 
@@ -38,4 +40,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])
