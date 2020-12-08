@@ -205,10 +205,20 @@ class Record(Mode):
     def key_down(self, key):
         super().key_down(key)
         # TODO: Knobs that will be replaced with knob functions
-        if key == 'knob_1_up':
+        if key == 'stop':
+            self.stop()
+        elif key == 'knob_1_up':
             self.use_knob(0.2, 0)
         elif key == 'knob_1_down':
             self.use_knob(-0.2, 0)
+        elif key == 'knob_2_up':
+            self.use_knob(5, 1)
+        elif key == 'knob_2_down':
+            self.use_knob(-5, 1)
+        elif key == 'knob_3_up':
+            self.use_knob(5, 2)
+        elif key == 'knob_3_down':
+            self.use_knob(-5, 2)
         elif key == 'knob_4_up':
             self.use_knob(1, 3)
         elif key == 'knob_4_down':
@@ -230,9 +240,6 @@ class Record(Mode):
             self.play()
             #self.change_sustenuto(False)
             #self.sustenuto_lock[self.current_channel_index[0]] = False
-
-        elif key == 'stop':
-            self.stop()
 
     def use_knob(self, change, knob_num):
         if knob_num == 0:

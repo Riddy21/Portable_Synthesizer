@@ -109,23 +109,24 @@ class GuiInterface(object):
                 WHITE,
                 self.gui.screen, 
                 393, 290)
+
         self.draw_text(
                 '%d' % (self.channel_index[0] + 1),
                 self.gui.font,
                 GREEN,
                 self.gui.screen,
-                15, 290)
+                10, 290)
 
         # TODO: Make pedal icon
         if self.channel.sustenuto == 64:
-            self.draw_text('S', self.gui.font, ORANGE, self.gui.screen, 40, 290)
+            self.draw_text('S', self.gui.font, ORANGE, self.gui.screen, 50, 290)
         else:
-            self.draw_text('S', self.gui.font, GRAY, self.gui.screen, 40, 290)
+            self.draw_text('S', self.gui.font, GRAY, self.gui.screen, 50, 290)
         # TODO: Make sustanuto icon
         if self.channel.sustain == 64:
-            self.draw_text('P', self.gui.font, PURPLE, self.gui.screen, 65, 290)
+            self.draw_text('P', self.gui.font, PURPLE, self.gui.screen, 75, 290)
         else:
-            self.draw_text('P', self.gui.font, GRAY, self.gui.screen, 65, 290)
+            self.draw_text('P', self.gui.font, GRAY, self.gui.screen, 75, 290)
 
 
     # Draw interface abstract method
