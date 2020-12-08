@@ -29,7 +29,7 @@ def main(arg):
         # Start GUI and pass event_handler to look at events
         gui = Gui(event_handler)
 
-    draw_interface_parallel(gui)
+        draw_interface_parallel(gui)
 
     while True:
         # Handle events
