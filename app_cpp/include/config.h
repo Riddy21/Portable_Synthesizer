@@ -6,6 +6,6 @@
 #define PI 3.14159265358979323846
 #define SAMPLE_RATE 48000
 #define CHANNELS 2
-#define BLOCK_SIZE 240
+#define BLOCK_SIZE 2400
 
 #endif
