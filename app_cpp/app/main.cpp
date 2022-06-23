@@ -24,6 +24,7 @@ void processNormalKeys(unsigned char key, int x, int y) {
 
 void audio_thread(){
     start_pcm();
+    printf("fault in audio\n", j);
     while(1){
         sem_wait(&audio_mutex);
         sem_post(&synth_mutex);
