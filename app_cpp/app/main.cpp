@@ -15,8 +15,8 @@ int test=0;
 long loop_counter = 0;
 float data_in_l[BLOCK_SIZE];
 float data_in_r[BLOCK_SIZE];
-sem_t audio_mutex;
-sem_t synth_mutex;
+//sem_t audio_mutex;
+//sem_t synth_mutex;
 
 void processNormalKeys(unsigned char key, int x, int y) {
     test = !test;    
@@ -25,8 +25,8 @@ void processNormalKeys(unsigned char key, int x, int y) {
 void audio_thread(){
     start_pcm();
     while(1){
-        sem_wait(&audio_mutex);
-        sem_post(&synth_mutex);
+        //sem_wait(&audio_mutex);
+        //sem_post(&synth_mutex);
         loop_counter += 1;
         stream(data_in_l, data_in_r);
     }
@@ -35,7 +35,7 @@ void audio_thread(){
 
 void synth_thread(){
     while(1){
-        sem_wait(&synth_mutex);
+        //sem_wait(&synth_mutex);
         for (int i=0; i<BLOCK_SIZE; i++){
             if (test){
                 data_in_l[i] = std::sin((2.0*PI/SAMPLE_RATE)*(((double)i + (double)loop_counter*BLOCK_SIZE)*261.63*std::pow(2.0, 4.0/12.0)));
@@ -54,7 +54,7 @@ void synth_thread(){
                 data_in_r[i] = 0;
             }
         }
-        sem_post(&audio_mutex);
+        //sem_post(&audio_mutex);
     }
 }
 
@@ -65,8 +65,8 @@ int main(int argc, char *argv[]){
     //glutCreateWindow ("OpenGL / C Example - Well House");
     //glutKeyboardFunc(processNormalKeys);
     //
-    sem_init(&audio_mutex, 0, 0);
-    sem_init(&synth_mutex, 0, 1);
+    //sem_init(&audio_mutex, 0, 0);
+    //sem_init(&synth_mutex, 0, 1);
 
     std::thread synth_thread_inst = std::thread(synth_thread);
     std::thread audio_thread_inst = std::thread(audio_thread);
