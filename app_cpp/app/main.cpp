@@ -10,8 +10,10 @@
 #include <iostream>
 #include <limits>
 
+int test=0;
+
 void processNormalKeys(unsigned char key, int x, int y) {
-    //synth.test = !synth.test;    
+    test = !test;    
 }
 
 void synth_thread(){
@@ -22,8 +24,13 @@ void synth_thread(){
     while(1){
         j++;
         for (int i=0; i<BLOCK_SIZE; i++){
-            data_in_l[i] = std::sin((2.0*PI/SAMPLE_RATE)*(((double)i + (double)j*BLOCK_SIZE)*261.63*std::pow(2.0, 4.0/12.0)));
-            data_in_r[i] = std::sin((2.0*PI/SAMPLE_RATE)*(((double)i + (double)j*BLOCK_SIZE)*261.63*std::pow(2.0, 0.0/12.0)));
+            if (test){
+                data_in_l[i] = std::sin((2.0*PI/SAMPLE_RATE)*(((double)i + (double)j*BLOCK_SIZE)*261.63*std::pow(2.0, 4.0/12.0)));
+                data_in_r[i] = std::sin((2.0*PI/SAMPLE_RATE)*(((double)i + (double)j*BLOCK_SIZE)*261.63*std::pow(2.0, 0.0/12.0)));
+            } else {
+                data_in_l[i] = 0;
+                data_in_r[i] = 0;
+            }
         }
         stream(data_in_l, data_in_r);
     }
@@ -32,16 +39,23 @@ void synth_thread(){
 
 int main(int argc, char *argv[]){
 
-    //glutInit(&argc, argv);
-    //glutInitWindowSize (300,300);
-    //glutCreateWindow ("OpenGL / C Example - Well House");
-    //glutKeyboardFunc(processNormalKeys);
+    glutInit(&argc, argv);
+    glutInitWindowSize (300,300);
+    glutCreateWindow ("OpenGL / C Example - Well House");
+    glutKeyboardFunc(processNormalKeys);
 
     std::thread synth_thread_inst = std::thread(synth_thread);
 
+    for(int i=0; i<20; i++){
+        sleep(1);
+        printf("\n%d\n", i);
+        test = !test;
+
+    }
+
     synth_thread_inst.join();
 
-    //glutMainLoop();
+    glutMainLoop();
     //for (int j=0; j<3*100; j++){
     //    double sound_r [AUDIO_BLOCK_SIZE];
     //    for (int i=0; i<AUDIO_BLOCK_SIZE; i++){
