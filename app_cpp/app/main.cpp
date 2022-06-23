@@ -39,10 +39,10 @@ void synth_thread(){
 
 int main(int argc, char *argv[]){
 
-    glutInit(&argc, argv);
-    glutInitWindowSize (300,300);
-    glutCreateWindow ("OpenGL / C Example - Well House");
-    glutKeyboardFunc(processNormalKeys);
+    //glutInit(&argc, argv);
+    //glutInitWindowSize (300,300);
+    //glutCreateWindow ("OpenGL / C Example - Well House");
+    //glutKeyboardFunc(processNormalKeys);
 
     std::thread synth_thread_inst = std::thread(synth_thread);
 
@@ -55,7 +55,7 @@ int main(int argc, char *argv[]){
 
     synth_thread_inst.join();
 
-    glutMainLoop();
+    //glutMainLoop();
     //for (int j=0; j<3*100; j++){
     //    double sound_r [AUDIO_BLOCK_SIZE];
     //    for (int i=0; i<AUDIO_BLOCK_SIZE; i++){
