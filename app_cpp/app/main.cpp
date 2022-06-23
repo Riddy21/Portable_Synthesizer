@@ -64,6 +64,7 @@ int main(int argc, char *argv[]){
     std::thread audio_thread_inst = std::thread(audio_thread);
 
     for(int j=0; j<20; j++){
+        printf("%d\n", j);
         sleep(1);
         test = !test;
     }
