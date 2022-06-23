@@ -267,7 +267,6 @@ static int write_loop(snd_pcm_t *handle,
         }
         cptr = period_size;
         count += 1;
-        printf("%d", cptr);
         while (cptr > 0) {
             err = snd_pcm_writei(handle, ptr, cptr);
             if (err == -EAGAIN)
