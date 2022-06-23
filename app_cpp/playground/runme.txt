@@ -1,0 +1,1 @@
+g++ -lasound -fpermissive -o sound2 sound2.c
