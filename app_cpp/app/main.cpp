@@ -32,6 +32,15 @@ void synth_thread(){
                 data_in_r[i] = 0;
             }
         }
+        for (int i=0; i<BLOCK_SIZE; i++){
+            if (test){
+                data_in_l[i] = std::sin((2.0*PI/SAMPLE_RATE)*(((double)i + (double)j*BLOCK_SIZE)*261.63*std::pow(2.0, 4.0/12.0)));
+                data_in_r[i] = std::sin((2.0*PI/SAMPLE_RATE)*(((double)i + (double)j*BLOCK_SIZE)*261.63*std::pow(2.0, 0.0/12.0)));
+            } else {
+                data_in_l[i] = 0;
+                data_in_r[i] = 0;
+            }
+        }
         stream(data_in_l, data_in_r);
     }
     end_pcm();
